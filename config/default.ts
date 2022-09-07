@@ -34,7 +34,7 @@ const defaultConfig = {
   databases: {
     mongolocal: {
       port: process.env.MONGO_LOCAL_PORT || 27017,
-      host: process.env.MONGO_LOCAL_HOST || '0.0.0.0',
+      host: process.env.MONGO_LOCAL_HOST || 'localhost',
       database: process.env.MONGO_LOCAL_DB || 'mongolocaldb',
     },
     mongoatlas: {
