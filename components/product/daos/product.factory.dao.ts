@@ -4,6 +4,7 @@ import config from 'config';
 
 class ProductFactory {
   static async get(key: TKeys): Promise<ICrud> {
+    if (key === 'mongoatlas' || key === 'mongolocal') key = 'mongoose';
     const { default: ProductDao } = await import(`./product.${key}.dao`);
     return ProductDao;
     // return new ProductDao();

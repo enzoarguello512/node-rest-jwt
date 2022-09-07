@@ -4,6 +4,7 @@ import config from 'config';
 
 class CartFactory {
   static async get(key: TKeys): Promise<ICrudCart> {
+    if (key === 'mongoatlas' || key === 'mongolocal') key = 'mongoose';
     const { default: CartDao } = await import(`./cart.${key}.dao`);
     return CartDao;
     // return new CartDao();

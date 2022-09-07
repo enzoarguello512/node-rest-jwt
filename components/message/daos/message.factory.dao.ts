@@ -4,6 +4,7 @@ import config from 'config';
 
 class MessageFactory {
   static async get(key: TKeys): Promise<ICrudMessage> {
+    if (key === 'mongoatlas' || key === 'mongolocal') key = 'mongoose';
     const { default: MessageDao } = await import(`./message.${key}.dao`);
     return MessageDao;
     // return new MessageDao();
