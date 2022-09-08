@@ -7,13 +7,13 @@ import { EPersistenceType } from '../common/types/factory.persistence.enum';
 // Enable environment variables
 const dotenvResult = dotenv.config();
 if (dotenvResult.error) {
-  throw dotenvResult.error;
+  console.log(dotenvResult.error);
 }
 
 const defaultConfig = {
   server: {
     port: process.env.PORT || 8080,
-    domain: 'localhost',
+    domain: process.env.DOMAIN || '0.0.0.0',
     /**
      * Persistence is equal to:
      * 'memory' | 'filesystem' | 'mysql' | 'sqlite3' | 'mongolocal' | 'mongoatlas' | 'firebase';
@@ -34,7 +34,7 @@ const defaultConfig = {
   databases: {
     mongolocal: {
       port: process.env.MONGO_LOCAL_PORT || 27017,
-      host: process.env.MONGO_LOCAL_HOST || 'localhost',
+      host: process.env.MONGO_LOCAL_HOST || '0.0.0.0',
       database: process.env.MONGO_LOCAL_DB || 'mongolocaldb',
     },
     mongoatlas: {

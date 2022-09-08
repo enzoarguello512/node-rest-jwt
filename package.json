@@ -4,7 +4,7 @@
   "description": "backend",
   "main": "server.js",
   "scripts": {
-    "start": "tsc && node --inspect ./build/server.js",
+    "start": "tsc && node ./build/server.js",
     "ci": "cross-env NODE_ENV=ci npm start",
     "development": "cross-env NODE_ENV=development npm start",
     "production": "cross-env NODE_ENV=production npm start",
