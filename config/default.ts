@@ -7,7 +7,11 @@ import { EPersistenceType } from '../common/types/factory.persistence.enum';
 // Enable environment variables
 const dotenvResult = dotenv.config();
 if (dotenvResult.error) {
-  console.log(dotenvResult.error);
+  console.info(`Error: possibly the ".env" file is missing, the server can still run as long 
+                as it has the environment variables. Check the following link to know what variables
+                the project should have: https://github.com/enzoarguello512/node-rest-jwt/blob/main/.env.example`);
+
+  console.error(dotenvResult.error);
 }
 
 const defaultConfig = {
