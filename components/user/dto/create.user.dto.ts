@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ICreateCartDto } from '../../cart/dto/create.cart.dto';
 
 export interface ICreateUserDto extends mongoose.Document {
   id: string;
@@ -10,4 +11,5 @@ export interface ICreateUserDto extends mongoose.Document {
   createdAt?: Date;
   updatedAt?: Date;
   refreshToken?: Array<string>;
+  cart?: mongoose.Types.ObjectId | ICreateCartDto;
 }

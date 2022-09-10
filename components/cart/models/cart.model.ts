@@ -1,8 +1,9 @@
 import MongooseService from '../../../services/mongoose/mongoose.service';
+import { ICreateCartDto } from '../dto/create.cart.dto';
 
 const Schema = MongooseService.getMongoose().Schema;
 
-export const cartSchema = new Schema(
+export const cartSchema = new Schema<ICreateCartDto>(
   {
     products: [
       {
@@ -11,6 +12,7 @@ export const cartSchema = new Schema(
         quantity: { type: Number, required: true },
       },
     ],
+    user: { type: 'ObjectId', ref: 'User', required: false },
   },
   {
     timestamps: true,
@@ -25,4 +27,7 @@ cartSchema.set('toJSON', {
   },
 });
 
-export const Cart = MongooseService.getMongoose().model('Cart', cartSchema);
+export const Cart = MongooseService.getMongoose().model<ICreateCartDto>(
+  'Cart',
+  cartSchema
+);

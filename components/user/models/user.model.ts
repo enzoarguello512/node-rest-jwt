@@ -18,6 +18,7 @@ export const userSchema = new Schema<ICreateUserDto, IUserModel>(
       default: EPermissionLevel.FREE_PERMISSION,
     },
     refreshToken: [String],
+    cart: { type: 'ObjectId', ref: 'Cart', required: false },
   },
   {
     timestamps: true,
