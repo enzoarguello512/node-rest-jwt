@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.0.5...v0.0.6) (2022-09-10)
+
+
+### Features
+
+* separate environments and configurations. ([fbc1759](https://github.com/enzoarguello512/api-rest-ecommerce/commit/fbc1759e9e582843a1ce68b802f0f33c7936ae07))
+
+
+### Bug Fixes
+
+* persistence error. ([1875f16](https://github.com/enzoarguello512/api-rest-ecommerce/commit/1875f166a89c078e32033f463c79fd4275e94bef))
+* update docker image. ([f884eff](https://github.com/enzoarguello512/api-rest-ecommerce/commit/f884eff80dd5e2a80b05db516ac7ea9172c62484))
+* update image settings. ([ae65b41](https://github.com/enzoarguello512/api-rest-ecommerce/commit/ae65b413f9b1d8065975856b42b11f12220a354a))
+* update insert mode. ([8036ca2](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8036ca2ac8157bdfd2a84988bd2fc5c3b1ccdd62))
+* update interfaces and models. ([ccfee73](https://github.com/enzoarguello512/api-rest-ecommerce/commit/ccfee73e1ab3c3dab541a0c19aa29afcd3f825c1))
+* update models and references. ([c75d724](https://github.com/enzoarguello512/api-rest-ecommerce/commit/c75d724bf9288fa167e6902f266ad1f9e96c52b4))
+* update properties and middleware of the product model. ([57a6b8f](https://github.com/enzoarguello512/api-rest-ecommerce/commit/57a6b8ffefc24f3bf55bc0310bdc54332c8475ab))
+* update startup parameters. ([2874147](https://github.com/enzoarguello512/api-rest-ecommerce/commit/287414719e537f687212fb087e81c8f7208f415c))
+* update the list of enabled domains. ([2113ffc](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2113ffc3c0323b7db064c5bc9fb7952ffcaa8c8c))
+* updated scripts and package listing. ([56483af](https://github.com/enzoarguello512/api-rest-ecommerce/commit/56483af65920a7637a2a93f896ea1975d14a629a))
+
 ### 0.0.5 (2022-09-07)
 
 ### [0.0.4](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.0.2...v0.0.4) (2022-08-25)
