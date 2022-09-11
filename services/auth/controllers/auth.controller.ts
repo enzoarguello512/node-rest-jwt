@@ -6,6 +6,7 @@ import usersService from '../../../components/user/services/user.service';
 import { UnauthorizedError } from '../../../common/error/unauthorized.error';
 import { Error as MongoError } from 'mongoose';
 import { BadRequestError } from '../../../common/error/bad.request.error';
+import { ICreateUserDto } from '../../../components/user/dto/create.user.dto';
 
 const log: debug.IDebugger = debug('app:auth-controller');
 
@@ -23,6 +24,24 @@ const jwtOptionsMaxAge = {
   maxAge: 24 * 60 * 60 * 1000, // hours - min - sec - milsec
 } as const;
 
+function signToken(
+  user: ICreateUserDto,
+  secretToken: string,
+  expiresIn: string
+): string {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      permissionLevel: user.permissionLevel,
+      cart: user?.cart || '',
+    },
+    secretToken,
+    { expiresIn }
+  );
+}
+
 class AuthController {
   public async auth(
     req: express.Request,
@@ -35,20 +54,8 @@ class AuthController {
         req.body.email
       );
       if (foundUser && (await foundUser.comparePassword(req.body.password))) {
-        const accessToken = jwt.sign(
-          {
-            email: foundUser.email,
-            firstName: foundUser.firstName,
-            permissionLevel: foundUser.permissionLevel,
-          },
-          accessTokenSecret,
-          { expiresIn: '10m' }
-        );
-        const newRefreshToken = jwt.sign(
-          { email: foundUser.email },
-          refreshTokenSecret,
-          { expiresIn: '1d' }
-        );
+        const accessToken = signToken(foundUser, accessTokenSecret, '10m');
+        const newRefreshToken = signToken(foundUser, refreshTokenSecret, '1d');
 
         let newRefreshTokenArray = !cookies?.jwt
           ? foundUser.refreshToken
@@ -179,21 +186,9 @@ class AuthController {
           return res.sendStatus(403);
 
         // Refresh token was still valid
-        const accessToken = jwt.sign(
-          {
-            email: foundUser.email,
-            firstName: foundUser.firstName,
-            permissionLevel: foundUser.permissionLevel,
-          },
-          accessTokenSecret,
-          { expiresIn: '10m' }
-        );
+        const accessToken = signToken(foundUser, accessTokenSecret, '10m');
+        const newRefreshToken = signToken(foundUser, refreshTokenSecret, '1d');
 
-        const newRefreshToken = jwt.sign(
-          { email: foundUser.email },
-          refreshTokenSecret,
-          { expiresIn: '1d' }
-        );
         // Saving refreshToken with current user
         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
         await foundUser.save();

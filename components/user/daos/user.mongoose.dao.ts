@@ -72,7 +72,7 @@ class UsersDao implements ICrudUser {
 
   public async readById(userId: string) {
     try {
-      return User.findOne({ _id: userId }).populate('User').exec();
+      return User.findOne({ _id: userId }).exec();
     } catch (err) {
       throw new BaseError('Failed to find user', err, 'readById');
     }
