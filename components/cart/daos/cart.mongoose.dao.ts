@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import debug from 'debug';
-import { ICreateCartDto } from '../dto/create.cart.dto';
+import { ICartProduct, ICreateCartDto } from '../dto/create.cart.dto';
 import { IPatchCartDto } from '../dto/patch.cart.dto';
 import BaseError from '../../../common/error/base.error';
 import { ICrudCart } from '../../../common/types/crud.interface';
@@ -8,6 +8,7 @@ import { BadRequestError } from '../../../common/error/bad.request.error';
 import { Cart } from '../models/cart.model';
 import { ICreateProductDto } from '../../product/dto/create.product.dto';
 import { NotFoundError } from '../../../common/error/not.found.error';
+import { ICreateUserDto } from '../../user/dto/create.user.dto';
 
 const log: debug.IDebugger = debug('app:carts-dao');
 
@@ -16,11 +17,11 @@ export class CartsDao implements ICrudCart {
     log('Created new instance of CartsDao');
   }
 
-  public async create(cartFields: ICreateCartDto): Promise<string> {
+  public async create(cartFields: ICreateCartDto): Promise<any> {
     try {
       const cart = new Cart(cartFields);
       await cart.save();
-      return cart.id;
+      return cart;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
         const message = Object.values(err.errors).map((prop) => prop.message);
@@ -44,6 +45,38 @@ export class CartsDao implements ICrudCart {
       throw new BaseError('Failed to find cart', err, 'readById');
     }
   }
+
+  public createOrRead = async (
+    user: ICreateUserDto,
+    product: ICreateProductDto,
+    quantity = 1
+  ) => {
+    try {
+      if (user?.cart) {
+        const prevCart = await this.readById(String(user.cart));
+        return await this.addProduct(
+          product,
+          prevCart as ICreateCartDto,
+          quantity
+        );
+      } else {
+        const formatProduct = {
+          products: [{ data: product._id, quantity }],
+        } as ICreateCartDto;
+        const newCart = await this.create(formatProduct);
+
+        user.cart = newCart._id;
+        await user.save();
+        newCart.user = user._id;
+        await newCart.save();
+
+        newCart.products[0].data = product;
+        return await newCart;
+      }
+    } catch (err) {
+      throw new BaseError('Failed to create/read cart', err, 'createOrRead');
+    }
+  };
 
   public async patchById(cartId: string, cartFields: IPatchCartDto) {
     try {
@@ -71,17 +104,31 @@ export class CartsDao implements ICrudCart {
     }
   }
 
-  public async addProduct(product: ICreateProductDto, cart: ICreateCartDto) {
+  public async addProduct(
+    product: ICreateProductDto,
+    cart: ICreateCartDto,
+    quantity = 1
+  ) {
     try {
       const productIndex: number = cart.products.findIndex(
         (item) => item.data.id === product.id
       );
+
       if (productIndex === -1) {
-        cart.products.push({ data: product, quantity: 1 });
+        cart.products.push({ data: product._id, quantity });
       } else {
-        cart.products[productIndex].quantity += 1;
+        cart.products[productIndex].quantity = quantity;
       }
-      return await cart.save();
+
+      await cart.save();
+
+      if (productIndex === -1) {
+        cart.products[cart.products.length - 1].data = product;
+      } else {
+        cart.products[productIndex].data = product;
+      }
+
+      return cart;
     } catch (err) {
       throw new BaseError('Failed to add product to cart', err, 'addProduct');
     }
