@@ -45,6 +45,23 @@ class CartsController {
     }
   }
 
+  public async createOrRead(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const cart = await cartsService.createOrRead(
+        req.body.user,
+        req.body.product,
+        parseInt(req.params.quantity)
+      );
+      res.status(httpStatus.CREATED).send({ cart });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   public async addProduct(
     req: express.Request,
     res: express.Response,
@@ -53,7 +70,8 @@ class CartsController {
     try {
       const cartId = await cartsService.addProduct(
         req.body.product,
-        req.body.cart
+        req.body.cart,
+        parseInt(req.params.quantity)
       );
       res.status(httpStatus.CREATED).send({ id: cartId });
     } catch (err) {

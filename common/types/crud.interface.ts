@@ -1,5 +1,6 @@
 import { ICreateCartDto } from '../../components/cart/dto/create.cart.dto';
 import { ICreateProductDto } from '../../components/product/dto/create.product.dto';
+import { ICreateUserDto } from '../../components/user/dto/create.user.dto';
 
 export interface ICrud {
   create: (resource: any) => Promise<any>;
@@ -10,9 +11,15 @@ export interface ICrud {
 }
 
 export interface ICrudCart extends ICrud {
+  createOrRead: (
+    user: ICreateUserDto,
+    product: ICreateProductDto,
+    quantity: number
+  ) => Promise<any>;
   addProduct: (
     product: ICreateProductDto,
-    cart: ICreateCartDto
+    cart: ICreateCartDto,
+    quantity: number
   ) => Promise<any>;
   deleteProductById: (
     product: ICreateProductDto,
