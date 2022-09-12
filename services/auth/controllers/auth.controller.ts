@@ -54,6 +54,7 @@ class AuthController {
         req.body.email
       );
       if (foundUser && (await foundUser.comparePassword(req.body.password))) {
+        //TODO: replace this part of the cart in the frontend, otherwise the set-cookies limit is exceeded.
         const accessToken = signToken(foundUser, accessTokenSecret, '10m');
         const newRefreshToken = signToken(foundUser, refreshTokenSecret, '1d');
 

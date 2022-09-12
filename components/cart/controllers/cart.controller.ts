@@ -26,7 +26,7 @@ class CartsController {
   ) {
     try {
       const cart = await cartsService.readById(req.body.id);
-      res.status(httpStatus.OK).send(cart.products);
+      res.status(httpStatus.OK).send(cart);
     } catch (err) {
       next(err);
     }

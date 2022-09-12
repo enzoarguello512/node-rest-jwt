@@ -43,8 +43,14 @@ class UsersDao implements ICrudUser {
   public async getUserByEmailWithPassword(email: string) {
     try {
       return User.findOne({ email: email })
-        .select('id email firstName permissionLevel +password refreshToken')
+        .select(
+          'id email firstName permissionLevel +password refreshToken cart'
+        )
         .exec();
+      //.populate({
+      //path: 'cart',
+      //populate: 'products.data',
+      //})
     } catch (err) {
       throw new BaseError(
         'Failed to find user',
