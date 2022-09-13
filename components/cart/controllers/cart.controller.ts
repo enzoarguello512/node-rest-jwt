@@ -56,7 +56,7 @@ class CartsController {
         req.body.product,
         parseInt(req.params.quantity)
       );
-      res.status(httpStatus.CREATED).send({ cart });
+      res.status(httpStatus.CREATED).send(cart);
     } catch (err) {
       next(err);
     }
@@ -68,12 +68,12 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      const cartId = await cartsService.addProduct(
+      const newCart = await cartsService.addProduct(
         req.body.product,
         req.body.cart,
         parseInt(req.params.quantity)
       );
-      res.status(httpStatus.CREATED).send({ id: cartId });
+      res.status(httpStatus.CREATED).send(newCart);
     } catch (err) {
       next(err);
     }
