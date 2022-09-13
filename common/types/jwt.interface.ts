@@ -1,6 +1,7 @@
 export interface IJwt {
-  UserInfo: {
-    email: string;
-    permissionLevel: string;
-  };
+  id: string;
+  email: string;
+  firstName: string;
+  permissionLevel: number;
+  cart?: string;
 }

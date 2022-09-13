@@ -7,6 +7,7 @@ import { UnauthorizedError } from '../../../common/error/unauthorized.error';
 import { Error as MongoError } from 'mongoose';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { ICreateUserDto } from '../../../components/user/dto/create.user.dto';
+import { IJwt } from '../../../common/types/jwt.interface';
 
 const log: debug.IDebugger = debug('app:auth-controller');
 
@@ -36,7 +37,7 @@ function signToken(
       firstName: user.firstName,
       permissionLevel: user.permissionLevel,
       cart: user?.cart || '',
-    },
+    } as IJwt,
     secretToken,
     { expiresIn }
   );

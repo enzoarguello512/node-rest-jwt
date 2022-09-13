@@ -19,8 +19,11 @@ class JwtMiddleware {
         }
         const decoded = jwt.verify(authorization[1], accessTokenSecret) as IJwt;
         res.locals.jwt = {
-          email: decoded.UserInfo.email,
-          permissionLevel: decoded.UserInfo.permissionLevel,
+          id: decoded?.id || req.params.cartId || '',
+          email: decoded?.email || '',
+          firstName: decoded?.firstName || '',
+          permissionLevel: decoded?.permissionLevel || '',
+          cart: decoded?.cart || req.params.cartId || '',
         };
         next();
       } catch (err) {
