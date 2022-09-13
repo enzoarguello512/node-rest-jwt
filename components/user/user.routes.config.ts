@@ -34,7 +34,7 @@ export default class UsersRoutes extends CommonRoutesConfig {
       .all(
         UsersMiddleware.validateUserExists,
         JwtMiddleware.validJWTNeeded,
-        PermissionMiddleware.onlySameUserOrAdminCanDoThisAction
+        PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('userId', 'id')
       )
       .get(UsersController.getUserById)
       .delete(UsersController.removeUser);
@@ -51,7 +51,7 @@ export default class UsersRoutes extends CommonRoutesConfig {
     //   BodyValidationMiddleware.verifyBodyFieldsErrors,
     //   UsersMiddleware.validateSameEmailBelongToSameUser,
     //   UsersMiddleware.userCantChangePermission,
-    //   PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
+    //   PermissionMiddleware.onlySameUserOrAdminCanDoThisAction("userId", "id"),
     //   PermissionMiddleware.minimumPermissionLevelRequired(
     //     EPermissionLevel.PAID_PERMISSION
     //   ),
@@ -70,7 +70,7 @@ export default class UsersRoutes extends CommonRoutesConfig {
       body('permissionLevel').isInt().optional(),
       BodyValidationMiddleware.verifyBodyFieldsErrors,
       UsersMiddleware.validatePatchEmail,
-      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
+      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('userId', 'id'),
       PermissionMiddleware.minimumPermissionLevelRequired(
         EPermissionLevel.PAID_PERMISSION
       ),
@@ -79,7 +79,7 @@ export default class UsersRoutes extends CommonRoutesConfig {
 
     this.app.patch(`/users/:userId/permissionLevel/:permissionLevel`, [
       JwtMiddleware.validJWTNeeded,
-      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction,
+      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('userId', 'id'),
       PermissionMiddleware.minimumPermissionLevelRequired(
         EPermissionLevel.ADMIN_PERMISSION
       ),

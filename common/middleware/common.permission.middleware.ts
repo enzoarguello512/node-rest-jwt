@@ -24,25 +24,25 @@ class CommonPermissionMiddleware {
     };
   }
 
-  async onlySameUserOrAdminCanDoThisAction(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
-    const userPermissionLevel = parseInt(res.locals.jwt.permissionLevel);
-    if (
-      req.params &&
-      req.params.userId &&
-      req.params.userId === res.locals.jwt.userId
-    ) {
-      return next();
-    } else {
-      if (userPermissionLevel & EPermissionLevel.ADMIN_PERMISSION) {
+  onlySameUserOrAdminCanDoThisAction(paramsProp: string, jwtProp: string) {
+    return async (
+      req: express.Request,
+      res: express.Response,
+      next: express.NextFunction
+    ) => {
+      const userPermissionLevel = parseInt(res.locals.jwt.permissionLevel);
+      const param = req.params[paramsProp];
+      const localJwt = res.locals.jwt[jwtProp];
+      if (req.params && param && param === localJwt) {
         return next();
       } else {
-        return res.status(403).send();
+        if (userPermissionLevel & EPermissionLevel.ADMIN_PERMISSION) {
+          return next();
+        } else {
+          return res.status(403).send();
+        }
       }
-    }
+    };
   }
 
   async onlyAdminCanDoThisAction(

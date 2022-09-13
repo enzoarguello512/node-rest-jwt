@@ -4,6 +4,9 @@ import CartMiddleware from './middleware/cart.middleware';
 import ProductMiddleware from '../product/middleware/product.middleware';
 import UserMiddleware from '../user/middleware/user.middleware';
 import express from 'express';
+import JwtMiddleware from '../../services/auth/middleware/jwt.middleware';
+import PermissionMiddleware from '../../common/middleware/common.permission.middleware';
+import { EPermissionLevel } from '../../common/types/common.permissionlevel.enum';
 
 export default class CartRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
@@ -12,38 +15,55 @@ export default class CartRoutes extends CommonRoutesConfig {
   configureRoutes(): express.Application {
     this.app
       .route(`/cart`)
-      .get(CartController.listCarts)
+      .all(JwtMiddleware.validJWTNeeded)
+      .get(
+        PermissionMiddleware.onlyAdminCanDoThisAction,
+        CartController.listCarts
+      )
       .post(
         CartMiddleware.validateRequiredCartBodyFields,
+        PermissionMiddleware.minimumPermissionLevelRequired(
+          EPermissionLevel.FREE_PERMISSION
+        ),
         CartController.createCart
       );
 
     this.app.param(`cartId`, CartMiddleware.extractCartId);
     this.app.delete(`/cart/:cartId`, [
       CartMiddleware.validateCartExists,
+      JwtMiddleware.validJWTNeeded,
+      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('cartId', 'cart'),
       CartController.removeCart,
     ]);
 
     this.app.get(`/cart/:cartId/products`, [
       CartMiddleware.validateCartExists,
+      JwtMiddleware.validJWTNeeded,
+      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('cartId', 'cart'),
       CartController.getCartProductsById,
     ]);
 
     this.app.delete(`/cart/:cartId/products/:productId`, [
       CartMiddleware.validateCartExists,
       ProductMiddleware.validateProductExists,
+      JwtMiddleware.validJWTNeeded,
+      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('cartId', 'cart'),
       CartController.removeCartProduct,
     ]);
 
     this.app.post(`/cart/:cartId/products/:productId/:quantity`, [
       CartMiddleware.validateCartExists,
       ProductMiddleware.validateProductExists,
+      JwtMiddleware.validJWTNeeded,
+      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('cartId', 'cart'),
       CartController.addProduct,
     ]);
 
     this.app.post(`/cart/:userId/:productId/:quantity`, [
       UserMiddleware.validateUserExists,
       ProductMiddleware.validateProductExists,
+      JwtMiddleware.validJWTNeeded,
+      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('userId', 'id'),
       CartController.createOrRead,
     ]);
 
