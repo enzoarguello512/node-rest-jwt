@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.0.6...v0.0.7) (2022-09-14)
+
+
+### Features
+
+* update methods and add createOrRead. ([41d450b](https://github.com/enzoarguello512/api-rest-ecommerce/commit/41d450b7336f4fb4d2c6b47757cbad21b10fff54))
+
+
+### Bug Fixes
+
+* add consistency in responses. ([57339b3](https://github.com/enzoarguello512/api-rest-ecommerce/commit/57339b3a185eb4b2e9015fee7e0fa6052b7e4db1))
+* add parameters to middleware. ([1bf147d](https://github.com/enzoarguello512/api-rest-ecommerce/commit/1bf147d275f21f6a0f28b6d91941d3fa0e93b80c))
+* change routing method. ([ebb765c](https://github.com/enzoarguello512/api-rest-ecommerce/commit/ebb765c4cd86f2af7ecd3dacf422bfeb83251aba))
+* comment out unnecessary code and fix server responses. ([cb6b180](https://github.com/enzoarguello512/api-rest-ecommerce/commit/cb6b180d3cda10935b302b208f74fe30853f249c))
+* correct errors and simplify the code. ([a6341b4](https://github.com/enzoarguello512/api-rest-ecommerce/commit/a6341b497be44a3ae8d1b3dc410ed1d7105de09a))
+* request error and remove middleware session. ([b2e9bc9](https://github.com/enzoarguello512/api-rest-ecommerce/commit/b2e9bc9f4e12b5815b561ccb09b5b4bc122c52d0))
+* update for createOrRead implementation. ([0b74fbe](https://github.com/enzoarguello512/api-rest-ecommerce/commit/0b74fbe9ca395b01457dc586a1098c3653ccf257))
+* update IJwt interface. ([24b7466](https://github.com/enzoarguello512/api-rest-ecommerce/commit/24b7466bdfc323042bfa3434f9883dcddcefe4c6))
+
 ### [0.0.6](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.0.5...v0.0.6) (2022-09-10)
 
 
