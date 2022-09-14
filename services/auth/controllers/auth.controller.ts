@@ -3,7 +3,6 @@ import debug from 'debug';
 import jwt from 'jsonwebtoken';
 import config from 'config';
 import usersService from '../../../components/user/services/user.service';
-import { UnauthorizedError } from '../../../common/error/unauthorized.error';
 import { Error as MongoError } from 'mongoose';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { ICreateUserDto } from '../../../components/user/dto/create.user.dto';
@@ -95,16 +94,11 @@ class AuthController {
         // Send authorization access token to user
         return res.json({ accessToken });
       }
-      throw new UnauthorizedError();
+      throw new BadRequestError(
+        'Invalid user email/password',
+        'validateUserExists'
+      );
     } catch (err) {
-      if (err instanceof MongoError.CastError) {
-        return next(
-          new BadRequestError(
-            'Invalid user email/password',
-            'validateUserExists'
-          )
-        );
-      }
       next(err);
     }
   }

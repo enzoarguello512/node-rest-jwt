@@ -13,7 +13,6 @@ import http from 'http';
 import SocketServer from './services/socket/socket.service';
 import MessagesRoutes from './components/message/message.routes.config';
 import socketio from 'socket.io';
-import sessionMiddleware from './components/app/middleware/session.middleware';
 import AuthRoutes from './services/auth/auth.routes.config';
 import { corsOptions } from './components/app/middleware/cors.middleware';
 import { credentials } from './components/app/middleware/credentials.middleware';
@@ -44,7 +43,6 @@ app.use(credentials);
 app.use(cors(corsOptions));
 
 app.use(helmet());
-app.use(sessionMiddleware);
 
 //middleware for cookies
 app.use(cookieParser());
