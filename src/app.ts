@@ -1,22 +1,35 @@
+// Server
 import express from 'express';
+import http from 'http';
 import debug from 'debug';
+import path from 'path';
+
+// To fix the environment variable (config module)
+process.env['NODE_CONFIG_DIR'] = path.join(__dirname, 'config');
+
+// Middleware and options
 import cors from 'cors';
 import helmet from 'helmet';
-import CommonRoutesConfig from './common/common.routes.config';
-import ProductsRoutes from './components/product/product.routes.config';
+import { corsOptions } from './components/app/middleware/cors.middleware';
+import { credentials } from './components/app/middleware/credentials.middleware';
 import logsMiddleware from './components/app/middleware/logs.middleware';
 import ErrorMiddleware from './components/app/middleware/error.middleware';
 import ErrorHandler from './common/error.handler.config';
+
+// Routes
+import CommonRoutesConfig from './common/common.routes.config';
+import ProductsRoutes from './components/product/product.routes.config';
 import CartRoutes from './components/cart/cart.routes.config';
 import UsersRoutes from './components/user/user.routes.config';
-import http from 'http';
-import SocketServer from './services/socket/socket.service';
 import MessagesRoutes from './components/message/message.routes.config';
-import socketio from 'socket.io';
 import AuthRoutes from './services/auth/auth.routes.config';
-import { corsOptions } from './components/app/middleware/cors.middleware';
-import { credentials } from './components/app/middleware/credentials.middleware';
+
+// Jwt
 import cookieParser from 'cookie-parser';
+
+// Socket-io (chat)
+import SocketServer from './services/socket/socket.service';
+import socketio from 'socket.io';
 
 // App
 
@@ -57,7 +70,7 @@ routes.forEach((route: CommonRoutesConfig): void => {
   debugLog(`Routes configured for ${route.getName()}`);
 });
 
-// Errors
+// Manage errors
 app.use(ErrorMiddleware.handle);
 // Manage non-existent routes
 app.use(ErrorMiddleware.routeNotFound);
