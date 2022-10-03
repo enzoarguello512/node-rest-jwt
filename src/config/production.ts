@@ -1,6 +1,3 @@
-// import path from 'path';
-// // For the "config" module to correctly detect our configuration folder ("config/")
-// process.env['NODE_CONFIG_DIR'] = path.join(__dirname, '/backend/config');
 import dotenv from 'dotenv';
 import { EPersistenceType } from '../common/types/factory.persistence.enum';
 
