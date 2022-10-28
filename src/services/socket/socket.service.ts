@@ -37,7 +37,9 @@ export default class SocketServer {
         type: 'user',
       });
 
-      const messagesList = await messageService.listUserMessages(user._id);
+      const messagesList = await messageService.listUserItemsCollection(
+        user._id
+      );
       this.socket.emit('new message saved', messagesList);
     } catch (err) {
       const message = err instanceof BaseError ? err.message : err;
@@ -51,7 +53,9 @@ export default class SocketServer {
       if (!user) {
         throw new NotFoundError('User email not found', 'getMessages');
       }
-      const messagesList = await messageService.listUserMessages(user._id);
+      const messagesList = await messageService.listUserItemsCollection(
+        user._id
+      );
       this.socket.emit('messages', messagesList);
     } catch (err) {
       const message = err instanceof BaseError ? err.message : err;

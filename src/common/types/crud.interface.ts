@@ -27,8 +27,8 @@ export interface ICrudCart extends ICrud {
   ) => Promise<any>;
 }
 
-export interface ICrudMessage extends ICrud {
-  listUserMessages: (
+export interface ICrudDerivedToUser extends ICrud {
+  listUserItemsCollection: (
     userId: string,
     limit?: number,
     page?: number

@@ -3,13 +3,13 @@ import debug from 'debug';
 import { ICreateMessageDto } from '../dto/create.message.dto';
 import { IPatchMessageDto } from '../dto/patch.message.dto';
 import BaseError from '../../../common/error/base.error';
-import { ICrudMessage } from '../../../common/types/crud.interface';
+import { ICrudDerivedToUser } from '../../../common/types/crud.interface';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { Message } from '../models/message.model';
 
 const log: debug.IDebugger = debug('app:messages-dao');
 
-class MessagesDao implements ICrudMessage {
+class MessagesDao implements ICrudDerivedToUser {
   constructor() {
     log('Created new instance of MessagesDao');
   }
@@ -69,7 +69,7 @@ class MessagesDao implements ICrudMessage {
     }
   }
 
-  public async listUserMessages(userId: string, limit = 200, page = 0) {
+  public async listUserItemsCollection(userId: string, limit = 200, page = 0) {
     try {
       return Message.find({ user: userId })
         .limit(limit)

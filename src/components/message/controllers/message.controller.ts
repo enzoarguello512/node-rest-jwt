@@ -25,7 +25,7 @@ class MessagesController {
     next: express.NextFunction
   ) {
     try {
-      const messages = await messagesService.listUserMessages(
+      const messages = await messagesService.listUserItemsCollection(
         req.params.userId
       );
       res.status(httpStatus.OK).send(messages);
