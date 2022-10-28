@@ -1,3 +1,4 @@
+import { UploadedFile } from 'express-fileupload';
 import mongoose from 'mongoose';
 
 export interface ICreateProductDto extends mongoose.Document {
@@ -5,7 +6,8 @@ export interface ICreateProductDto extends mongoose.Document {
   name: string;
   description?: string;
   productCode?: number;
-  imageUrl?: string;
+  imageId: string | UploadedFile;
+  imageUrl: string;
   hasFreeShipping?: boolean;
   discount: number;
   discountedPrice: number;

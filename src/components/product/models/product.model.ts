@@ -10,11 +10,8 @@ export const productSchema = new Schema<ICreateProductDto>(
     name: { type: String, required: true },
     description: String,
     productCode: Number,
-    imageUrl: {
-      type: String,
-      required: false,
-      default: '',
-    },
+    imageId: { type: String, required: true },
+    imageUrl: { type: String, required: true },
     price: { type: Number, required: true },
     stock: { type: Number, required: true },
     hasFreeShipping: {

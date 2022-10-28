@@ -1,15 +1,21 @@
+import { UploadedFile } from 'express-fileupload';
 import mongoose from 'mongoose';
 import { ICreateCartDto } from '../../cart/dto/create.cart.dto';
 
 export interface ICreateUserDto extends mongoose.Document {
   id: string;
-  firstName: string;
-  lastName?: string;
   email: string;
   password: string;
+  firstName: string;
+  lastName?: string;
+  address: string;
+  age: number;
+  phoneNumber: string;
+  imageId: string | UploadedFile;
+  imageUrl: string;
   permissionLevel: number;
-  createdAt?: Date;
-  updatedAt?: Date;
   refreshToken?: Array<string>;
   cart?: mongoose.Types.ObjectId | ICreateCartDto;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

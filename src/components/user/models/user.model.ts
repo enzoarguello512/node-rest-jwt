@@ -12,6 +12,16 @@ export const userSchema = new Schema<ICreateUserDto, IUserModel>(
     password: { type: String, required: true, select: false },
     firstName: { type: String, required: true },
     lastName: String,
+    address: String,
+    age: { type: Number, required: true },
+    phoneNumber: { type: String, required: true },
+    imageId: { type: String, required: false, default: 'Users/avatar.jpg' },
+    imageUrl: {
+      type: String,
+      required: false,
+      default:
+        'https://res.cloudinary.com/enzoarguello512/image/upload/v1666978387/Users/avatar.jpg',
+    },
     permissionLevel: {
       type: Number,
       required: true,
