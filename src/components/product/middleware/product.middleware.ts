@@ -10,12 +10,18 @@ class ProductsMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    if (req.body && req.body.name && req.body.price && req.body.stock) {
+    if (
+      req.body &&
+      req.body.name &&
+      req.body.price &&
+      req.body.stock &&
+      req.files?.image
+    ) {
       next();
     } else {
       next(
         new BadRequestError(
-          `Missing required fields: name, price and stock`,
+          `Missing required fields: name, price, stock and image`,
           'validateRequiredProductBodyFields'
         )
       );

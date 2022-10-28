@@ -6,6 +6,8 @@ import BaseError from '../../../common/error/base.error';
 import { ICrud } from '../../../common/types/crud.interface';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { Product } from '../models/product.model';
+import CloudinaryService from '../../../services/cloudinary/cloudinary.service';
+import { UploadedFile } from 'express-fileupload';
 
 const log: debug.IDebugger = debug('app:products-dao');
 
@@ -17,21 +19,32 @@ class ProductsDao implements ICrud {
   public async create(productFields: ICreateProductDto): Promise<string> {
     try {
       const product = new Product(productFields);
+      const image = productFields.imageId as UploadedFile;
+      const { public_id, secure_url } = await CloudinaryService.uploadImage(
+        image,
+        'Products'
+      );
+      product.imageId = public_id;
+      product.imageUrl = secure_url;
       await product.save();
       return product.id;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
         const message = Object.values(err.errors).map((prop) => prop.message);
         throw new BadRequestError(message.join('. '), 'create');
-      }
+      } else if (err instanceof BaseError) throw err;
       throw new BaseError('Failed to save product', err, 'create');
     }
   }
 
-  public async deleteById(productId: string) {
+  public async deleteById(product: ICreateProductDto) {
     try {
-      return Product.deleteOne({ _id: productId }).exec();
+      if (typeof product.imageId === 'string') {
+        await CloudinaryService.deleteImage(product.imageId);
+      }
+      return Product.deleteOne({ _id: product.id }).exec();
     } catch (err) {
+      if (err instanceof BaseError) throw err;
       throw new BaseError('Failed to remove product', err, 'deleteById');
     }
   }
