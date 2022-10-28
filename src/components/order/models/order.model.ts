@@ -1,9 +1,9 @@
 import MongooseService from '../../../services/mongoose/mongoose.service';
-import { ICreateMessageDto } from '../dto/create.message.dto';
+import { ICreateOrderDto } from '../dto/create.order.dto';
 
 const Schema = MongooseService.getMongoose().Schema;
 
-export const messageSchema = new Schema<ICreateMessageDto>(
+export const orderSchema = new Schema<ICreateOrderDto>(
   {
     user: {
       type: 'ObjectId',
@@ -17,7 +17,7 @@ export const messageSchema = new Schema<ICreateMessageDto>(
   }
 );
 
-messageSchema.set('toJSON', {
+orderSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,
   transform: function (doc, ret) {
@@ -25,7 +25,7 @@ messageSchema.set('toJSON', {
   },
 });
 
-export const Message = MongooseService.getMongoose().model<ICreateMessageDto>(
-  'Message',
-  messageSchema
+export const Order = MongooseService.getMongoose().model<ICreateOrderDto>(
+  'Order',
+  orderSchema
 );

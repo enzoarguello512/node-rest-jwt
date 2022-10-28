@@ -1,12 +1,12 @@
 import express from 'express';
-import messageService from '../services/message.service';
+import orderService from '../services/order.service';
 import httpStatus from 'http-status';
 import { Error as MongoError } from 'mongoose';
 import { NotFoundError } from '../../../common/error/not.found.error';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 
-class MessagesMiddleware {
-  public async validateRequiredMessageBodyFields(
+class OrdersMiddleware {
+  public async validateRequiredOrderBodyFields(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
@@ -20,37 +20,35 @@ class MessagesMiddleware {
     }
   }
 
-  public async validateMessageExists(
+  public async validateOrderExists(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
     try {
-      const message = await messageService.readById(req.params.messageId);
-      if (!message) {
-        throw new NotFoundError('Message not found', 'validateMessageExists');
+      const order = await orderService.readById(req.params.orderId);
+      if (!order) {
+        throw new NotFoundError('Order not found', 'validateOrderExists');
       }
-      req.body.message = message;
+      req.body.order = order;
       next();
     } catch (err) {
       if (err instanceof MongoError.CastError) {
-        next(
-          new BadRequestError('Invalid message id', 'validateMessageExists')
-        );
+        next(new BadRequestError('Invalid order id', 'validateOrderExists'));
         return;
       }
       next(err);
     }
   }
 
-  public async extractMessageId(
+  public async extractOrderId(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
-    req.body.id = req.params.messageId;
+    req.body.id = req.params.orderId;
     next();
   }
 }
 
-export default new MessagesMiddleware();
+export default new OrdersMiddleware();

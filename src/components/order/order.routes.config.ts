@@ -1,33 +1,31 @@
 import CommonRoutesConfig from '../../common/common.routes.config';
-import MessagesController from './controllers/message.controller';
-import MessagesMiddleware from './middleware/message.middleware';
+import OrdersController from './controllers/order.controller';
+import OrdersMiddleware from './middleware/order.middleware';
 import express from 'express';
 import PermissionMiddleware from '../../common/middleware/common.permission.middleware';
 
-export default class MessagesRoutes extends CommonRoutesConfig {
+export default class OrdersRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
-    super(app, 'MessagesRoutes');
+    super(app, 'OrdersRoutes');
   }
   configureRoutes(): express.Application {
-    this.app.route(`/messages`).get(MessagesController.listMessages).post(
-      MessagesMiddleware.validateRequiredMessageBodyFields,
+    this.app.route(`/orders`).get(OrdersController.listOrders).post(
+      OrdersMiddleware.validateRequiredOrderBodyFields,
       // PermissionMiddleware.isAdmin,
-      MessagesController.createMessage
+      OrdersController.createOrder
     );
 
-    this.app.param(`messageId`, MessagesMiddleware.extractMessageId);
+    this.app.param(`orderId`, OrdersMiddleware.extractOrderId);
     this.app
-      .route(`/messages/:messageId`)
-      .all(MessagesMiddleware.validateMessageExists)
-      .get(MessagesController.getMessageById)
+      .route(`/orders/:orderId`)
+      .all(OrdersMiddleware.validateOrderExists)
+      .get(OrdersController.getOrderById)
       // .all(PermissionMiddleware.isAdmin)
-      .delete(MessagesController.removeMessage);
+      .delete(OrdersController.removeOrder);
 
-    this.app.patch(`/messages/:messageId`, [MessagesController.patch]);
+    this.app.patch(`/orders/:orderId`, [OrdersController.patch]);
 
-    this.app.get(`/messages/user/:userId`, [
-      MessagesController.listUserMessages,
-    ]);
+    this.app.get(`/orders/user/:userId`, [OrdersController.listUserOrders]);
 
     return this.app;
   }

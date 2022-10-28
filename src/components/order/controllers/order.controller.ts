@@ -1,60 +1,60 @@
 import express from 'express';
-import messagesService from '../services/message.service';
+import ordersService from '../services/order.service';
 import debug from 'debug';
 import httpStatus from 'http-status';
 
-const log: debug.IDebugger = debug('app:messages-controller');
+const log: debug.IDebugger = debug('app:orders-controller');
 
-class MessagesController {
-  public async listMessages(
+class OrdersController {
+  public async listOrders(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
     try {
-      const messages = await messagesService.list(100, 0);
-      res.status(httpStatus.OK).send(messages);
+      const orders = await ordersService.list(100, 0);
+      res.status(httpStatus.OK).send(orders);
     } catch (err) {
       next(err);
     }
   }
 
-  public async listUserMessages(
+  public async listUserOrders(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
     try {
-      const messages = await messagesService.listUserMessages(
+      const orders = await ordersService.listUserItemsCollection(
         req.params.userId
       );
-      res.status(httpStatus.OK).send(messages);
+      res.status(httpStatus.OK).send(orders);
     } catch (err) {
       next(err);
     }
   }
 
-  public async getMessageById(
+  public async getOrderById(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
     try {
-      const message = await messagesService.readById(req.params.messageId);
-      res.status(httpStatus.OK).send(message);
+      const order = await ordersService.readById(req.params.orderId);
+      res.status(httpStatus.OK).send(order);
     } catch (err) {
       next(err);
     }
   }
 
-  public async createMessage(
+  public async createOrder(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
     try {
-      const messageId = await messagesService.create(req.body);
-      res.status(httpStatus.CREATED).send({ id: messageId });
+      const orderId = await ordersService.create(req.body);
+      res.status(httpStatus.CREATED).send({ id: orderId });
     } catch (err) {
       next(err);
     }
@@ -66,20 +66,20 @@ class MessagesController {
     next: express.NextFunction
   ) {
     try {
-      log(await messagesService.patchById(req.params.messageId, req.body));
+      log(await ordersService.patchById(req.params.orderId, req.body));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);
     }
   }
 
-  public async removeMessage(
+  public async removeOrder(
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
     try {
-      log(await messagesService.deleteById(req.body.message));
+      log(await ordersService.deleteById(req.body.order));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);
@@ -87,4 +87,4 @@ class MessagesController {
   }
 }
 
-export default new MessagesController();
+export default new OrdersController();

@@ -1,85 +1,85 @@
 import mongoose from 'mongoose';
 import debug from 'debug';
-import { ICreateMessageDto } from '../dto/create.message.dto';
-import { IPatchMessageDto } from '../dto/patch.message.dto';
+import { ICreateOrderDto } from '../dto/create.order.dto';
+import { IPatchOrderDto } from '../dto/patch.order.dto';
 import BaseError from '../../../common/error/base.error';
-import { ICrudMessage } from '../../../common/types/crud.interface';
+import { ICrudDerivedToUser } from '../../../common/types/crud.interface';
 import { BadRequestError } from '../../../common/error/bad.request.error';
-import { Message } from '../models/message.model';
+import { Order } from '../models/order.model';
 
-const log: debug.IDebugger = debug('app:messages-dao');
+const log: debug.IDebugger = debug('app:orders-dao');
 
-class MessagesDao implements ICrudMessage {
+class OrdersDao implements ICrudDerivedToUser {
   constructor() {
-    log('Created new instance of MessagesDao');
+    log('Created new instance of OrdersDao');
   }
 
-  public async create(messageFields: ICreateMessageDto): Promise<string> {
+  public async create(orderFields: ICreateOrderDto): Promise<string> {
     try {
-      const message = new Message(messageFields);
-      await message.save();
-      return message.id;
+      const order = new Order(orderFields);
+      await order.save();
+      return order.id;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
-        const message = Object.values(err.errors).map((prop) => prop.message);
-        throw new BadRequestError(message.join('. '), 'create');
+        const order = Object.values(err.errors).map((prop) => prop.message);
+        throw new BadRequestError(order.join('. '), 'create');
       }
-      throw new BaseError('Failed to save message', err, 'create');
+      throw new BaseError('Failed to save order', err, 'create');
     }
   }
 
-  public async deleteById(message: ICreateMessageDto) {
+  public async deleteById(order: ICreateOrderDto) {
     try {
-      return Message.deleteOne({ _id: message.id }).exec();
+      return Order.deleteOne({ _id: order.id }).exec();
     } catch (err) {
-      throw new BaseError('Failed to remove message', err, 'deleteById');
+      throw new BaseError('Failed to remove order', err, 'deleteById');
     }
   }
 
-  public async readById(messageId: string) {
+  public async readById(orderId: string) {
     try {
-      return Message.findOne({ _id: messageId }).exec();
+      return Order.findOne({ _id: orderId }).exec();
     } catch (err) {
-      throw new BaseError('Failed to find message', err, 'readById');
+      throw new BaseError('Failed to find order', err, 'readById');
     }
   }
 
   public async list(limit = 200, page = 0) {
-    return Message.find()
+    return Order.find()
       .limit(limit)
       .skip(limit * page)
       .exec();
   }
 
-  public async patchById(messageId: string, messageFields: IPatchMessageDto) {
+  public async patchById(orderId: string, orderFields: IPatchOrderDto) {
     try {
-      const existingMessage = await Message.findOneAndUpdate(
-        { _id: messageId },
-        { $set: messageFields },
+      const existingOrder = await Order.findOneAndUpdate(
+        { _id: orderId },
+        { $set: orderFields },
         { new: true }
       ).exec();
 
-      return existingMessage;
+      return existingOrder;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
-        const message = Object.values(err.errors).map((prop) => prop.message);
-        throw new BadRequestError(message.join('. '), 'patchById');
+        const order = Object.values(err.errors).map((prop) => prop.message);
+        throw new BadRequestError(order.join('. '), 'patchById');
       }
-      throw new BaseError('Failed to update message', err, 'patchById');
+      throw new BaseError('Failed to update order', err, 'patchById');
     }
   }
 
-  public async listUserMessages(userId: string, limit = 200, page = 0) {
+  public async listUserItemsCollection(userId: string, limit = 200, page = 0) {
     try {
-      return Message.find({ user: userId })
+      return Order.find({ user: userId })
         .limit(limit)
         .skip(limit * page)
         .populate('user')
         .exec();
     } catch (err) {
-      throw new BaseError('Failed to find messages', err, 'listUserMessages');
+      throw new BaseError('Failed to find orders', err, 'listUserOrders');
     }
   }
 }
 
-export default new MessagesDao();
+export default new OrdersDao();

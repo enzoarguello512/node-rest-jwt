@@ -1,4 +1,4 @@
-import { ICreateMessageDto } from './create.message.dto';
+import { ICreateOrderDto } from './create.order.dto';
 
 // eslint-disable-next-line
-export interface IPatchMessageDto extends Partial<ICreateMessageDto> {}
+export interface IPatchOrderDto extends Partial<ICreateOrderDto> {}

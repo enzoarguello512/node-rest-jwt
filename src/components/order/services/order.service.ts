@@ -1,14 +1,14 @@
-import { ICrudMessage } from '../../../common/types/crud.interface';
-import { ICreateMessageDto } from '../dto/create.message.dto';
-import { IPatchMessageDto } from '../dto/patch.message.dto';
-import FactoryInstance from '../daos/message.factory.dao';
+import { ICrudDerivedToUser } from '../../../common/types/crud.interface';
+import { ICreateOrderDto } from '../dto/create.order.dto';
+import { IPatchOrderDto } from '../dto/patch.order.dto';
+import FactoryInstance from '../daos/order.factory.dao';
 
-class MessagesService implements ICrudMessage {
-  async create(resource: ICreateMessageDto): Promise<any> {
+class OrdersService implements ICrudDerivedToUser {
+  async create(resource: ICreateOrderDto): Promise<any> {
     return (await FactoryInstance).create(resource);
   }
 
-  async deleteById(resource: ICreateMessageDto): Promise<any> {
+  async deleteById(resource: ICreateOrderDto): Promise<any> {
     return (await FactoryInstance).deleteById(resource);
   }
 
@@ -16,7 +16,7 @@ class MessagesService implements ICrudMessage {
     return (await FactoryInstance).list(limit, page);
   }
 
-  async patchById(id: string, resource: IPatchMessageDto): Promise<any> {
+  async patchById(id: string, resource: IPatchOrderDto): Promise<any> {
     return (await FactoryInstance).patchById(id, resource);
   }
 
@@ -24,13 +24,13 @@ class MessagesService implements ICrudMessage {
     return (await FactoryInstance).readById(id);
   }
 
-  async listUserMessages(
+  async listUserItemsCollection(
     userId: string,
     limit?: number,
     page?: number
   ): Promise<any> {
-    return (await FactoryInstance).listUserMessages(userId, limit, page);
+    return (await FactoryInstance).listUserItemsCollection(userId, limit, page);
   }
 }
 
-export default new MessagesService();
+export default new OrdersService();
