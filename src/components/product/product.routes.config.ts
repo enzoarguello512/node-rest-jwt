@@ -3,6 +3,7 @@ import ProductsController from './controllers/product.controller';
 import ProductsMiddleware from './middleware/product.middleware';
 import express from 'express';
 import PermissionMiddleware from '../../common/middleware/common.permission.middleware';
+import fileUploadMiddleware from '../app/middleware/file.upload.middleware';
 
 export default class ProductsRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
@@ -10,6 +11,7 @@ export default class ProductsRoutes extends CommonRoutesConfig {
   }
   configureRoutes(): express.Application {
     this.app.route(`/products`).get(ProductsController.listProducts).post(
+      fileUploadMiddleware,
       ProductsMiddleware.validateRequiredProductBodyFields,
       // PermissionMiddleware.isAdmin,
       ProductsController.createProduct

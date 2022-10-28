@@ -5,6 +5,7 @@ import JwtMiddleware from '../../services/auth/middleware/jwt.middleware';
 import PermissionMiddleware from '../../common/middleware/common.permission.middleware';
 import { EPermissionLevel } from '../../common/types/common.permissionlevel.enum';
 import BodyValidationMiddleware from '../../common/middleware/body.validation.middleware';
+import fileUploadMiddleware from '../app/middleware/file.upload.middleware';
 import { body } from 'express-validator';
 
 import express from 'express';
@@ -23,6 +24,7 @@ export default class UsersRoutes extends CommonRoutesConfig {
         UsersController.listUsers
       )
       .post(
+        fileUploadMiddleware,
         UsersMiddleware.validateRequiredUserBodyFields,
         UsersMiddleware.validateSameEmailDoesntExist,
         UsersController.createUser
