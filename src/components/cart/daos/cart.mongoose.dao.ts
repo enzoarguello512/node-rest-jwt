@@ -9,8 +9,6 @@ import { Cart } from '../models/cart.model';
 import { ICreateProductDto } from '../../product/dto/create.product.dto';
 import { NotFoundError } from '../../../common/error/not.found.error';
 import { ICreateUserDto } from '../../user/dto/create.user.dto';
-import TwilioService from '../../../services/twilio/twilio.service';
-import MailService from '../../../services/mail/mail.service';
 
 const log: debug.IDebugger = debug('app:carts-dao');
 
