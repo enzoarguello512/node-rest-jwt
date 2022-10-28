@@ -32,13 +32,13 @@ import SocketServer from './services/socket/socket.service';
 import socketio from 'socket.io';
 
 // App
-
+//////////////////////
 const app: express.Application = express();
 const debugLog: debug.IDebugger = debug('app');
 const routes: Array<CommonRoutesConfig> = [];
 
 // Middlewares
-
+//////////////////////
 // custom middleware logger
 app.use(logsMiddleware);
 
@@ -55,12 +55,14 @@ app.use(credentials);
 // cross Origin Resource Sharing
 app.use(cors(corsOptions));
 
+// helmet helps you secure your express apps
 app.use(helmet());
 
 //middleware for cookies
 app.use(cookieParser());
 
 // Routes config
+//////////////////////
 routes.push(new ProductsRoutes(app));
 routes.push(new CartRoutes(app));
 routes.push(new UsersRoutes(app));
@@ -70,11 +72,15 @@ routes.forEach((route: CommonRoutesConfig): void => {
   debugLog(`Routes configured for ${route.getName()}`);
 });
 
-// Manage errors
+// Errors
+//////////////////////
+// manage errors
 app.use(ErrorMiddleware.handle);
-// Manage non-existent routes
+
+// manage non-existent routes
 app.use(ErrorMiddleware.routeNotFound);
 
+// unhandled errors
 process.on('uncaughtException', async (error: Error): Promise<void> => {
   ErrorHandler.handleError(error);
   if (!ErrorHandler.isTrustedError(error)) process.exit(1);
@@ -84,9 +90,11 @@ process.on('unhandledRejection', (reason: Error): never => {
 });
 
 // Server
+//////////////////////
 const httpServer: http.Server = http.createServer(app);
 
 // Chat server
+//////////////////////
 const ioServer: socketio.Server = new socketio.Server(httpServer, {
   cors: {
     origin: '*',

@@ -4,7 +4,6 @@ import { Global } from './types/memory.server.interface';
 import MongoMemoryServer from 'mongodb-memory-server-core';
 import config from 'config';
 import { TKeys } from '../../common/types/factory.persistence.enum';
-import { MongoClient } from 'mongodb';
 
 const log: debug.IDebugger = debug('app:mongoose-service');
 
@@ -50,7 +49,7 @@ class MongooseService {
     return type === 'mongolocal' ? localUrl : atlasUrl;
   };
   // @ts-ignore
-  public connectWithRetry = async (): Promise<MongoClient> => {
+  public connectWithRetry = async () => {
     try {
       log('Attempting MongoDB connection (will retry if needed)');
       const uri: string = await this.getMongoUri(this.persistence);

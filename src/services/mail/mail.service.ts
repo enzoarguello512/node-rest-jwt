@@ -15,7 +15,7 @@ const transporter = nodeMailer.createTransport({
 });
 
 class MailService {
-  public async send(to: string = email, subject: string, htmlMessage: string) {
+  public async send(subject: string, htmlMessage: string, to: string = email) {
     const mailOptions = {
       from: 'The Morfi',
       to,
