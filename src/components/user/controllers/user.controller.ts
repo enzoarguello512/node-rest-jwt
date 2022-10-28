@@ -39,6 +39,7 @@ class UsersController {
     next: express.NextFunction
   ) {
     try {
+      req.body.imageId = req.files?.image;
       req.body.password = await User.encryptPassword(req.body.password);
       const userId = await usersService.create(req.body);
       res.status(201).send({ id: userId });
@@ -69,7 +70,7 @@ class UsersController {
     next: express.NextFunction
   ) {
     try {
-      log(await usersService.deleteById(req.params.userId));
+      log(await usersService.deleteById(req.body.user));
       res.status(204).send();
     } catch (err) {
       next(err);

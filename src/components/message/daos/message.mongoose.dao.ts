@@ -28,9 +28,9 @@ class MessagesDao implements ICrudMessage {
     }
   }
 
-  public async deleteById(messageId: string) {
+  public async deleteById(message: ICreateMessageDto) {
     try {
-      return Message.deleteOne({ _id: messageId }).exec();
+      return Message.deleteOne({ _id: message.id }).exec();
     } catch (err) {
       throw new BaseError('Failed to remove message', err, 'deleteById');
     }

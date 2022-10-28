@@ -38,6 +38,7 @@ class ProductsController {
     next: express.NextFunction
   ) {
     try {
+      req.body.imageId = req.files?.image;
       const productId = await productsService.create(req.body);
       res.status(httpStatus.CREATED).send({ id: productId });
     } catch (err) {
@@ -64,7 +65,7 @@ class ProductsController {
     next: express.NextFunction
   ) {
     try {
-      log(await productsService.deleteById(req.params.productId));
+      log(await productsService.deleteById(req.body.product));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);

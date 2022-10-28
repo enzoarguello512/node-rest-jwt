@@ -85,7 +85,7 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      log(await cartsService.deleteById(req.body.id));
+      log(await cartsService.deleteById(req.body.cart));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);

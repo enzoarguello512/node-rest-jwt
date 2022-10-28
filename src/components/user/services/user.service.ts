@@ -8,8 +8,8 @@ class UsersService implements ICrudUser {
     return (await FactoryInstance).create(resource);
   }
 
-  public async deleteById(id: string) {
-    return (await FactoryInstance).deleteById(id);
+  public async deleteById(resource: ICreateUserDto) {
+    return (await FactoryInstance).deleteById(resource);
   }
 
   public async list(limit?: number, page?: number) {

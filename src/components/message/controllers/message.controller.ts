@@ -79,7 +79,7 @@ class MessagesController {
     next: express.NextFunction
   ) {
     try {
-      log(await messagesService.deleteById(req.params.messageId));
+      log(await messagesService.deleteById(req.body.message));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);

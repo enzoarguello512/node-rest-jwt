@@ -8,8 +8,8 @@ class ProductsService implements ICrud {
     return (await FactoryInstance).create(resource);
   }
 
-  async deleteById(id: string): Promise<any> {
-    return (await FactoryInstance).deleteById(id);
+  async deleteById(resource: ICreateProductDto): Promise<any> {
+    return (await FactoryInstance).deleteById(resource);
   }
 
   async list(limit?: number, page?: number): Promise<any> {

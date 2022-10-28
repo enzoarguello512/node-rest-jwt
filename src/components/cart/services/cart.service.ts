@@ -18,8 +18,8 @@ class CartsService implements ICrudCart {
     return (await FactoryInstance).addProduct(product, cart, quantity);
   }
 
-  async deleteById(id: string): Promise<any> {
-    return (await FactoryInstance).deleteById(id);
+  async deleteById(resource: ICreateCartDto): Promise<any> {
+    return (await FactoryInstance).deleteById(resource);
   }
 
   async deleteProductById(
