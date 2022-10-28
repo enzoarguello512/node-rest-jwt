@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import debug from 'debug';
-import { ICartProduct, ICreateCartDto } from '../dto/create.cart.dto';
+import { ICreateCartDto } from '../dto/create.cart.dto';
 import { IPatchCartDto } from '../dto/patch.cart.dto';
 import BaseError from '../../../common/error/base.error';
 import { ICrudCart } from '../../../common/types/crud.interface';
@@ -9,6 +9,8 @@ import { Cart } from '../models/cart.model';
 import { ICreateProductDto } from '../../product/dto/create.product.dto';
 import { NotFoundError } from '../../../common/error/not.found.error';
 import { ICreateUserDto } from '../../user/dto/create.user.dto';
+import TwilioService from '../../../services/twilio/twilio.service';
+import MailService from '../../../services/mail/mail.service';
 
 const log: debug.IDebugger = debug('app:carts-dao');
 
@@ -96,9 +98,9 @@ export class CartsDao implements ICrudCart {
     }
   }
 
-  public async deleteById(cartId: string) {
+  public async deleteById(cart: ICreateCartDto) {
     try {
-      return Cart.deleteOne({ _id: cartId }).exec();
+      return Cart.deleteOne({ _id: cart.id }).exec();
     } catch (err) {
       throw new BaseError('Failed to remove cart', err, 'deleteById');
     }
