@@ -16,7 +16,7 @@ export const productSchema = new Schema<ICreateProductDto>(
     stock: { type: Number, required: true },
     hasFreeShipping: {
       type: Boolean,
-      required: false,
+      required: true,
       default: false,
     },
     discount: {

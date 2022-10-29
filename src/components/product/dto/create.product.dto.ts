@@ -4,11 +4,11 @@ import mongoose from 'mongoose';
 export interface ICreateProductDto extends mongoose.Document {
   id: string;
   name: string;
-  description?: string;
+  description: string;
   productCode?: number;
   imageId: string | UploadedFile;
   imageUrl: string;
-  hasFreeShipping?: boolean;
+  hasFreeShipping: boolean;
   discount: number;
   discountedPrice: number;
   promotion?: Array<string>;

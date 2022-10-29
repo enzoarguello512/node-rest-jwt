@@ -5,6 +5,7 @@ const Schema = MongooseService.getMongoose().Schema;
 
 export const cartSchema = new Schema<ICreateCartDto>(
   {
+    user: { type: 'ObjectId', ref: 'User', required: false },
     products: [
       {
         _id: false,
@@ -12,7 +13,6 @@ export const cartSchema = new Schema<ICreateCartDto>(
         quantity: { type: Number, required: true },
       },
     ],
-    user: { type: 'ObjectId', ref: 'User', required: false },
   },
   {
     timestamps: true,
