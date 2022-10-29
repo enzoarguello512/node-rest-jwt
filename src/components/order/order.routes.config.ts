@@ -14,7 +14,6 @@ export default class OrdersRoutes extends CommonRoutesConfig {
     this.app.route(`/orders`).get(OrdersController.listOrders);
 
     this.app.post(`/orders/:userId/cart/:cartId`, [
-      OrdersMiddleware.validateRequiredOrderBodyFields,
       // PermissionMiddleware.isAdmin,
       UsersMiddleware.validateUserExists,
       CartMiddleware.validateCartExists,

@@ -1,6 +1,5 @@
 import express from 'express';
 import orderService from '../services/order.service';
-import httpStatus from 'http-status';
 import { Error as MongoError } from 'mongoose';
 import { NotFoundError } from '../../../common/error/not.found.error';
 import { BadRequestError } from '../../../common/error/bad.request.error';
@@ -9,20 +8,6 @@ import { ICreateUserDto } from '../../user/dto/create.user.dto';
 import { ICreateProductDto } from '../../product/dto/create.product.dto';
 
 class OrdersMiddleware {
-  public async validateRequiredOrderBodyFields(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
-    if (req.body && req.body.user && req.body.text && req.body.type) {
-      next();
-    } else {
-      res.status(httpStatus.BAD_REQUEST).send({
-        error: `Missing required fields {user, text, type}`,
-      });
-    }
-  }
-
   public async validateOrderExists(
     req: express.Request,
     res: express.Response,
