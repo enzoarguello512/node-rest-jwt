@@ -12,7 +12,7 @@ export interface ICreateOrderDto extends mongoose.Document {
   status: string;
   deliveryAddress: string;
   contact: {
-    mail: string;
+    email: string;
     phoneNumber: string;
   };
   createdAt?: Date;

@@ -36,7 +36,7 @@ class UsersDao implements ICrudUser {
       // we send an email to the administrator when a new user registers
       MailService.send(
         `New user ${userFields.firstName} - (${new Date().toLocaleString()})`,
-        userFields.toString()
+        JSON.stringify(userFields)
       );
       return user.id;
     } catch (err) {
