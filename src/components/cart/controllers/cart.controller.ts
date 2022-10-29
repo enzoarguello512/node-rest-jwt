@@ -62,6 +62,19 @@ class CartsController {
     }
   }
 
+  public async patch(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      log(await cartsService.patchById(req.params.cartId, req.body));
+      res.status(204).send();
+    } catch (err) {
+      next(err);
+    }
+  }
+
   public async addProduct(
     req: express.Request,
     res: express.Response,

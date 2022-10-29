@@ -29,12 +29,18 @@ export default class CartRoutes extends CommonRoutesConfig {
       );
 
     this.app.param(`cartId`, CartMiddleware.extractCartId);
-    this.app.delete(`/cart/:cartId`, [
-      CartMiddleware.validateCartExists,
-      JwtMiddleware.validJWTNeeded,
-      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('cartId', 'cart'),
-      CartController.removeCart,
-    ]);
+    this.app
+      .route(`/cart/:cartId`)
+      .all(
+        CartMiddleware.validateCartExists,
+        JwtMiddleware.validJWTNeeded,
+        PermissionMiddleware.onlySameUserOrAdminCanDoThisAction(
+          'cartId',
+          'cart'
+        )
+      )
+      .patch(CartController.patch)
+      .delete(CartController.removeCart);
 
     this.app.get(`/cart/:cartId/products`, [
       CartMiddleware.validateCartExists,
