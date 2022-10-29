@@ -30,6 +30,7 @@ import cookieParser from 'cookie-parser';
 // Socket-io (chat)
 import SocketServer from './services/socket/socket.service';
 import socketio from 'socket.io';
+import OrdersRoutes from './components/order/order.routes.config';
 
 // App
 //////////////////////
@@ -68,6 +69,7 @@ routes.push(new CartRoutes(app));
 routes.push(new UsersRoutes(app));
 routes.push(new MessagesRoutes(app));
 routes.push(new AuthRoutes(app));
+routes.push(new OrdersRoutes(app));
 routes.forEach((route: CommonRoutesConfig): void => {
   debugLog(`Routes configured for ${route.getName()}`);
 });
