@@ -6,6 +6,8 @@ import BaseError from '../../../common/error/base.error';
 import { ICrudDerivedToUser } from '../../../common/types/crud.interface';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { Order } from '../models/order.model';
+import MailService from '../../../services/mail/mail.service';
+import TwilioService from '../../../services/twilio/twilio.service';
 
 const log: debug.IDebugger = debug('app:orders-dao');
 
@@ -18,6 +20,19 @@ class OrdersDao implements ICrudDerivedToUser {
     try {
       const order = new Order(orderFields);
       await order.save();
+      const body = {
+        title: `New purchase order from (${orderFields.contact.email})`,
+        order: order.products.map((product) => product.data.name),
+      };
+      MailService.send(
+        body.title,
+        body.order.toString(),
+        orderFields.contact.email
+      );
+      //TwilioService.sendWhatsApp(
+      //orderFields.contact.phoneNumber,
+      //body.toString()
+      //);
       return order.id;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
