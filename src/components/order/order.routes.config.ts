@@ -12,6 +12,7 @@ export default class OrdersRoutes extends CommonRoutesConfig {
     this.app.route(`/orders`).get(OrdersController.listOrders).post(
       OrdersMiddleware.validateRequiredOrderBodyFields,
       // PermissionMiddleware.isAdmin,
+      OrdersMiddleware.transformOrder,
       OrdersController.createOrder
     );
 
