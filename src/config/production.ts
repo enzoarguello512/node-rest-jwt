@@ -45,6 +45,8 @@ const defaultConfig = {
     accountsid: process.env.TWILIO_ACCOUNT_SID || 'accountsid',
     authtoken: process.env.TWILIO_AUTH_TOKEN || 'authtoken',
     servicenumber: process.env.TWILIO_SERVICE_PHONE_NUMBER || 'servicenumber',
+    servicenumberwa:
+      process.env.TWILIO_SERVICE_WA_PHONE_NUMBER || 'servicenumber',
     receivernumber:
       process.env.TWILIO_RECEIVER_PHONE_NUMBER || 'receivernumber',
   },
