@@ -1,23 +1,35 @@
 import config from 'config';
 import twilio from 'twilio';
 
-const { accountsid, authtoken, servicenumber } = config.get<{
+const { accountsid, authtoken, servicenumber, servicenumberwa } = config.get<{
   accountsid: string;
   authtoken: string;
   servicenumber: string;
+  servicenumberwa: string;
   receivernumber: string;
 }>('twilio');
 
 class TwilioService {
-  private client: twilio.Twilio = twilio(accountsid, authtoken);
+  private twilio: twilio.Twilio;
 
-  public async sendWhatsApp(to: string, body: string) {
+  constructor() {
+    this.twilio = twilio(accountsid, authtoken);
+  }
+
+  public async sendWhatsApp(
+    to: string,
+    messageBody: string,
+    mode: 'sms' | 'whatsapp'
+  ) {
     const messageOptions = {
-      from: `whatsapp:${servicenumber}`,
-      body,
-      to: `whatsapp:${to}`,
+      from: mode === 'sms' ? servicenumber : `whatsapp:${servicenumberwa}`,
+      body: messageBody,
+      to: `${mode === 'sms' ? '' : 'whatsapp:'}${to}`,
     };
-    await this.client.messages.create(messageOptions);
+
+    const response = await this.twilio.messages.create(messageOptions);
+
+    return response;
   }
 }
 
