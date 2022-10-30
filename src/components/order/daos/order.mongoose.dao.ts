@@ -24,15 +24,21 @@ class OrdersDao implements ICrudDerivedToUser {
         title: `New purchase order from (${orderFields.contact.email})`,
         order: order.products.map((product) => product.data.name),
       };
-      MailService.send(
+
+      // Notify admin
+      await MailService.send(body.title, body.order.toString());
+
+      // Notify User
+      await MailService.send(
         body.title,
         body.order.toString(),
         orderFields.contact.email
       );
-      //TwilioService.sendWhatsApp(
-      //orderFields.contact.phoneNumber,
-      //body.toString()
-      //);
+      await TwilioService.sendWhatsApp(
+        orderFields.contact.phoneNumber,
+        body.order.toString(),
+        'whatsapp'
+      );
       return order.id;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
