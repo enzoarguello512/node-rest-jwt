@@ -20,7 +20,7 @@ export const userSchema = new Schema<ICreateUserDto, IUserModel>(
       type: String,
       required: false,
       default:
-        'https://res.cloudinary.com/enzoarguello512/image/upload/v1666978387/Users/avatar.jpg',
+        'https://res.cloudinary.com/enzoarguello512/image/upload/v1667251875/Users/avatar.svg',
     },
     permissionLevel: {
       type: Number,
