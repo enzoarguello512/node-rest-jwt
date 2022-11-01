@@ -2,10 +2,6 @@
 import express from 'express';
 import http from 'http';
 import debug from 'debug';
-import path from 'path';
-
-// To fix the environment variable (config module)
-process.env['NODE_CONFIG_DIR'] = path.join(__dirname, 'config');
 
 // Middleware and options
 import cors from 'cors';
