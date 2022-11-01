@@ -26,6 +26,7 @@ const defaultConfig = {
       // Timeout in minutes
       cookietimeout: process.env.SESSION_COOKIE_TIMEOUT || '10',
     },
+    loglevel: process.env.LOG_LEVEL || 'warn',
   },
   jwt: {
     // Secrets
