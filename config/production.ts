@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { EPersistenceType } from '../common/types/factory.persistence.enum';
+//import { EPersistenceType } from '../common/types/factory.persistence.enum';
 
 // Enable environment variables
 const dotenvResult = dotenv.config();
@@ -19,7 +19,7 @@ const defaultConfig = {
      * Persistence is equal to:
      * 'memory' | 'filesystem' | 'mysql' | 'sqlite3' | 'mongolocal' | 'mongoatlas' | 'firebase';
      */
-    persistence: process.env.PERSISTENCE || EPersistenceType.mongoatlas,
+    persistence: process.env.PERSISTENCE || 'mongoatlas',
     mode: process.env.MODE,
     session: {
       secret: process.env.SESSION_SECRET || 'secret',
