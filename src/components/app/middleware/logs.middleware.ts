@@ -22,6 +22,10 @@ const loggerOptions: expressWinston.LoggerOptions = {
   ),
 };
 
+export const logger = winston.createLogger({
+  ...(loggerOptions as winston.LoggerOptions),
+});
+
 if (!process.env.DEBUG) {
   loggerOptions.meta = false; // when not debugging, make terse
   if (typeof global.it === 'function') {
