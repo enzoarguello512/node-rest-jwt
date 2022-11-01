@@ -24,21 +24,3 @@ export default class BaseError extends Error {
     Error.captureStackTrace(this);
   }
 }
-
-export function errorStructure(
-  httpCode: number,
-  message?: string,
-  isOperational?: boolean,
-  err?: BaseError
-): InstanceType<typeof BaseError> {
-  const structure = {
-    message: err?.message || message || 'Generic error',
-    error: httpStatus[`${httpCode}_MESSAGE`],
-    name: err?.name || 'Error',
-    httpCode,
-    log: err?.log || 'undefined',
-    methodName: err?.methodName || 'undefined',
-    isOperational: err?.isOperational || isOperational || false,
-  };
-  return structure;
-}
