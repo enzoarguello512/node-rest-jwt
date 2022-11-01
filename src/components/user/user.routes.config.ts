@@ -24,7 +24,7 @@ export default class UsersRoutes extends CommonRoutesConfig {
         UsersController.listUsers
       )
       .post(
-        //fileUploadMiddleware,
+        fileUploadMiddleware,
         UsersMiddleware.validateRequiredUserBodyFields,
         UsersMiddleware.validateSameEmailDoesntExist,
         UsersController.createUser
