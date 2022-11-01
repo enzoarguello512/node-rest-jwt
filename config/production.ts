@@ -5,10 +5,9 @@ import dotenv from 'dotenv';
 const dotenvResult = dotenv.config();
 if (dotenvResult.error) {
   console.info(`Error: possibly the ".env" file is missing, the server can still run as long 
-                as it has the environment variables. Check the following link to know what variables
-                the project should have: https://github.com/enzoarguello512/node-rest-jwt/blob/main/.env.example`);
+                as it has the environment variables.`);
 
-  console.error(dotenvResult.error);
+  //console.error(dotenvResult.error);
 }
 
 const defaultConfig = {
