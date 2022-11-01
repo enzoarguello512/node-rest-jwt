@@ -15,6 +15,8 @@ import { credentials } from './components/app/middleware/credentials.middleware'
 import logsMiddleware from './components/app/middleware/logs.middleware';
 import ErrorMiddleware from './components/app/middleware/error.middleware';
 import ErrorHandler from './common/error.handler.config';
+//import fileUploadMiddleware from './components/app/middleware/file.upload.middleware';
+import fileUpload from 'express-fileupload';
 
 // Routes
 import CommonRoutesConfig from './common/common.routes.config';
@@ -61,6 +63,13 @@ app.use(helmet());
 
 //middleware for cookies
 app.use(cookieParser());
+
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/',
+  })
+);
 
 // Routes config
 //////////////////////
