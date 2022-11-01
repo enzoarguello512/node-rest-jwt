@@ -31,6 +31,7 @@ import cookieParser from 'cookie-parser';
 import SocketServer from './services/socket/socket.service';
 import socketio from 'socket.io';
 import OrdersRoutes from './components/order/order.routes.config';
+import { TError } from './common/types/error.interface';
 
 // App
 //////////////////////
@@ -83,7 +84,7 @@ app.use(ErrorMiddleware.handle);
 app.use(ErrorMiddleware.routeNotFound);
 
 // unhandled errors
-process.on('uncaughtException', async (error: Error): Promise<void> => {
+process.on('uncaughtException', async (error: TError): Promise<void> => {
   ErrorHandler.handleError(error);
   if (!ErrorHandler.isTrustedError(error)) process.exit(1);
 });

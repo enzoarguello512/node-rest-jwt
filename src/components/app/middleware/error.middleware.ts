@@ -1,7 +1,7 @@
 import express from 'express';
 import httpStatus from 'http-status';
 import ErrorHandler from '../../../common/error.handler.config';
-import BaseError, { errorStructure } from '../../../common/error/base.error';
+import BaseError from '../../../common/error/base.error';
 
 class ErrorMiddleware {
   public async handle(
@@ -17,7 +17,9 @@ class ErrorMiddleware {
     ErrorHandler.handleError(err);
     res
       .status(err.httpCode)
-      .json(errorStructure(err.httpCode, err.message, undefined, err));
+      .json(
+        ErrorHandler.formatError(err.httpCode, err.message, undefined, err)
+      );
   }
 
   public async routeNotFound(
@@ -28,7 +30,7 @@ class ErrorMiddleware {
     const message = `Route '${req.originalUrl}' - Method '${req.method}' not found`;
     res
       .status(httpStatus.NOT_FOUND)
-      .json(errorStructure(httpStatus.NOT_FOUND, message, true));
+      .json(ErrorHandler.formatError(httpStatus.NOT_FOUND, message, true));
   }
 }
 
