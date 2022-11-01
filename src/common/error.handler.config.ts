@@ -10,18 +10,20 @@ const level = config.get<string>('server.loglevel');
 
 class ErrorHandler {
   public handleError = (err: TError): void => {
+    // Shows the error in the console if you are using the "debug" module (npm run development)
     log(err);
 
-    // basically we check if the error is of class BaseError, otherwise we would be encountering an unknown error (non-operational)
+    // Basically we check if the error is of class BaseError, otherwise we would be encountering an unknown error (non-operational)
     if ('httpCode' in err) {
       logger.log({
-        // we use 500 type errors to store the most important logs ("error" level)
+        // We use 500 type errors to store the most important logs ("error" level)
         level: err.httpCode >= 500 ? 'error' : level, // possibly "warn" value
         message: err.message,
       });
     }
   };
 
+  // This is going to be the formatted error that is sent to the user who makes a request to our server
   public formatError(
     httpCode: number,
     message?: string,
@@ -41,6 +43,7 @@ class ErrorHandler {
     return structure;
   }
 
+  // Check if our error is operational
   public isTrustedError(error: Error): boolean {
     return error instanceof BaseError && error.isOperational;
   }

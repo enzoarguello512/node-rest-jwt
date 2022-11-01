@@ -1,5 +1,7 @@
 import express from 'express';
 
+// Main class on which most of the routes implemented in app.ts are based
+// implementations can be found in the files "./components/**/*.routes.config.ts
 export default abstract class CommonRoutesConfig {
   protected app: express.Application;
   private readonly name: string;

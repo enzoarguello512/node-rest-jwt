@@ -10,4 +10,5 @@ export interface IFormatError {
   isOperational: boolean;
 }
 
+// It is the type of error by default, BaseError if it is operational
 export type TError = BaseError | Error;

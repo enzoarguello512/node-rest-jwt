@@ -2,6 +2,8 @@ import { ICreateCartDto } from '../../components/cart/dto/create.cart.dto';
 import { ICreateProductDto } from '../../components/product/dto/create.product.dto';
 import { ICreateUserDto } from '../../components/user/dto/create.user.dto';
 
+// Interface in charge of services and dao's
+// Generics could be used
 export interface ICrud {
   create: (resource: any) => Promise<any>;
   list: (limit?: number, page?: number) => Promise<any>;

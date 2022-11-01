@@ -1,5 +1,6 @@
 import httpStatus from 'http-status';
 
+// This is an extension of the "Error" class that is responsible for providing consistency to all errors that are operational
 export default class BaseError extends Error {
   public readonly log: string;
   public readonly methodName: string | undefined;
