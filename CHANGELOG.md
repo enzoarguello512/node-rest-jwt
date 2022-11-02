@@ -2,6 +2,68 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.1.0](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.0.7...v0.1.0) (2022-11-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* rename server.ts to index.ts
+* Moved all code to src/ folder.
+
+### Features
+
+* add cloudinary, express-fileupload, nodemailer, twilio, @types/express-fileupload and @types/nodemailer modules. ([d94ab40](https://github.com/enzoarguello512/api-rest-ecommerce/commit/d94ab4080dd568ffdd514b85530215db71d4887f))
+* add cloudinary, mail and twilio services. ([bd7c060](https://github.com/enzoarguello512/api-rest-ecommerce/commit/bd7c0602d1fe950fbb9ec2d5a6eb546815cf7fc1))
+* add configuration file for pm2. ([b439f8b](https://github.com/enzoarguello512/api-rest-ecommerce/commit/b439f8b5193377b1f041a2a0e30905573ad36b6c))
+* add interfaces and error types. ([176b805](https://github.com/enzoarguello512/api-rest-ecommerce/commit/176b805496426cec34d306ba33d1125089f8e912))
+* add log level property. ([d02463f](https://github.com/enzoarguello512/api-rest-ecommerce/commit/d02463fa70f3a8e0cfa4be3d56d2f77ac312be76))
+* add middleware for file upload. ([8963cfc](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8963cfc8672a5316aef41c53915db2d6fe6eeed5))
+* add middleware to transform user order. ([94e45c5](https://github.com/enzoarguello512/api-rest-ecommerce/commit/94e45c588652bc520aa332676b3cf2897963b3cd))
+* add new transport for winston module errors. ([383f5de](https://github.com/enzoarguello512/api-rest-ecommerce/commit/383f5de6aa484d4ef6e1a210fc1776d02eda5af1))
+* add patch method to cart endpoints. ([dd9ffe8](https://github.com/enzoarguello512/api-rest-ecommerce/commit/dd9ffe8c6357676985f808820428e8cec487c4d5))
+* add pm2 and artillery modules and scripts. ([90ac0be](https://github.com/enzoarguello512/api-rest-ecommerce/commit/90ac0beb2c2ab9c956750b2e45b41d7fe37eb3cf))
+* add template for orders. ([7302268](https://github.com/enzoarguello512/api-rest-ecommerce/commit/730226871b140d344d8a1a24643b406999a3a64e))
+* add transport for winston (new logger object). ([bf3b680](https://github.com/enzoarguello512/api-rest-ecommerce/commit/bf3b6804dd9a3143a781591c65af3ef697d7e382))
+* add ts-node-dev and yargs modules. ([c91249c](https://github.com/enzoarguello512/api-rest-ecommerce/commit/c91249c0cdfe2bd6448db10af4f1ff477e0aecef))
+* add user communication services. ([6b4f811](https://github.com/enzoarguello512/api-rest-ecommerce/commit/6b4f811d28ea6d445f075570fc3f5ad54cfc16ec))
+* create src folder. ([3965f61](https://github.com/enzoarguello512/api-rest-ecommerce/commit/3965f610eb2cc418d1e5a8c308e2922e9b873b17))
+
+
+### Bug Fixes
+
+* add ability to upload images to the product. ([2fa4541](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2fa454159fd26ea3068bb0cb7a84968d19c7d908))
+* add ability to upload images to the user. ([a576eee](https://github.com/enzoarguello512/api-rest-ecommerce/commit/a576eee03a4a02abdaf88f2e547d98cdec4d4d98))
+* add comments and fix minor bugs. ([461c250](https://github.com/enzoarguello512/api-rest-ecommerce/commit/461c25008e1b401f598947665cdad11c7b4ae175))
+* add config variable settings. ([9daca04](https://github.com/enzoarguello512/api-rest-ecommerce/commit/9daca042805ef49cb4ccb9482f3aef5f85db0b1b))
+* add new properties to the user and product models. ([a36de94](https://github.com/enzoarguello512/api-rest-ecommerce/commit/a36de94315b8e4ea5a6d895ec7a071779857022f))
+* add notification levels. ([5bf828b](https://github.com/enzoarguello512/api-rest-ecommerce/commit/5bf828ba50c8bbf84709fdaada0b821f2ef7b2a3))
+* add services and method correction. ([55c10d0](https://github.com/enzoarguello512/api-rest-ecommerce/commit/55c10d036d736365a12ed270cf715959045f2d81))
+* add the orders routes to the main app. ([48a7928](https://github.com/enzoarguello512/api-rest-ecommerce/commit/48a792841693efa54190783fa313f40dbe6979f1))
+* add twilio whatsapp service number. ([defb1e1](https://github.com/enzoarguello512/api-rest-ecommerce/commit/defb1e151557ee66295edda27e31a3b552ff1955))
+* adjust template to order model. ([6dbee5b](https://github.com/enzoarguello512/api-rest-ecommerce/commit/6dbee5bc80a92f0d9c1c8cf559ad77f50b479880))
+* change application startup in docker. ([828557f](https://github.com/enzoarguello512/api-rest-ecommerce/commit/828557f56d3025418ffcfd3a7e898eadf03c3654))
+* change ICrud interface signature. ([cff9090](https://github.com/enzoarguello512/api-rest-ecommerce/commit/cff9090903749d7fd161370d7e0c29131722429f))
+* change interface name and methods. ([2cc6fd5](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2cc6fd5eb383cdbd7046732fb5c270fe8169f4c4))
+* combine ErrorHandler and errorStructure. ([eea40d4](https://github.com/enzoarguello512/api-rest-ecommerce/commit/eea40d4b3ca5e79071d05db63d150add13fb8145))
+* delete unused files. ([74294fb](https://github.com/enzoarguello512/api-rest-ecommerce/commit/74294fb7ca92a40e4a2f162a43f254c8c4bd69db))
+* file upload middleware error. ([6aafc71](https://github.com/enzoarguello512/api-rest-ecommerce/commit/6aafc71cdaa7c83dfae44f902cf95716f995ba03))
+* move "config" folder out of "src" folder. ([10b23dd](https://github.com/enzoarguello512/api-rest-ecommerce/commit/10b23dd6db20b57227e60d3306591054c0b99457))
+* order properties and modify optional. ([4d3ef6f](https://github.com/enzoarguello512/api-rest-ecommerce/commit/4d3ef6f372d6f54e66692b9cd8e6f5e88018a096))
+* remove path to "config" folder and environment variables. ([4ea4638](https://github.com/enzoarguello512/api-rest-ecommerce/commit/4ea4638aa0670e725a524116dce3f33b7bed9b30))
+* remove unused code. ([8ce8ec0](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8ce8ec08936750ebf83ae73a70eb49c3a84e4a99))
+* remove unused middleware. ([41a41db](https://github.com/enzoarguello512/api-rest-ecommerce/commit/41a41dbbbe3c025b325fb738538f9574a6dff89b))
+* remove unused services. ([90a9858](https://github.com/enzoarguello512/api-rest-ecommerce/commit/90a98587c81f49d2869c63d4d6cc2cb793bfeb94))
+* rendering error. ([6fa32bb](https://github.com/enzoarguello512/api-rest-ecommerce/commit/6fa32bb7d178d36551dc25b38c5318f13b4f3bfa))
+* temporarily fix the registration form. ([67bb5f8](https://github.com/enzoarguello512/api-rest-ecommerce/commit/67bb5f8e4dd1b7fcd6c1d1659969c600aeb686af))
+* twilio service (sandbox). ([d894e88](https://github.com/enzoarguello512/api-rest-ecommerce/commit/d894e88e8855270dff301cba23f2b81989f36bd9))
+* update endpoint to create order. ([350c5c6](https://github.com/enzoarguello512/api-rest-ecommerce/commit/350c5c6fd5c6adec8fe7daa268aa6c0f91aaf24d))
+* update methods and types. ([ac69ed5](https://github.com/enzoarguello512/api-rest-ecommerce/commit/ac69ed562365cecef16efadabdeeb675d97399e5))
+* update model and order dto. ([917c9d3](https://github.com/enzoarguello512/api-rest-ecommerce/commit/917c9d3dec8de63698adcdc376a85365a2664ea9))
+* update routes, variables and modules. ([3811062](https://github.com/enzoarguello512/api-rest-ecommerce/commit/381106230d19ae9e3419808dca2634f11af64513))
+
+
+* rename server.ts to index.ts ([8dfa81f](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8dfa81f5d11aecfd3cfa0ba213cf5f4c2cd82edd))
+
 ### [0.0.7](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.0.6...v0.0.7) (2022-09-14)
 
 
