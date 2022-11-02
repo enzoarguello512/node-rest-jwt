@@ -16,11 +16,7 @@ class TwilioService {
     this.twilio = twilio(accountsid, authtoken);
   }
 
-  public async sendWhatsApp(
-    to: string,
-    messageBody: string,
-    mode: 'sms' | 'whatsapp'
-  ) {
+  public async send(to: string, messageBody: string, mode: 'sms' | 'whatsapp') {
     const messageOptions = {
       from: mode === 'sms' ? servicenumber : `whatsapp:${servicenumberwa}`,
       body: messageBody,

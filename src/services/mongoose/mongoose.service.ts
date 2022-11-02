@@ -10,7 +10,7 @@ const log: debug.IDebugger = debug('app:mongoose-service');
 declare const global: Global;
 
 class MongooseService {
-  private count = 0;
+  private count = 0; // Times the service tried to connect to MongoDB
   private mongooseOptions = { serverSelectionTimeoutMS: 5000 };
   // mongoatlas
   private atlasUser = config.get<string>('databases.mongoatlas.user');
@@ -30,6 +30,7 @@ class MongooseService {
     this.connectWithRetry();
   }
 
+  // Function in charge of creating a server to perform tests during development
   public async getTestServer(): Promise<string> {
     const instance: MongoMemoryServer = await MongoMemoryServer.create();
     const uri: string = instance.getUri();
@@ -37,6 +38,7 @@ class MongooseService {
     return uri.slice(0, uri.lastIndexOf('/'));
   }
 
+  // Function in charge of returning the connection with MongoDB based on the type of persistence selected in the parameter
   public getMongoUri = async (type: TKeys): Promise<string> => {
     if (process.env.NODE_ENV === 'test') {
       const testServer: string = await this.getTestServer();
@@ -48,14 +50,13 @@ class MongooseService {
 
     return type === 'mongolocal' ? localUrl : atlasUrl;
   };
-  // @ts-ignore
+
   public connectWithRetry = async () => {
     try {
       log('Attempting MongoDB connection (will retry if needed)');
       const uri: string = await this.getMongoUri(this.persistence);
       const mongoInstance = await mongoose.connect(uri, this.mongooseOptions);
       log('MongoDB is connected');
-      // @ts-ignore
       return mongoInstance.connection.getClient();
     } catch (err) {
       const retrySeconds = 5;

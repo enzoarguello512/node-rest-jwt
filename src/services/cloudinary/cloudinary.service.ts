@@ -19,6 +19,7 @@ class CloudinaryService {
         return { secure_url: 'secure url', public_id: 'public id' };
       }
 
+      // Verification of valid image extensions
       const filetypes = /jpeg|jpg|png|webp/;
       const mimetype = filetypes.test(file?.mimetype);
       if (!mimetype) {
@@ -27,12 +28,15 @@ class CloudinaryService {
           'uploadImage'
         );
       }
+
+      // Size verification of valid images
       if (file?.size > 1024 * 1024) {
         throw new BadRequestError(
           'The image exceeds the allowed size, it must be less than 1mb',
           'uploadImage'
         );
       }
+
       const { tempFilePath } = file;
       const { secure_url, public_id } = await cloudinary.uploader.upload(
         tempFilePath,

@@ -15,6 +15,7 @@ const transporter = nodeMailer.createTransport({
 });
 
 class MailService {
+  // It can be used both to send a message to a user or to an administrator if the last argument is left blank.
   public async send(subject: string, htmlMessage: string, to: string = email) {
     const mailOptions = {
       from: 'The Morfi',

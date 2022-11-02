@@ -11,11 +11,11 @@ const log: debug.IDebugger = debug('app:socket-io');
 export default class SocketServer {
   private readonly server: socketio.Server;
   private readonly socket: socketio.Socket;
-
   constructor(server: socketio.Server, socket: socketio.Socket) {
     this.server = server;
     this.socket = socket;
 
+    // Event handlers
     socket.on('new message', (message) => this.newMessage(message));
     socket.on('get messages', (userEmail) => this.getMessages(userEmail));
 
@@ -24,6 +24,7 @@ export default class SocketServer {
 
   // TODO newMessage and getMessages are very similar methods, redundancies must be eliminated.
 
+  // Method responsible for saving messages in the database
   public async newMessage(message: IMessage): Promise<void> {
     try {
       const user = await userService.getUserByEmail(message.email);
@@ -46,7 +47,7 @@ export default class SocketServer {
       this.socket.emit('messages error', { message });
     }
   }
-
+  // Method responsible for retrieving messages from a specific user
   public async getMessages(userEmail: string): Promise<void> {
     try {
       const user = await userService.getUserByEmail(userEmail);

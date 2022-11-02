@@ -24,6 +24,7 @@ const jwtOptionsMaxAge = {
   maxAge: 24 * 60 * 60 * 1000, // hours - min - sec - milsec
 } as const;
 
+// Function in charge of generating our tokens that will later be included in the user's profile to keep it authenticated for a certain time
 function signToken(
   user: ICreateUserDto,
   secretToken: string,
@@ -58,6 +59,8 @@ class AuthController {
         const accessToken = signToken(foundUser, accessTokenSecret, '10m');
         const newRefreshToken = signToken(foundUser, refreshTokenSecret, '1d');
 
+        // We invalidate the previous token of this device (we delete the token from the array) to assign a new one below
+        // This is for a security issue
         let newRefreshTokenArray = !cookies?.jwt
           ? foundUser.refreshToken
           : foundUser.refreshToken.filter((rt: string) => rt !== cookies.jwt);
@@ -81,6 +84,7 @@ class AuthController {
             newRefreshTokenArray = [];
           }
 
+          // We delete the cookie from the response
           res.clearCookie('jwt', jwtOptions);
         }
 
@@ -129,6 +133,7 @@ class AuthController {
       );
       await foundUser.save();
 
+      // We delete the cookie from the response
       res.clearCookie('jwt', jwtOptions);
       res.sendStatus(204);
     } catch (err) {
@@ -165,6 +170,8 @@ class AuthController {
         return res.sendStatus(403); //Forbidden
       }
 
+      // We invalidate the previous token of this device (we delete the token from the array) to assign a new one below
+      // This is for a security issue
       const newRefreshTokenArray = foundUser.refreshToken.filter(
         (rt: string) => rt !== refreshToken
       );
