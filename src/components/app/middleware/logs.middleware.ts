@@ -22,6 +22,7 @@ const loggerOptions: expressWinston.LoggerOptions = {
   ),
 };
 
+// Logger responsible for transporting errors to files (warn.log, error.log)
 export const logger = winston.createLogger({
   ...(loggerOptions as winston.LoggerOptions),
 });

@@ -10,6 +10,10 @@ export default class ProductsRoutes extends CommonRoutesConfig {
     super(app, 'ProductsRoutes');
   }
   configureRoutes(): express.Application {
+    /**
+     * GET - Get all products
+     * POST - Add a new product
+     */
     this.app.route(`/products`).get(ProductsController.listProducts).post(
       fileUploadMiddleware,
       ProductsMiddleware.validateRequiredProductBodyFields,
@@ -17,6 +21,10 @@ export default class ProductsRoutes extends CommonRoutesConfig {
       ProductsController.createProduct
     );
 
+    /**
+     * GET/:productId - Find an individual product
+     * DELETE/:productId - Delete a product
+     */
     this.app.param(`productId`, ProductsMiddleware.extractProductId);
     this.app
       .route(`/products/:productId`)
@@ -25,6 +33,9 @@ export default class ProductsRoutes extends CommonRoutesConfig {
       // .all(PermissionMiddleware.isAdmin)
       .delete(ProductsController.removeProduct);
 
+    /**
+     * PATCH/:productId - Update a product
+     */
     this.app.patch(`/products/:productId`, [ProductsController.patch]);
 
     return this.app;

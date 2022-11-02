@@ -43,6 +43,7 @@ class MessagesMiddleware {
     }
   }
 
+  // Utility for downstream middleware/controllers
   public async extractMessageId(
     req: express.Request,
     res: express.Response,

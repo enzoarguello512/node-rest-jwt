@@ -9,12 +9,20 @@ export default class MessagesRoutes extends CommonRoutesConfig {
     super(app, 'MessagesRoutes');
   }
   configureRoutes(): express.Application {
+    /**
+     * GET - Get all orders
+     * POST - Add a new order
+     */
     this.app.route(`/messages`).get(MessagesController.listMessages).post(
       MessagesMiddleware.validateRequiredMessageBodyFields,
       // PermissionMiddleware.isAdmin,
       MessagesController.createMessage
     );
 
+    /**
+     * GET/:messageId - Find an individual message
+     * DELETE/:messageId - Delete a message
+     */
     this.app.param(`messageId`, MessagesMiddleware.extractMessageId);
     this.app
       .route(`/messages/:messageId`)
@@ -23,8 +31,14 @@ export default class MessagesRoutes extends CommonRoutesConfig {
       // .all(PermissionMiddleware.isAdmin)
       .delete(MessagesController.removeMessage);
 
+    /**
+     * PATCH/:messageId - Update a message
+     */
     this.app.patch(`/messages/:messageId`, [MessagesController.patch]);
 
+    /**
+     * GET/user/:userId - List all user messages
+     */
     this.app.get(`/messages/user/:userId`, [
       MessagesController.listUserMessages,
     ]);

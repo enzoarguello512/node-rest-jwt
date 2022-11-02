@@ -129,6 +129,7 @@ class UsersMiddleware {
     }
   }
 
+  // Utility for downstream middleware/controllers
   public async extractUserId(
     req: express.Request,
     res: express.Response,

@@ -11,8 +11,14 @@ export default class OrdersRoutes extends CommonRoutesConfig {
     super(app, 'OrdersRoutes');
   }
   configureRoutes(): express.Application {
+    /**
+     * GET - Get all orders
+     */
     this.app.route(`/orders`).get(OrdersController.listOrders);
 
+    /**
+     * POST/:userId/cart/:cartId - Add a new order based on a user's id and cart (the order will be generated in the backend)
+     */
     this.app.post(`/orders/:userId/cart/:cartId`, [
       // PermissionMiddleware.isAdmin,
       UsersMiddleware.validateUserExists,
@@ -21,6 +27,10 @@ export default class OrdersRoutes extends CommonRoutesConfig {
       OrdersController.createOrder,
     ]);
 
+    /**
+     * GET/:orderId - Find an individual order
+     * DELETE/:orderId - Delete a order
+     */
     this.app.param(`orderId`, OrdersMiddleware.extractOrderId);
     this.app
       .route(`/orders/:orderId`)
@@ -29,8 +39,14 @@ export default class OrdersRoutes extends CommonRoutesConfig {
       // .all(PermissionMiddleware.isAdmin)
       .delete(OrdersController.removeOrder);
 
+    /**
+     * PATCH/:orderId - Update a order
+     */
     this.app.patch(`/orders/:orderId`, [OrdersController.patch]);
 
+    /**
+     * GET/user/:userId - List all user orders
+     */
     this.app.get(`/orders/user/:userId`, [OrdersController.listUserOrders]);
 
     return this.app;

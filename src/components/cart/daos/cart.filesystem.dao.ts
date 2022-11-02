@@ -12,7 +12,9 @@ import { ICrud } from '../../../common/types/crud.interface';
 const log: debug.IDebugger = debug('app:filesystem-dao');
 
 class CartsDao implements ICrud {
+  // We select the location for our database (where we are going to save our file)
   private readonly filename = path.join(__dirname, 'carts.filesystem.db.json');
+  // We make use of the functions provided by our module
   private readonly crud = localDB(this.filename);
 
   constructor() {

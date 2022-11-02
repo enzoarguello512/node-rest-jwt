@@ -36,6 +36,9 @@ export const productSchema = new Schema<ICreateProductDto>(
   }
 );
 
+// Middleware that runs BEFORE using mongoose's "insertMany" method
+// I made a custom function that is responsible for calculating the discountedPrice of each product before it is inserted into the database
+// Mostly used by the "./populate.mongoose.ts" script
 productSchema.pre(
   'insertMany',
   function (
@@ -56,6 +59,7 @@ productSchema.pre(
   }
 );
 
+// Responsible for calculating the discountedPrice of the product
 productSchema.pre('save', function (next) {
   this.discountedPrice = this.price - (this.price * this.discount) / 100;
   next();

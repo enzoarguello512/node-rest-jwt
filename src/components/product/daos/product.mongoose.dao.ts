@@ -39,6 +39,7 @@ class ProductsDao implements ICrud {
 
   public async deleteById(product: ICreateProductDto) {
     try {
+      // In case our product has an image, we will delete it too
       if (typeof product.imageId === 'string') {
         await CloudinaryService.deleteImage(product.imageId);
       }

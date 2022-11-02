@@ -13,6 +13,10 @@ export default class CartRoutes extends CommonRoutesConfig {
     super(app, 'CartRoutes');
   }
   configureRoutes(): express.Application {
+    /**
+     * GET - Get all carts
+     * POST - Add a new cart
+     */
     this.app
       .route(`/cart`)
       .all(JwtMiddleware.validJWTNeeded)
@@ -28,6 +32,10 @@ export default class CartRoutes extends CommonRoutesConfig {
         CartController.createCart
       );
 
+    /**
+     * DELETE/:cartId - Delete a user
+     * PATCH/:cartId - Update a cart
+     */
     this.app.param(`cartId`, CartMiddleware.extractCartId);
     this.app
       .route(`/cart/:cartId`)
@@ -42,6 +50,9 @@ export default class CartRoutes extends CommonRoutesConfig {
       .patch(CartController.patch)
       .delete(CartController.removeCart);
 
+    /**
+     * GET/:cartId/products - List all products in a cart
+     */
     this.app.get(`/cart/:cartId/products`, [
       CartMiddleware.validateCartExists,
       JwtMiddleware.validJWTNeeded,
@@ -49,6 +60,9 @@ export default class CartRoutes extends CommonRoutesConfig {
       CartController.getCartProductsById,
     ]);
 
+    /**
+     * DELETE/:cartId/products/:productId - Delete a product from the cart
+     */
     this.app.delete(`/cart/:cartId/products/:productId`, [
       CartMiddleware.validateCartExists,
       ProductMiddleware.validateProductExists,
@@ -57,6 +71,9 @@ export default class CartRoutes extends CommonRoutesConfig {
       CartController.removeCartProduct,
     ]);
 
+    /**
+     * POST/:cartId/products/:productId/:quantity - Add a new product to the cart including its quantity
+     */
     this.app.post(`/cart/:cartId/products/:productId/:quantity`, [
       CartMiddleware.validateCartExists,
       ProductMiddleware.validateProductExists,
@@ -65,6 +82,9 @@ export default class CartRoutes extends CommonRoutesConfig {
       CartController.addProduct,
     ]);
 
+    /**
+     * POST/:userId/:productId/:quantity - Create or read an existing cart and add a new product with its quantity
+     */
     this.app.post(`/cart/:userId/:productId/:quantity`, [
       UserMiddleware.validateUserExists,
       ProductMiddleware.validateProductExists,

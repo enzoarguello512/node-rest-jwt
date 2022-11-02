@@ -16,6 +16,10 @@ export default class UsersRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes(): express.Application {
+    /**
+     * GET - Get all users
+     * POST - Add a new user
+     */
     this.app
       .route(`/users`)
       .get(
@@ -30,6 +34,11 @@ export default class UsersRoutes extends CommonRoutesConfig {
         UsersController.createUser
       );
 
+    /**
+     * GET/:userId - Find an individual user
+     * DELETE/:userId - Delete a user
+     * PATCH/:userId - Update a user
+     */
     this.app.param(`userId`, UsersMiddleware.extractUserId);
     this.app
       .route(`/users/:userId`)
@@ -60,6 +69,9 @@ export default class UsersRoutes extends CommonRoutesConfig {
     //   UsersController.patch,
     // ]);
 
+    /**
+     * PATCH/:userId - Update a user
+     */
     this.app.patch(`/users/:userId`, [
       JwtMiddleware.validJWTNeeded,
       body('email').isEmail().optional(),
@@ -79,6 +91,9 @@ export default class UsersRoutes extends CommonRoutesConfig {
       UsersController.patch,
     ]);
 
+    /**
+     * PATCH/:userId/permissionLevel/:permissionLevel - Update a user's permission level
+     */
     this.app.patch(`/users/:userId/permissionLevel/:permissionLevel`, [
       JwtMiddleware.validJWTNeeded,
       PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('userId', 'id'),

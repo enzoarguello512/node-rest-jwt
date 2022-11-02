@@ -29,6 +29,7 @@ class OrdersMiddleware {
     }
   }
 
+  // We use the objects already provided by the superior middlewares and combine them to generate the format of an order and pass it correctly to the controller
   public async transformOrder(
     req: express.Request,
     res: express.Response,
@@ -37,8 +38,9 @@ class OrdersMiddleware {
     try {
       const user = req.body.user as ICreateUserDto;
       const cart = req.body.cart as ICreateCartDto;
-      let total = 0;
+      let total = 0; // Total value of the order in dollars $$$
 
+      // Structure of the order to be sent to the controller
       const order = {
         user: user.id,
         products: cart.products.map((productData) => {
@@ -77,6 +79,7 @@ class OrdersMiddleware {
     }
   }
 
+  // Utility for downstream middleware/controllers
   public async extractOrderId(
     req: express.Request,
     res: express.Response,

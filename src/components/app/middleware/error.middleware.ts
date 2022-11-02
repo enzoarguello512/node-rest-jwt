@@ -4,6 +4,7 @@ import ErrorHandler from '../../../common/error.handler.config';
 import BaseError from '../../../common/error/base.error';
 
 class ErrorMiddleware {
+  // Responsible for returning a consistent response to the user in the event of an error
   public async handle(
     err: BaseError,
     req: express.Request,
@@ -22,6 +23,7 @@ class ErrorMiddleware {
       );
   }
 
+  // Responsible for handling all non-existent routes
   public async routeNotFound(
     req: express.Request,
     res: express.Response,

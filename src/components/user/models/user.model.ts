@@ -35,12 +35,22 @@ export const userSchema = new Schema<ICreateUserDto, IUserModel>(
   }
 );
 
+// Used on the user model
+// e.g req.body.password = await User.encryptPassword(req.body.password);
 userSchema.statics.encryptPassword = async function (
   password: string
 ): Promise<string> {
   return await bcryptjs.hash(password, 10);
 };
 
+// Used on top of mongoose's answer
+/*
+  e.g
+  const foundUser = await usersService.getUserByEmailWithPassword(
+    req.body.email
+  );
+  await foundUser.comparePassword(req.body.password)
+*/
 userSchema.methods.comparePassword = async function (
   password: string
 ): Promise<boolean> {

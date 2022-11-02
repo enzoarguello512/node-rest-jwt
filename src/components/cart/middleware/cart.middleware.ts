@@ -44,6 +44,7 @@ class CartsMiddleware {
     }
   }
 
+  // Utility for downstream middleware/controllers
   public async extractCartId(
     req: express.Request,
     res: express.Response,

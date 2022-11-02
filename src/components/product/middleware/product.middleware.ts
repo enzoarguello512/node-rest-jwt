@@ -51,6 +51,7 @@ class ProductsMiddleware {
     }
   }
 
+  // Utility for downstream middleware/controllers
   public async extractProductId(
     req: express.Request,
     res: express.Response,

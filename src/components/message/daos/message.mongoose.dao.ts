@@ -69,6 +69,7 @@ class MessagesDao implements ICrudDerivedToUser {
     }
   }
 
+  // Method in charge of listing all the messages of a specific user
   public async listUserItemsCollection(userId: string, limit = 200, page = 0) {
     try {
       return Message.find({ user: userId })

@@ -20,6 +20,7 @@ class OrdersDao implements ICrudDerivedToUser {
     try {
       const order = new Order(orderFields);
       await order.save();
+      // Order structure (for notifications)
       const body = {
         title: `New purchase order from (${orderFields.contact.email})`,
         order: order.products.map((product) => product.data.name),
@@ -34,7 +35,7 @@ class OrdersDao implements ICrudDerivedToUser {
         body.order.toString(),
         orderFields.contact.email
       );
-      await TwilioService.sendWhatsApp(
+      await TwilioService.send(
         orderFields.contact.phoneNumber,
         body.order.toString(),
         'whatsapp'
@@ -90,6 +91,7 @@ class OrdersDao implements ICrudDerivedToUser {
     }
   }
 
+  // Method in charge of listing all the orders of a specific user
   public async listUserItemsCollection(userId: string, limit = 200, page = 0) {
     try {
       return Order.find({ user: userId })

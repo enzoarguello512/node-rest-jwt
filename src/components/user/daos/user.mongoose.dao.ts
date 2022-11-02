@@ -48,6 +48,7 @@ class UsersDao implements ICrudUser {
     }
   }
 
+  // Used for registration/authentication/user messages
   public async getUserByEmail(email: string) {
     try {
       return User.findOne({ email }).exec();
@@ -56,6 +57,7 @@ class UsersDao implements ICrudUser {
     }
   }
 
+  // Used for authentication
   public async getUserByEmailWithPassword(email: string) {
     try {
       return User.findOne({ email: email })
@@ -76,6 +78,7 @@ class UsersDao implements ICrudUser {
     }
   }
 
+  // Used for authentication
   public async getUserByRefreshToken(refreshToken: string) {
     try {
       return User.findOne({ refreshToken }).exec();
