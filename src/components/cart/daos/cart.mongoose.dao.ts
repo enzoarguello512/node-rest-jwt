@@ -78,6 +78,12 @@ export class CartsDao implements ICrudCart {
         newCart.user = user._id;
         await newCart.save();
 
+        // We do this only to correctly display the message to the frontend, because in MongoDB we only store the "id" and not the entire product
+        newCart.products[0] = {
+          data: product,
+          quantity,
+        };
+
         return await newCart;
       }
     } catch (err) {
