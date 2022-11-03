@@ -7,6 +7,7 @@ import { Error as MongoError } from 'mongoose';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { ICreateUserDto } from '../../../components/user/dto/create.user.dto';
 import { IJwt } from '../../../common/types/jwt.interface';
+import { products } from '../../../scripts/products.data';
 
 const log: debug.IDebugger = debug('app:auth-controller');
 
@@ -36,7 +37,10 @@ function signToken(
       email: user.email,
       firstName: user.firstName,
       permissionLevel: user.permissionLevel,
-      cart: user?.cart || '',
+      cart: {
+        id: user?.cart || '', // user.cart is the reference to the cart (an id)
+        products: [],
+      },
     } as IJwt,
     secretToken,
     { expiresIn }
