@@ -15,7 +15,7 @@ function transformRequestBody(req: express.Request): ICreateProductDto {
     name,
     description,
     productCode: req.body?.productCode,
-    imageId: req.files?.image as UploadedFile,
+    imageId: req.files?.image as UploadedFile, // non-optional (when creating)
     hasFreeShipping,
     discount,
     promotion: req.body?.promotion,

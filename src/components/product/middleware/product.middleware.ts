@@ -24,7 +24,7 @@ class ProductsMiddleware {
     } else {
       next(
         new BadRequestError(
-          `Missing required fields: name, price, stock and image`,
+          `Missing required fields: name, description, image, hasFreeShipping, discount, price, stock`,
           'validateRequiredProductBodyFields'
         )
       );
