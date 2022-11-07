@@ -27,7 +27,7 @@ class UsersDao implements ICrudUser {
       if (userFields.imageId && typeof userFields.imageId !== 'string') {
         const { public_id, secure_url } = await CloudinaryService.uploadImage(
           userFields.imageId,
-          'Products'
+          'Users'
         );
         user.imageId = public_id;
         user.imageUrl = secure_url;
