@@ -2,8 +2,31 @@ import express from 'express';
 import productsService from '../services/product.service';
 import debug from 'debug';
 import httpStatus from 'http-status';
+import { ICreateProductDto } from '../dto/create.product.dto';
+import { UploadedFile } from 'express-fileupload';
 
 const log: debug.IDebugger = debug('app:products-controller');
+
+function transformRequestBody(req: express.Request): ICreateProductDto {
+  const { name, description, hasFreeShipping, discount, price, stock } =
+    req.body as ICreateProductDto;
+
+  return {
+    name,
+    description,
+    productCode: req.body?.productCode,
+    imageId: req.files?.image as UploadedFile,
+    hasFreeShipping,
+    discount,
+    promotion: req.body?.promotion,
+    categories: req.body?.categories,
+    region: req.body?.region,
+    rating: req.body?.rating,
+    payment: req.body?.payment,
+    price,
+    stock,
+  } as ICreateProductDto;
+}
 
 class ProductsController {
   public async listProducts(
@@ -25,7 +48,8 @@ class ProductsController {
     next: express.NextFunction
   ) {
     try {
-      const product = await productsService.readById(req.params.productId);
+      const productId: string = req.body.id;
+      const product = await productsService.readById(productId);
       res.status(httpStatus.OK).send(product);
     } catch (err) {
       next(err);
@@ -38,8 +62,8 @@ class ProductsController {
     next: express.NextFunction
   ) {
     try {
-      req.body.imageId = req.files?.image;
-      const productId = await productsService.create(req.body);
+      const newFields: ICreateProductDto = transformRequestBody(req);
+      const productId = await productsService.create(newFields);
       res.status(httpStatus.CREATED).send({ id: productId });
     } catch (err) {
       next(err);
@@ -52,7 +76,9 @@ class ProductsController {
     next: express.NextFunction
   ) {
     try {
-      log(await productsService.patchById(req.params.productId, req.body));
+      const productId: string = req.body.id;
+      const newFields: ICreateProductDto = transformRequestBody(req);
+      log(await productsService.patchById(productId, newFields));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);
@@ -65,7 +91,8 @@ class ProductsController {
     next: express.NextFunction
   ) {
     try {
-      log(await productsService.deleteById(req.body.product));
+      const fetchedProduct: ICreateProductDto = req.body.product;
+      log(await productsService.deleteById(fetchedProduct));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);

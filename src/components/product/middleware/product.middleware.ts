@@ -13,9 +13,12 @@ class ProductsMiddleware {
     if (
       req.body &&
       req.body.name &&
+      req.body.description &&
+      req.files?.image &&
+      req.body.hasFreeShipping &&
+      req.body.discount &&
       req.body.price &&
-      req.body.stock &&
-      req.files?.image
+      req.body.stock
     ) {
       next();
     } else {
