@@ -10,13 +10,22 @@ class UsersMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    if (req.body && req.body.email && req.body.password) {
+    if (
+      req.body &&
+      req.body.email &&
+      req.body.password &&
+      req.body.firstName &&
+      req.body.address &&
+      req.body.age &&
+      req.body.phoneNumber &&
+      req.files?.image
+    ) {
       next();
       return;
     }
     next(
       new BadRequestError(
-        'Missing required fields: email and password',
+        'Missing required fields: email, password, firstName, address, age, phoneNumber, image',
         'validateRequiredUserBodyFields'
       )
     );
