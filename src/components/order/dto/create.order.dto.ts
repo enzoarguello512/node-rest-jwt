@@ -15,8 +15,8 @@ export interface ICreateOrderDto extends mongoose.Document {
     email: string;
     phoneNumber: string;
   };
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: Date; // automatically added by mongoose
+  updatedAt?: Date; // automatically added by mongoose
 }
 
 export type TOrderUser = mongoose.Types.ObjectId | ICreateUserDto;

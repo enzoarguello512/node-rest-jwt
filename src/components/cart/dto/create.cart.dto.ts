@@ -6,8 +6,8 @@ export interface ICreateCartDto extends mongoose.Document {
   id: string;
   products: Array<ICartProduct>;
   user?: mongoose.Types.ObjectId | ICreateUserDto;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: Date; // automatically added by mongoose
+  updatedAt?: Date; // automatically added by mongoose
 }
 
 export interface ICartProduct {

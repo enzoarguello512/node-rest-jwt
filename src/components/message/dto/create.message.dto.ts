@@ -6,8 +6,8 @@ export interface ICreateMessageDto extends mongoose.Document {
   user: TMessageUser;
   text: string;
   type: TMessageType;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt?: Date; // automatically added by mongoose
+  updatedAt?: Date; // automatically added by mongoose
 }
 
 export type TMessageUser = mongoose.Types.ObjectId | ICreateUserDto;
