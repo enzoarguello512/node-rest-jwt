@@ -16,7 +16,7 @@ class CartsMiddleware {
       next();
     } else {
       res.status(httpStatus.BAD_REQUEST).send({
-        error: `Missing required fields {products}`,
+        error: `Missing required fields: products`,
       });
     }
   }

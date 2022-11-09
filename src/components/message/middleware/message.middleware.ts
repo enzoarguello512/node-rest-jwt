@@ -15,7 +15,7 @@ class MessagesMiddleware {
       next();
     } else {
       res.status(httpStatus.BAD_REQUEST).send({
-        error: `Missing required fields {user, text, type}`,
+        error: `Missing required fields: user, text, type`,
       });
     }
   }

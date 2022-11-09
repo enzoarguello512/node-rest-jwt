@@ -2,8 +2,20 @@ import express from 'express';
 import cartsService from '../services/cart.service';
 import debug from 'debug';
 import httpStatus from 'http-status';
+import { ICreateCartDto } from '../dto/create.cart.dto';
+import { ICreateUserDto } from '../../user/dto/create.user.dto';
+import { ICreateProductDto } from '../../product/dto/create.product.dto';
 
 const log: debug.IDebugger = debug('app:carts-controller');
+
+function transformRequestBody(req: express.Request): ICreateCartDto {
+  const { products } = req.body as ICreateCartDto;
+
+  return {
+    products, // depending on the method it starts as an empty array
+    user: req.body?.user, // optional in case you want to create a cart but without a user
+  } as ICreateCartDto;
+}
 
 class CartsController {
   public async listCarts(
@@ -25,7 +37,8 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      const cart = await cartsService.readById(req.body.id);
+      const cartId: string = req.body.id;
+      const cart = await cartsService.readById(cartId);
       res.status(httpStatus.OK).send(cart);
     } catch (err) {
       next(err);
@@ -38,7 +51,8 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      const cartId = await cartsService.create(req.body);
+      const newFields: ICreateCartDto = transformRequestBody(req);
+      const cartId = await cartsService.create(newFields);
       res.status(httpStatus.CREATED).send({ id: cartId });
     } catch (err) {
       next(err);
@@ -51,10 +65,13 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      const cart = await cartsService.createOrRead(
-        req.body.user,
-        req.body.product,
-        parseInt(req.params.quantity)
+      const fetchedUser: ICreateUserDto = req.body.user;
+      const fetchedProduct: ICreateProductDto = req.body.product;
+      const quantity: number = parseInt(req.params.quantity);
+      const cart: ICreateCartDto = await cartsService.createOrRead(
+        fetchedUser,
+        fetchedProduct,
+        quantity
       );
       res.status(httpStatus.CREATED).send(cart);
     } catch (err) {
@@ -68,8 +85,10 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      log(await cartsService.patchById(req.params.cartId, req.body));
-      res.status(204).send();
+      const cartId: string = req.body.id;
+      const newFields: ICreateCartDto = transformRequestBody(req);
+      log(await cartsService.patchById(cartId, newFields));
+      res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);
     }
@@ -81,10 +100,13 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      const newCart = await cartsService.addProduct(
-        req.body.product,
-        req.body.cart,
-        parseInt(req.params.quantity)
+      const fetchedProduct: ICreateProductDto = req.body.product;
+      const fetchedCart: ICreateCartDto = req.body.cart;
+      const quantity: number = parseInt(req.params.quantity);
+      const newCart: ICreateCartDto = await cartsService.addProduct(
+        fetchedProduct,
+        fetchedCart,
+        quantity
       );
       res.status(httpStatus.CREATED).send(newCart);
     } catch (err) {
@@ -98,7 +120,8 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      log(await cartsService.deleteById(req.body.cart));
+      const fetchedCart: ICreateCartDto = req.body.cart;
+      log(await cartsService.deleteById(fetchedCart));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);
@@ -111,9 +134,9 @@ class CartsController {
     next: express.NextFunction
   ) {
     try {
-      log(
-        await cartsService.deleteProductById(req.body.product, req.body.cart)
-      );
+      const fetchedProduct: ICreateProductDto = req.body.product;
+      const fetchedCart: ICreateCartDto = req.body.cart;
+      log(await cartsService.deleteProductById(fetchedProduct, fetchedCart));
       res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);
