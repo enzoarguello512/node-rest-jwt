@@ -44,7 +44,7 @@ app.use(logsMiddleware);
 app.use(express.json());
 
 // built-in middleware to handle urlencoded form data
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 // handle options credentials check - before CORS!
 // and fetch cookies credentials requirement
