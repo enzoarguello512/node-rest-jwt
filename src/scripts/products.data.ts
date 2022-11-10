@@ -3,8 +3,10 @@ export const products = [
     price: 22.0,
     id: 1,
     name: 'Polenta Squares with Gorgonzola and Pine Nuts',
+    imageId:
+      'Products/base/polenta-squares-with-gorgonzola-and-pine-nuts_qkebrq',
     imageUrl:
-      '/img/shop/shop/polenta-squares-with-gorgonzola-and-pine-nuts.webp',
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/polenta-squares-with-gorgonzola-and-pine-nuts_qkebrq.webp',
     hasFreeShipping: true,
     hasDiscount: true,
     discount: 50,
@@ -21,7 +23,9 @@ export const products = [
     price: 103.25,
     id: 2,
     name: 'Maple-Sesame Cauliflower Bites',
-    imageUrl: '/img/shop/shop/maple-sesame-cauliflower-bites.webp',
+    imageId: 'Products/base/maple-sesame-cauliflower-bites_avwsyw',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/maple-sesame-cauliflower-bites_avwsyw.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -38,7 +42,9 @@ export const products = [
     price: 77.99,
     id: 3,
     name: 'Double-Serrano Watermelon Bites',
-    imageUrl: '/img/shop/shop/double-serrano-watermelon-bites.webp',
+    imageId: 'Products/base/double-serrano-watermelon-bites_jfy1rm',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/double-serrano-watermelon-bites_jfy1rm.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -55,7 +61,9 @@ export const products = [
     price: 98.0,
     id: 4,
     name: 'Smoked Salmon Bites',
-    imageUrl: '/img/shop/shop/smoked-salmon-bites.webp',
+    imageId: 'Products/base/smoked-salmon-bites_c9u6hw',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094048/Products/base/smoked-salmon-bites_c9u6hw.webp',
     hasFreeShipping: true,
     hasDiscount: false,
     discount: 0,
@@ -72,7 +80,9 @@ export const products = [
     price: 109.0,
     id: 5,
     name: 'French Onion Dip With Sweet Potato Chips',
-    imageUrl: '/img/shop/shop/french-onion-dip-with-sweet-potato-chips.webp',
+    imageId: 'Products/base/french-onion-dip-with-sweet-potato-chips_rp5aqb',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/french-onion-dip-with-sweet-potato-chips_rp5aqb.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -89,8 +99,10 @@ export const products = [
     price: 89.99,
     id: 6,
     name: 'Roasted Banana Bars with Browned Butter–Pecan Frosting',
+    imageId:
+      'Products/base/roasted-banana-bars-with-browned-butter_pecan-frosting_ojwj4l',
     imageUrl:
-      '/img/shop/shop/roasted-banana-bars-with-browned-butter–pecan-frosting.webp',
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/roasted-banana-bars-with-browned-butter_pecan-frosting_ojwj4l.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -107,7 +119,9 @@ export const products = [
     price: 25.8,
     id: 7,
     name: 'Texas Sheet Cake',
-    imageUrl: '/img/shop/shop/texas-sheet-cake.webp',
+    imageId: 'Products/base/texas-sheet-cake_c7zish',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094048/Products/base/texas-sheet-cake_c7zish.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -124,7 +138,9 @@ export const products = [
     price: 50.0,
     id: 8,
     name: 'Espresso Crinkles',
-    imageUrl: '/img/shop/shop/espresso-crinkles.webp',
+    imageId: 'Products/base/espresso-crinkles_nyadem',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/espresso-crinkles_nyadem.webp',
     hasFreeShipping: false,
     hasDiscount: true,
     discount: 20,
@@ -141,7 +157,9 @@ export const products = [
     price: 40.73,
     id: 9,
     name: 'Vanilla Cheesecake with Cherry Topping',
-    imageUrl: '/img/shop/shop/vanilla-cheesecake-with-cherry-topping.webp',
+    imageId: 'Products/base/vanilla-cheesecake-with-cherry-topping_vojm44',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094048/Products/base/vanilla-cheesecake-with-cherry-topping_vojm44.webp',
     hasFreeShipping: true,
     hasDiscount: false,
     discount: 0,
@@ -158,7 +176,9 @@ export const products = [
     price: 90.14,
     id: 10,
     name: 'Amaretto Apple Streusel Cupcakes',
-    imageUrl: '/img/shop/shop/amaretto-apple-streusel-cupcakes.webp',
+    imageId: 'Products/base/amaretto-apple-streusel-cupcakes_a2o6ig',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/amaretto-apple-streusel-cupcakes_a2o6ig.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -175,7 +195,9 @@ export const products = [
     price: 47.8,
     id: 11,
     name: 'Salted Caramel Ice Cream',
-    imageUrl: '/img/shop/shop/salted-caramel-ice-cream.webp',
+    imageId: 'Products/base/salted-caramel-ice-cream_ozskre',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/salted-caramel-ice-cream_ozskre.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -192,7 +214,9 @@ export const products = [
     price: 75.89,
     id: 12,
     name: 'Tiramisu',
-    imageUrl: '/img/shop/shop/tiramisu.webp',
+    imageId: 'Products/base/tiramisu_ijxu9q',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094048/Products/base/tiramisu_ijxu9q.webp',
     hasFreeShipping: true,
     hasDiscount: false,
     discount: 0,
@@ -209,8 +233,10 @@ export const products = [
     price: 30.53,
     id: 13,
     name: 'Rum-Spiked Grilled Pineapple with Toasted Coconut',
+    imageId:
+      'Products/base/rum-spiked-grilled-pineapple-with-toasted-coconut_rbawsv',
     imageUrl:
-      '/img/shop/shop/rum-spiked-grilled-pineapple-with-toasted-coconut.webp',
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094048/Products/base/rum-spiked-grilled-pineapple-with-toasted-coconut_rbawsv.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -227,7 +253,9 @@ export const products = [
     price: 60.0,
     id: 14,
     name: 'Carrot Cake',
-    imageUrl: '/img/shop/shop/carrot-cake.webp',
+    imageId: 'Products/base/carrot-cake_wccy26',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/carrot-cake_wccy26.webp',
     hasFreeShipping: false,
     hasDiscount: true,
     discount: 80,
@@ -244,7 +272,9 @@ export const products = [
     price: 3.0,
     id: 15,
     name: 'Chicken Sandwich',
-    imageUrl: '/img/shop/shop/chicken-sandwich.webp',
+    imageId: 'Products/base/chicken-sandwich_dcrlif',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/chicken-sandwich_dcrlif.webp',
     hasFreeShipping: false,
     hasDiscount: false,
     discount: 0,
@@ -261,7 +291,9 @@ export const products = [
     price: 38.41,
     id: 16,
     name: 'Cheesy Gordita Crunch',
-    imageUrl: '/img/shop/shop/cheesy-gordita-crunch.webp',
+    imageId: 'Products/base/cheesy-gordita-crunch_k6me3p',
+    imageUrl:
+      'https://res.cloudinary.com/enzoarguello512/image/upload/v1668094047/Products/base/cheesy-gordita-crunch_k6me3p.webp',
     hasFreeShipping: true,
     hasDiscount: false,
     discount: 0,
