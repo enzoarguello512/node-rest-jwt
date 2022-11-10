@@ -1,20 +1,24 @@
-import app from '../../app';
+import app from '../../../app';
 import supertest from 'supertest';
 import { expect } from 'chai';
 import { nanoid } from 'nanoid';
 import mongoose from 'mongoose';
+import MongoMemoryServer from 'mongodb-memory-server-core';
+import { Global } from '../../../services/mongoose/types/memory.server.interface';
+
+declare const global: Global;
 
 let firstUserIdTest = '';
 const firstUserBody = {
-  email: `marcos.henrique+${nanoid()}@toptal.com`,
-  password: 'Sup3rSecret!23',
+  email: `github.enzoarguello512+${nanoid()}@themorfi.com`,
+  password: '7BDADeX1&9Ou',
 };
 
 let accessToken = '';
 let refreshToken = '';
-const newFirstName = 'Jose';
-const newFirstName2 = 'Paulo';
-const newLastName2 = 'Faraco';
+const newFirstName = 'Enzo';
+const newFirstName2 = 'Enzo2';
+const newLastName2 = 'Arguello';
 
 describe('users and auth endpoints', function () {
   let request: supertest.SuperAgentTest;
@@ -22,6 +26,9 @@ describe('users and auth endpoints', function () {
     request = supertest.agent(app);
   });
   after(function (done) {
+    // stop mongo test server
+    const instance: MongoMemoryServer = global.__MONGOINSTANCE__;
+    instance.stop();
     // shut down the Express.js server, close our MongoDB connection, then tell Mocha we're done:
     app.close(() => {
       mongoose.connection.close(done);
@@ -61,7 +68,7 @@ describe('users and auth endpoints', function () {
     expect(res.body.email).to.equal(firstUserBody.email);
   });
 
-  describe('with a valid access token', async function () {
+  describe('with a valid access token', function () {
     it('should disallow a GET to /users', async function () {
       const res = await request
         .get(`/users`)
@@ -121,7 +128,7 @@ describe('users and auth endpoints', function () {
       expect(res.status).to.equal(204);
     });
 
-    describe('with a new permission level', async function () {
+    describe('with a new permission level', function () {
       it('should allow a POST to /auth/refresh-token', async function () {
         const res = await request
           .post('/auth/refresh-token')
