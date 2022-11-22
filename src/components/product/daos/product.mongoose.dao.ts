@@ -3,7 +3,6 @@ import debug from 'debug';
 import { ICreateProductDto } from '../dto/create.product.dto';
 import { IPatchProductDto } from '../dto/patch.product.dto';
 import BaseError from '../../../common/error/base.error';
-import { ICrud } from '../../../common/types/crud.interface';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { Product } from '../models/product.model';
 import CloudinaryService from '../../../services/cloudinary/cloudinary.service';
@@ -11,12 +10,14 @@ import { UploadedFile } from 'express-fileupload';
 
 const log: debug.IDebugger = debug('app:products-dao');
 
-class ProductsDao implements ICrud {
+class ProductsDao {
   constructor() {
     log('Created new instance of ProductsDao');
   }
 
-  public async create(productFields: ICreateProductDto): Promise<string> {
+  public async create(
+    productFields: ICreateProductDto
+  ): Promise<ICreateProductDto> {
     try {
       const product = new Product(productFields);
       const image = productFields.imageId as UploadedFile;
@@ -27,7 +28,7 @@ class ProductsDao implements ICrud {
       product.imageId = public_id;
       product.imageUrl = secure_url;
       await product.save();
-      return product.id;
+      return product;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
         const message = Object.values(err.errors).map((prop) => prop.message);
@@ -46,16 +47,17 @@ class ProductsDao implements ICrud {
       ) {
         await CloudinaryService.deleteImage(product.imageId);
       }
-      return Product.deleteOne({ _id: product.id }).exec();
+      await Product.deleteOne({ _id: product.id }).exec();
+      return product.id;
     } catch (err) {
       if (err instanceof BaseError) throw err;
       throw new BaseError('Failed to remove product', err, 'deleteById');
     }
   }
 
-  public async readById(productId: string) {
+  public async readById(productId: { id: string }) {
     try {
-      return Product.findOne({ _id: productId }).exec();
+      return Product.findOne({ _id: productId.id }).exec();
     } catch (err) {
       throw new BaseError('Failed to find product', err, 'readById');
     }
@@ -68,10 +70,13 @@ class ProductsDao implements ICrud {
       .exec();
   }
 
-  public async patchById(productId: string, productFields: IPatchProductDto) {
+  public async patchById(
+    productId: { id: string },
+    productFields: IPatchProductDto
+  ) {
     try {
       const existingProduct = await Product.findOneAndUpdate(
-        { _id: productId },
+        { _id: productId.id },
         { $set: productFields },
         { new: true }
       ).exec();
