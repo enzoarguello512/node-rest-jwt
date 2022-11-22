@@ -29,6 +29,13 @@ import socketio from 'socket.io';
 import OrdersRoutes from './components/order/order.routes.config';
 import { TError } from './common/types/error.interface';
 
+// DAO
+import ProductsDao from './components/product/daos/product.mongoose.dao';
+
+// GraphQL
+import { graphqlHTTP } from 'express-graphql';
+import { productSchema } from './components/product/product.schema';
+
 // App
 //////////////////////
 const app: express.Application = express();
@@ -54,22 +61,35 @@ app.use(credentials);
 app.use(cors(corsOptions));
 
 // helmet helps you secure your express apps
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy:
+      process.env.NODE_ENV === 'production' ? undefined : false,
+  })
+);
 
 //middleware for cookies
 app.use(cookieParser());
 
 // Routes config
 //////////////////////
-routes.push(new ProductsRoutes(app));
-routes.push(new CartRoutes(app));
-routes.push(new UsersRoutes(app));
-routes.push(new MessagesRoutes(app));
-routes.push(new AuthRoutes(app));
-routes.push(new OrdersRoutes(app));
-routes.forEach((route: CommonRoutesConfig): void => {
-  debugLog(`Routes configured for ${route.getName()}`);
-});
+//routes.push(new ProductsRoutes(app));
+//routes.push(new CartRoutes(app));
+//routes.push(new UsersRoutes(app));
+//routes.push(new MessagesRoutes(app));
+//routes.push(new AuthRoutes(app));
+//routes.push(new OrdersRoutes(app));
+//routes.forEach((route: CommonRoutesConfig): void => {
+//debugLog(`Routes configured for ${route.getName()}`);
+//});
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema: productSchema,
+    rootValue: ProductsDao,
+    graphiql: true,
+  })
+);
 
 // Errors
 //////////////////////
