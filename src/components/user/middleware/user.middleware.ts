@@ -17,15 +17,14 @@ class UsersMiddleware {
       req.body.firstName &&
       req.body.address &&
       req.body.age &&
-      req.body.phoneNumber &&
-      req.files?.image
+      req.body.phoneNumber
     ) {
       next();
       return;
     }
     next(
       new BadRequestError(
-        'Missing required fields: email, password, firstName, address, age, phoneNumber, image',
+        'Missing required fields: email, password, firstName, address, age, phoneNumber',
         'validateRequiredUserBodyFields'
       )
     );
