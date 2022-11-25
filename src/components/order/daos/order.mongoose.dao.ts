@@ -35,11 +35,11 @@ class OrdersDao implements ICrudDerivedToUser {
         body.order.toString(),
         orderFields.contact.email
       );
-      await TwilioService.send(
-        orderFields.contact.phoneNumber,
-        body.order.toString(),
-        'whatsapp'
-      );
+      //await TwilioService.send(
+      //orderFields.contact.phoneNumber,
+      //body.order.toString(),
+      //'whatsapp'
+      //);
       return order.id;
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) {
