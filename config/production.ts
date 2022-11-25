@@ -31,6 +31,10 @@ const defaultConfig = {
     // Secrets
     accesstoken: process.env.JWT_ACCESS_TOKEN_SECRET || 'secret',
     refreshtoken: process.env.JWT_REFRESH_TOKEN_SECRET || 'secret',
+    accesstokenduration:
+      process.env.JWT_ACCESS_TOKEN_DURATION || 'accesstokenduration',
+    refreshtokenduration:
+      process.env.JWT_REFRESH_TOKEN_DURATION || 'refreshtokenduration',
   },
   cloudinary: {
     cloudname: process.env.CLOUDINARY_CLOUD_NAME || 'cloudname',

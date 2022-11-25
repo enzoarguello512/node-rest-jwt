@@ -7,12 +7,13 @@ import { Error as MongoError } from 'mongoose';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { ICreateUserDto } from '../../../components/user/dto/create.user.dto';
 import { IJwt } from '../../../common/types/jwt.interface';
-import { products } from '../../../scripts/products.data';
 
 const log: debug.IDebugger = debug('app:auth-controller');
 
 const accessTokenSecret = config.get<string>('jwt.accesstoken');
 const refreshTokenSecret = config.get<string>('jwt.refreshtoken');
+const accessTokenDuration = config.get<string>('jwt.accesstokenduration');
+const refreshTokenDuration = config.get<string>('jwt.refreshtokenduration');
 
 const jwtOptions = {
   httpOnly: true,
@@ -60,8 +61,16 @@ class AuthController {
       );
       if (foundUser && (await foundUser.comparePassword(req.body.password))) {
         //TODO: replace this part of the cart in the frontend, otherwise the set-cookies limit is exceeded.
-        const accessToken = signToken(foundUser, accessTokenSecret, '10m');
-        const newRefreshToken = signToken(foundUser, refreshTokenSecret, '1d');
+        const accessToken = signToken(
+          foundUser,
+          accessTokenSecret,
+          accessTokenDuration
+        );
+        const newRefreshToken = signToken(
+          foundUser,
+          refreshTokenSecret,
+          refreshTokenDuration
+        );
 
         // We invalidate the previous token of this device (we delete the token from the array) to assign a new one below
         // This is for a security issue
@@ -193,8 +202,16 @@ class AuthController {
           return res.sendStatus(403);
 
         // Refresh token was still valid
-        const accessToken = signToken(foundUser, accessTokenSecret, '10m');
-        const newRefreshToken = signToken(foundUser, refreshTokenSecret, '1d');
+        const accessToken = signToken(
+          foundUser,
+          accessTokenSecret,
+          accessTokenDuration
+        );
+        const newRefreshToken = signToken(
+          foundUser,
+          refreshTokenSecret,
+          refreshTokenDuration
+        );
 
         // Saving refreshToken with current user
         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
