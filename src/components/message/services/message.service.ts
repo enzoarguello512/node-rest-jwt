@@ -1,9 +1,9 @@
-import { ICrudDerivedToUser } from '../../../common/types/crud.interface';
+import { ICrudMessage } from '../../../common/types/crud.interface';
 import { ICreateMessageDto } from '../dto/create.message.dto';
 import { IPatchMessageDto } from '../dto/patch.message.dto';
 import FactoryInstance from '../daos/message.factory.dao';
 
-class MessagesService implements ICrudDerivedToUser {
+class MessagesService implements ICrudMessage {
   async create(resource: ICreateMessageDto): Promise<any> {
     return (await FactoryInstance).create(resource);
   }
@@ -30,6 +30,13 @@ class MessagesService implements ICrudDerivedToUser {
     page?: number
   ): Promise<any> {
     return (await FactoryInstance).listUserItemsCollection(userId, limit, page);
+  }
+
+  async generateSystemMessage(
+    userId: string,
+    message: string
+  ): Promise<string> {
+    return (await FactoryInstance).generateSystemMessage(userId, message);
   }
 }
 
