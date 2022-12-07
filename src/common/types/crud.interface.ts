@@ -27,6 +27,7 @@ export interface ICrudCart extends ICrud {
     product: ICreateProductDto,
     cart: ICreateCartDto
   ) => Promise<any>;
+  readByUserId: (userId: string) => Promise<any>;
 }
 
 export interface ICrudDerivedToUser extends ICrud {
@@ -35,6 +36,10 @@ export interface ICrudDerivedToUser extends ICrud {
     limit?: number,
     page?: number
   ) => Promise<any>;
+}
+
+export interface ICrudMessage extends ICrudDerivedToUser {
+  generateSystemMessage: (userId: string, message: string) => Promise<string>;
 }
 
 export interface ICrudUser extends ICrud {

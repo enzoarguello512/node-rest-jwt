@@ -37,6 +37,10 @@ class CartsService implements ICrudCart {
     return (await FactoryInstance).readById(id);
   }
 
+  async readByUserId(userId: string): Promise<any> {
+    return (await FactoryInstance).readByUserId(userId);
+  }
+
   async createOrRead(
     user: ICreateUserDto,
     product: ICreateProductDto,

@@ -46,6 +46,14 @@ export class CartsDao implements ICrudCart {
     }
   }
 
+  public async readByUserId(userId: string) {
+    try {
+      return Cart.findOne({ user: userId }).populate('products.data').exec();
+    } catch (err) {
+      throw new BaseError('Failed to find cart', err, 'readByUserId');
+    }
+  }
+
   /*
    * This method has 2 functionalities
    * 1. If the user already has a shopping cart assigned, the new product will be added and the updated shopping cart will be returned.

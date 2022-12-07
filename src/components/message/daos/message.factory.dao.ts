@@ -1,9 +1,9 @@
-import { ICrudDerivedToUser } from '../../../common/types/crud.interface';
+import { ICrudMessage } from '../../../common/types/crud.interface';
 import { TKeys } from '../../../common/types/factory.persistence.enum';
 import config from 'config';
 
 class MessageFactory {
-  static async get(key: TKeys): Promise<ICrudDerivedToUser> {
+  static async get(key: TKeys): Promise<ICrudMessage> {
     if (key === 'mongoatlas' || key === 'mongolocal') key = 'mongoose';
     const { default: MessageDao } = await import(`./message.${key}.dao`);
     return MessageDao;
