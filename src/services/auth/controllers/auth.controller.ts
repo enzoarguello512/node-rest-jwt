@@ -42,6 +42,7 @@ function signToken(
         id: user?.cart || '', // user.cart is the reference to the cart (an id)
         products: [],
       },
+      messages: [],
     } as IJwt,
     secretToken,
     { expiresIn }
