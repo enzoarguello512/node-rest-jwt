@@ -9,7 +9,7 @@ export interface ICreateOrderDto extends mongoose.Document {
     quantity: number;
   }>;
   total: number;
-  status: string;
+  status: 'Incomplete' | 'Complete';
   deliveryAddress: string;
   contact: {
     email: string;
