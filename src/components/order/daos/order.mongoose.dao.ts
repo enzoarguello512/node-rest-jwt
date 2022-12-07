@@ -7,7 +7,7 @@ import { ICrudDerivedToUser } from '../../../common/types/crud.interface';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { Order } from '../models/order.model';
 import MailService from '../../../services/mail/mail.service';
-import TwilioService from '../../../services/twilio/twilio.service';
+//import TwilioService from '../../../services/twilio/twilio.service';
 
 const log: debug.IDebugger = debug('app:orders-dao');
 
