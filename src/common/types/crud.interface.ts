@@ -1,6 +1,7 @@
 import { ICreateCartDto } from '../../components/cart/dto/create.cart.dto';
 import { ICreateProductDto } from '../../components/product/dto/create.product.dto';
 import { ICreateUserDto } from '../../components/user/dto/create.user.dto';
+import { IProductFilters } from './product.filters';
 
 // Interface in charge of services and dao's
 // Generics could be used
@@ -10,6 +11,10 @@ export interface ICrud {
   readById: (id: string) => Promise<any>;
   patchById: (id: string, resource: any) => Promise<any>;
   deleteById: (resource: any) => Promise<any>;
+}
+
+export interface ICrudProduct extends ICrud {
+  listByFilter: (filters: IProductFilters) => Promise<any>;
 }
 
 export interface ICrudCart extends ICrud {

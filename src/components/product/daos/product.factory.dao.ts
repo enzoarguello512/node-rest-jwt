@@ -1,9 +1,9 @@
-import { ICrud } from '../../../common/types/crud.interface';
+import { ICrudProduct } from '../../../common/types/crud.interface';
 import { TKeys } from '../../../common/types/factory.persistence.enum';
 import config from 'config';
 
 class ProductFactory {
-  static async get(key: TKeys): Promise<ICrud> {
+  static async get(key: TKeys): Promise<ICrudProduct> {
     if (key === 'mongoatlas' || key === 'mongolocal') key = 'mongoose';
     const { default: ProductDao } = await import(`./product.${key}.dao`);
     return ProductDao;
