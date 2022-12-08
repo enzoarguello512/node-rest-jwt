@@ -22,6 +22,14 @@ export default class ProductsRoutes extends CommonRoutesConfig {
     );
 
     /**
+     * GET - Get all products with a custom filter
+     */
+    this.app.get(`/products/filter`, [
+      ProductsMiddleware.validateProductQuery,
+      ProductsController.listProductsByFilter,
+    ]);
+
+    /**
      * GET/:productId - Find an individual product
      * DELETE/:productId - Delete a product
      */

@@ -4,6 +4,7 @@ import debug from 'debug';
 import httpStatus from 'http-status';
 import { ICreateProductDto } from '../dto/create.product.dto';
 import { UploadedFile } from 'express-fileupload';
+import { IProductFilters } from '../../../common/types/product.filters';
 
 const log: debug.IDebugger = debug('app:products-controller');
 
@@ -36,6 +37,20 @@ class ProductsController {
   ) {
     try {
       const products = await productsService.list(100, 0);
+      res.status(httpStatus.OK).send(products);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async listProductsByFilter(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const filters: IProductFilters = req.body.filters;
+      const products = await productsService.listByFilter(filters);
       res.status(httpStatus.OK).send(products);
     } catch (err) {
       next(err);
