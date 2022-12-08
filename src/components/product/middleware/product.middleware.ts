@@ -1,6 +1,6 @@
 import express from 'express';
 import productService from '../services/product.service';
-import { Error as MongoError } from 'mongoose';
+import { Error as MongoError, SortOrder } from 'mongoose';
 import { NotFoundError } from '../../../common/error/not.found.error';
 import { BadRequestError } from '../../../common/error/bad.request.error';
 import { multiFilter } from '../../../scripts/products.filters';
@@ -61,29 +61,36 @@ class ProductsMiddleware {
     next: express.NextFunction
   ) {
     try {
+      const {
+        page,
+        limit,
+        search,
+        sort,
+        //sortBy,
+        categories,
+        region,
+        payment,
+        promotion,
+      } = req.query;
+
       const filters = {
-        page: parseInt(req.query.page as string) - 1 || 0, // number
-        limit: parseInt(req.query.limit as string) || 5, // number
-        search: req.query.search || '', // string
-        sort: [] as Array<string>, // Array<string>
-        sortBy: {} as { [key: string]: string }, // Object
-        categories: req.query.categories || ['All'], // Array<string>
-        region: req.query.region || ['All'], // Array<string>
-        payment: req.query.payment || ['All'], // Array<string>
-        promotion: req.query.promotion || ['All'], // Array<string>
+        page: typeof page === 'string' ? parseInt(page) - 1 : 0, // number
+        limit: typeof limit === 'string' ? parseInt(limit) : 5, // number
+        search: typeof search === 'string' ? search : '', // string
+        sort: typeof sort === 'string' ? sort.split(',') : ['rating'], // Array<string>
+        sortBy: {} as { [key: string]: SortOrder }, // Object
+        categories:
+          typeof categories === 'string' ? categories.split(',') : ['All'], // Array<string>
+        region: typeof region === 'string' ? region.split(',') : ['All'], // Array<string>
+        payment: typeof payment === 'string' ? payment.split(',') : ['All'], // Array<string>
+        promotion:
+          typeof promotion === 'string' ? promotion.split(',') : ['All'], // Array<string>
       };
 
-      if (typeof req.query.sort === 'string') {
-        filters.sort = req.query.sort.split(',');
+      if (filters.sort[1]) {
+        filters.sortBy[filters.sort[0]] = filters.sort[1] as SortOrder;
       } else {
-        filters.sort = ['rating'];
-      }
-
-      const { sort, sortBy } = filters;
-      if (sort[1]) {
-        sortBy[sort[0]] = sort[1];
-      } else {
-        sortBy[sort[0]] = 'asc';
+        filters.sortBy[filters.sort[0]] = 'asc';
       }
 
       const multiTagFilters = [
@@ -95,11 +102,10 @@ class ProductsMiddleware {
 
       for (let i = 0; i < multiTagFilters.length; i++) {
         const filterName = multiTagFilters[i];
-        let filterProp = filters[filterName];
-        if (filterProp === 'All') {
-          filterProp = [...multiFilter[filterName]];
-        } else if (typeof filterProp === 'string') {
-          filterProp = filterProp.split(',');
+        if (filters[filterName][0] === 'All') {
+          filters[filterName] = [...multiFilter[filterName]];
+        } else if (typeof filters[filterName][0] === 'string') {
+          filters[filterName] = filters[filterName][0].split(',');
         }
       }
 
