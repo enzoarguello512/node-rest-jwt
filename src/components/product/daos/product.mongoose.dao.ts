@@ -8,6 +8,7 @@ import { BadRequestError } from '../../../common/error/bad.request.error';
 import { Product } from '../models/product.model';
 import CloudinaryService from '../../../services/cloudinary/cloudinary.service';
 import { UploadedFile } from 'express-fileupload';
+import { IProductFilters } from '../../../common/types/product.filters';
 
 const log: debug.IDebugger = debug('app:products-dao');
 
@@ -61,11 +62,64 @@ class ProductsDao implements ICrud {
     }
   }
 
-  public async list(limit = 25, page = 0) {
+  public async list(limit = 0, page = 5) {
     return Product.find()
       .limit(limit)
       .skip(limit * page)
       .exec();
+  }
+
+  public async listByFilter(filters: IProductFilters) {
+    const {
+      page,
+      limit,
+      search,
+      //sort,
+      sortBy,
+      categories,
+      region,
+      payment,
+      promotion,
+    } = filters;
+
+    const products = await Product.find({
+      name: { $regex: search, $options: 'i' },
+    })
+      .where('categories')
+      .in([...categories])
+      .where('region')
+      .in([...region])
+      .where('payment')
+      .in([...payment])
+      .where('promotion')
+      .in([...promotion])
+      .sort(sortBy)
+      .skip(page * limit)
+      .limit(limit);
+
+    const total = await Product.countDocuments({
+      categories: { $in: [...categories] },
+      region: { $in: [...region] },
+      payment: { $in: [...payment] },
+      promotion: { $in: [...promotion] },
+      name: { $regex: search, $options: 'i' },
+    });
+
+    const response = {
+      error: false,
+      total,
+      page: page + 1,
+      limit,
+      filters1: {
+        categories,
+        region,
+        payment,
+        promotion,
+      },
+      products,
+    };
+
+    return response;
   }
 
   public async patchById(productId: string, productFields: IPatchProductDto) {
