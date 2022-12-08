@@ -15,16 +15,17 @@ export const availableRegion = [
   'North America',
   'United States',
   'Europe',
-  'Global',
+  'Global', // defailt
 ];
 
 export const availablePayment = [
-  'In 12 installments',
+  'In cash', // default
   'In 6 installments',
-  'In cash',
+  'In 12 installments',
 ];
 
 export const availablePromotion = [
+  'none', // default
   '10% off',
   '20% off',
   '30% off',
