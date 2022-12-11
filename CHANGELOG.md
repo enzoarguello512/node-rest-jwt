@@ -2,6 +2,62 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.1.0...v0.2.0) (2022-12-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* create and rename the file to follow the project structure.
+* "rename the file to the updated name (index.ts)".
+
+### Features
+
+* add filters with multiple tags. ([89fac81](https://github.com/enzoarguello512/api-rest-ecommerce/commit/89fac815fc2163d362ab67ecb498ff2e37054934))
+* add interface for filters new method (listByFilter). ([c433ee1](https://github.com/enzoarguello512/api-rest-ecommerce/commit/c433ee139696c657f0abd94ee396430cfe86bcad))
+* add local origin. ([6bdf91a](https://github.com/enzoarguello512/api-rest-ecommerce/commit/6bdf91a7b5b616c171f7cbbfb64297c7f5a7aceb))
+* add method of reading cart by user id. ([b981524](https://github.com/enzoarguello512/api-rest-ecommerce/commit/b9815241831c1682cef238e0579d1326ade2cba0))
+* add method to generate system message. ([e4f2c7d](https://github.com/enzoarguello512/api-rest-ecommerce/commit/e4f2c7d203359cdb3e40e5a800f2121637545bb7))
+* add middleware to validate product filters. ([7c243c6](https://github.com/enzoarguello512/api-rest-ecommerce/commit/7c243c6e6944ec56ffceb81222f112addec1cf75))
+* add new information set. ([b7703ab](https://github.com/enzoarguello512/api-rest-ecommerce/commit/b7703ab90ee355dbf6e401311ffb458de2820085))
+* add new interface for filter method (products). ([5162373](https://github.com/enzoarguello512/api-rest-ecommerce/commit/5162373ec33cd839a885b90a592277958eac6b29))
+* add testing environment. ([7726f77](https://github.com/enzoarguello512/api-rest-ecommerce/commit/7726f77a4071a6ccf8931444bafdd82afff0185d))
+* add tests for product endpoints and test image. ([c46a125](https://github.com/enzoarguello512/api-rest-ecommerce/commit/c46a125a0239c0c7c0621086e6daeddf15f7be57))
+* add variable to handle duration of jwt sessions. ([ccfcd06](https://github.com/enzoarguello512/api-rest-ecommerce/commit/ccfcd06e3a9507a44300ae9d95ce288530e43f1e))
+
+
+### Bug Fixes
+
+* add comments and update middleware fields. ([f0f93ed](https://github.com/enzoarguello512/api-rest-ecommerce/commit/f0f93edba6c998c6c18ada69c69127ca2468f111))
+* add exception to the images of the "base" folder. ([cf74e12](https://github.com/enzoarguello512/api-rest-ecommerce/commit/cf74e126fe0a85a68f98db0aad99c072a6012c04))
+* add filter method logic. ([101d339](https://github.com/enzoarguello512/api-rest-ecommerce/commit/101d3396ab9282b0bc730d2ada159dd429637b59))
+* cart response error. ([a9b8463](https://github.com/enzoarguello512/api-rest-ecommerce/commit/a9b846327cbec31389e2f0abdfcf5475578acc71))
+* change middleware to handle urlencoded form data. ([264cb29](https://github.com/enzoarguello512/api-rest-ecommerce/commit/264cb29996d6e2347277e7b2bb2aee9f543ec6f4))
+* comment unused lines. ([2575af2](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2575af25f5e8c723b7090f6e9dd4aa1b3b8b173e))
+* consistency bug. ([89eb640](https://github.com/enzoarguello512/api-rest-ecommerce/commit/89eb640d6a5bf7625aafcfbdeddf3661599478c3))
+* correct middleware to accept images by default (user). ([7eec8e1](https://github.com/enzoarguello512/api-rest-ecommerce/commit/7eec8e102ad170d3b564e6fcf86a85f23f249d54))
+* create route for new filter method. ([84d41df](https://github.com/enzoarguello512/api-rest-ecommerce/commit/84d41df259f1c840ebbb7c2d0d5951dcd617e044))
+* disable twilio service temporarily. ([12f7db8](https://github.com/enzoarguello512/api-rest-ecommerce/commit/12f7db8807afacc56153dc506b8501e248d4e4d9))
+* filtering bug. ([232444c](https://github.com/enzoarguello512/api-rest-ecommerce/commit/232444c2abb2f3ac1cbc9a1dee651e22bc341294))
+* folder name in cloudinary. ([e60e9ec](https://github.com/enzoarguello512/api-rest-ecommerce/commit/e60e9eca0be6aa14ad17a16f6ddbdcc0f2320e55))
+* limit possible order status. ([2a0d9ba](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2a0d9ba15fb9908023163142261de0cb880da578))
+* separate application layers and update fields. ([150cd10](https://github.com/enzoarguello512/api-rest-ecommerce/commit/150cd1009478057a1f1496411d64b76df7fbd26c))
+* separate application layers and update fields. ([82be0f7](https://github.com/enzoarguello512/api-rest-ecommerce/commit/82be0f76a08c04c93edcd87b3ff8f5a0915d53a2))
+* separate application layers and update fields. ([0ec23cc](https://github.com/enzoarguello512/api-rest-ecommerce/commit/0ec23ccbbb6823f832366ae5334768b3b72b775d))
+* split mongoose script. ([dd3c342](https://github.com/enzoarguello512/api-rest-ecommerce/commit/dd3c3420df9c52771a8fb7477e33b1b5ce9f796a))
+* tag errors and improve code readability. ([2ee14e4](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2ee14e47aac3e3d27665a7cdcb5c5b45e337630c))
+* update cart response. ([c7d4fa9](https://github.com/enzoarguello512/api-rest-ecommerce/commit/c7d4fa90521eaad339389c3b9e48bc988cd5cdbf))
+* update image references. ([ae85ad9](https://github.com/enzoarguello512/api-rest-ecommerce/commit/ae85ad9a46a40657555dc1c09c19a679dc29efda))
+* update message format to match frontend. ([85a4bf2](https://github.com/enzoarguello512/api-rest-ecommerce/commit/85a4bf230d2661ad72831b61987a573e8a76de17))
+* update methods to work with redux state. ([8a0536a](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8a0536af6f8a0d14593a807446896aa2fcdc4a68))
+* update permission check. ([2c1ef39](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2c1ef39f2aab93b5e44a69c29d98f73272ed8392))
+* update populate function with new set. ([0499a77](https://github.com/enzoarguello512/api-rest-ecommerce/commit/0499a774dc84c250f05924ec678665a45533a725))
+* update type. ([b31610d](https://github.com/enzoarguello512/api-rest-ecommerce/commit/b31610da1423db67065fa743159a18d1ef6cb19d))
+* update variable name. ([86e5388](https://github.com/enzoarguello512/api-rest-ecommerce/commit/86e5388d5f2bbfc1ce7894ae5bfb698073800dfb))
+
+
+* "rename the file to the updated name (index.ts)". ([8016657](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8016657e25f345972bbacd2fcdc4ffc9e3593086))
+* create and rename the file to follow the project structure. ([a5ca840](https://github.com/enzoarguello512/api-rest-ecommerce/commit/a5ca84021ee7d9c564d3a0a9f467bbc49b49af0a))
+
 ## [0.1.0](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.0.7...v0.1.0) (2022-11-02)
 
 
