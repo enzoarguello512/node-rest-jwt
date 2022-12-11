@@ -39,7 +39,7 @@ export const availablePromotion = [
   'New',
 ];
 
-export const multiFilter = {
+export const filtersArray = {
   categories: availableCategories,
   region: availableRegion,
   payment: availablePayment,
