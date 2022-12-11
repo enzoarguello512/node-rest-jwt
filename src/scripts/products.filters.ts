@@ -44,4 +44,4 @@ export const multiFilter = {
   region: availableRegion,
   payment: availablePayment,
   promotion: availablePromotion,
-} as const;
+};
