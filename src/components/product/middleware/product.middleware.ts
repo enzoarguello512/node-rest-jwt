@@ -3,7 +3,7 @@ import productService from '../services/product.service';
 import { Error as MongoError, SortOrder } from 'mongoose';
 import { NotFoundError } from '../../../common/error/not.found.error';
 import { BadRequestError } from '../../../common/error/bad.request.error';
-import { multiFilter } from '../../../scripts/products.filters';
+import { filtersArray } from '../../../scripts/products.filters';
 
 class ProductsMiddleware {
   public async validateRequiredProductBodyFields(
@@ -66,7 +66,6 @@ class ProductsMiddleware {
         limit,
         search,
         sort,
-        //sortBy,
         categories,
         region,
         payment,
@@ -75,37 +74,43 @@ class ProductsMiddleware {
 
       const filters = {
         page: typeof page === 'string' ? parseInt(page) - 1 : 0, // number
-        limit: typeof limit === 'string' ? parseInt(limit) : 5, // number
+        limit: typeof limit === 'string' ? parseInt(limit) : 16, // number
         search: typeof search === 'string' ? search : '', // string
-        sort: typeof sort === 'string' ? sort.split(',') : ['rating'], // Array<string>
+        sort: Array.isArray(sort) ? sort : ['id'], // Array<string>
         sortBy: {} as { [key: string]: SortOrder }, // Object
-        categories:
-          typeof categories === 'string' ? categories.split(',') : ['All'], // Array<string>
-        region: typeof region === 'string' ? region.split(',') : ['All'], // Array<string>
-        payment: typeof payment === 'string' ? payment.split(',') : ['All'], // Array<string>
-        promotion:
-          typeof promotion === 'string' ? promotion.split(',') : ['All'], // Array<string>
+        categories: [] as Array<string>, // Array<string>
+        region: [] as Array<string>, // Array<string>
+        payment: [] as Array<string>, // Array<string>
+        promotion: [] as Array<string>, // Array<string>
       };
 
-      if (filters.sort[1]) {
+      if (filters.sort[1] && typeof filters.sort[0] === 'string') {
         filters.sortBy[filters.sort[0]] = filters.sort[1] as SortOrder;
-      } else {
+      } else if (typeof filters.sort[0] === 'string') {
         filters.sortBy[filters.sort[0]] = 'asc';
       }
 
-      const multiTagFilters = [
+      const tagsArray = [
         'categories',
         'region',
         'payment',
         'promotion',
       ] as const;
 
-      for (let i = 0; i < multiTagFilters.length; i++) {
-        const filterName = multiTagFilters[i];
-        if (filters[filterName][0] === 'All') {
-          filters[filterName] = [...multiFilter[filterName]];
-        } else if (typeof filters[filterName][0] === 'string') {
-          filters[filterName] = filters[filterName][0].split(',');
+      const variablesArray = [categories, region, payment, promotion];
+
+      for (let i = 0; i < tagsArray.length; i++) {
+        // Variables
+        const propName = tagsArray[i];
+        const queryVariable = variablesArray[i];
+        const defaultTagsArray: Array<string> = filtersArray[propName];
+
+        if (typeof queryVariable === 'string') {
+          filters[propName] = [queryVariable];
+        } else if (Array.isArray(queryVariable)) {
+          filters[propName] = queryVariable as Array<string>;
+        } else {
+          filters[propName] = [...defaultTagsArray];
         }
       }
 
