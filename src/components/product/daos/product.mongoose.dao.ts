@@ -110,12 +110,12 @@ class ProductsDao implements ICrud {
       total,
       page: page + 1,
       limit,
-      filters1: {
-        categories,
-        region,
-        payment,
-        promotion,
-      },
+      //filtersAvailable: {
+      //categories,
+      //region,
+      //payment,
+      //promotion,
+      //},
       products,
     };
 
