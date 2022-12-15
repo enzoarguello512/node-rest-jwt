@@ -8,27 +8,61 @@ const Schema = MongooseService.getMongoose().Schema;
 
 export const userSchema = new Schema<ICreateUserDto, IUserModel>(
   {
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, select: false },
-    firstName: { type: String, required: true },
-    lastName: String,
-    address: String,
-    age: { type: Number, required: true },
-    phoneNumber: { type: String, required: true },
-    imageId: { type: String, required: false, default: 'Users/avatar.jpg' },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      description: 'User email',
+    },
+    password: {
+      type: String,
+      required: true,
+      select: false,
+      description: 'User password',
+    },
+    firstName: { type: String, required: true, description: 'User first name' },
+    lastName: { type: String, required: false, description: 'User last name' },
+    address: {
+      type: String,
+      required: false,
+      description: 'User shipping address',
+    },
+    age: { type: Number, required: true, description: 'User age' },
+    phoneNumber: {
+      type: String,
+      required: true,
+      description: 'User phone number',
+    },
+    imageId: {
+      type: String,
+      required: false,
+      default: 'Users/avatar.jpg',
+      description: 'User image id when saved to cloudinary or file to upload',
+    },
     imageUrl: {
       type: String,
       required: false,
       default:
         'https://res.cloudinary.com/enzoarguello512/image/upload/v1667251875/Users/avatar.svg',
+      description: 'User image url',
     },
     permissionLevel: {
       type: Number,
       required: true,
       default: EPermissionLevel.FREE_PERMISSION,
+      description: 'User permission level',
     },
-    refreshToken: [String],
-    cart: { type: 'ObjectId', ref: 'Cart', required: false },
+    refreshToken: {
+      type: [String],
+      required: false,
+      description: 'Array of the 10 most recent refresh tokens of the user',
+    },
+    cart: {
+      type: 'ObjectId',
+      ref: 'Cart',
+      required: false,
+      description: "User's cart id (if any)",
+    },
   },
   {
     timestamps: true,

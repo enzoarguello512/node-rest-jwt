@@ -5,14 +5,27 @@ const Schema = MongooseService.getMongoose().Schema;
 
 export const cartSchema = new Schema<ICreateCartDto>(
   {
-    user: { type: 'ObjectId', ref: 'User', required: false },
-    products: [
-      {
-        _id: false,
-        data: { type: 'ObjectId', ref: 'Product' },
-        quantity: { type: Number, required: true },
-      },
-    ],
+    user: {
+      type: 'ObjectId',
+      ref: 'User',
+      required: false,
+      description: 'User id',
+    },
+    products: {
+      type: [
+        {
+          _id: false,
+          data: { type: 'ObjectId', ref: 'Product', description: 'Product id' },
+          quantity: {
+            type: Number,
+            required: true,
+            description: 'Product quantity',
+          },
+        },
+      ],
+      required: true,
+      description: 'Array of {product ids and quantities}',
+    },
   },
   {
     timestamps: true,

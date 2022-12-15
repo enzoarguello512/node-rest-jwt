@@ -8,9 +8,16 @@ export const messageSchema = new Schema<ICreateMessageDto>(
     user: {
       type: 'ObjectId',
       ref: 'User',
+      require: true,
+      description: 'User id',
     },
-    text: { type: String, require: true },
-    type: { type: String, require: true },
+    text: { type: String, require: true, description: 'Message text' },
+    type: {
+      type: String,
+      require: true,
+      description: 'Message type (user | server)',
+      enum: ['user', 'server'],
+    },
   },
   {
     timestamps: true,
