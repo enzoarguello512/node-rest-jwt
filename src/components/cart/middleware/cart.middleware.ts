@@ -1,6 +1,5 @@
 import express from 'express';
 import cartService from '../services/cart.service';
-import httpStatus from 'http-status';
 import { Error as MongoError } from 'mongoose';
 import { NotFoundError } from '../../../common/error/not.found.error';
 import { BadRequestError } from '../../../common/error/bad.request.error';
@@ -15,9 +14,7 @@ class CartsMiddleware {
     if (req.body && req.body.products) {
       next();
     } else {
-      res.status(httpStatus.BAD_REQUEST).send({
-        error: `Missing required fields: products`,
-      });
+      next(new BadRequestError(`Missing required fields: products`));
     }
   }
 
