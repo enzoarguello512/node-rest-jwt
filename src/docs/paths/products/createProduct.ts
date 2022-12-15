@@ -21,7 +21,7 @@ const createProduct = {
         content: {
           'application/json': {
             schema: {
-              type: 'string',
+              $ref: '#/components/schemas/ProductId',
             },
           },
         },
@@ -32,7 +32,7 @@ const createProduct = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/BaseError',
+              $ref: '#/components/schemas/Error',
             },
           },
         },
@@ -42,7 +42,7 @@ const createProduct = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/BaseError',
+              $ref: '#/components/schemas/Error',
             },
           },
         },
@@ -52,7 +52,7 @@ const createProduct = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/BaseError',
+              $ref: '#/components/schemas/Error',
             },
           },
         },

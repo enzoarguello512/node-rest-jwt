@@ -24,7 +24,7 @@ const listProducts = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/BaseError',
+              $ref: '#/components/schemas/Error',
             },
           },
         },
@@ -34,7 +34,7 @@ const listProducts = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/BaseError',
+              $ref: '#/components/schemas/Error',
             },
           },
         },
