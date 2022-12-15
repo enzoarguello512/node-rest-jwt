@@ -8,21 +8,25 @@ import productsPaths from '../../../docs/paths/products/paths';
 import CommonRoutesConfig from '../../../common/common.routes.config';
 import express from 'express';
 import schemas from '../../../docs/schemas/schemas';
+import config from 'config';
+
+const port = config.get<number>('server.port');
+const domain = config.get<string>('server.domain');
 
 const options: swaggerUi.JsonObject = {
   openapi: '3.0.3',
   components: {
-    securitySchemas: {
-      bearerAuth: {
-        type: 'apiKey',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-      },
-    },
+    //securitySchemas: {
+    //bearerAuth: {
+    //type: 'apiKey',
+    //scheme: 'bearer',
+    //bearerFormat: 'JWT',
+    //},
+    //},
     schemas,
   },
   info: {
-    title: 'REST API Docs',
+    title: 'The Morfi REST API Docs - OpenAPI 3.0',
     version,
     description:
       'RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens',
@@ -36,15 +40,40 @@ const options: swaggerUi.JsonObject = {
       url: 'https://github.com/enzoarguello512',
     },
   },
-  servers: [{ url: 'https://node-rest-jwt.onrender.com' }],
+  externalDocs: {
+    description: 'Find more information about the project (The Morfi)',
+    url: 'https://github.com/enzoarguello512/morfi-react',
+  },
+  servers: [
+    {
+      description: 'Local deploy',
+      url: `http://${domain}:${port}`,
+    },
+    {
+      description: 'Remote deploy',
+      url: 'https://node-rest-jwt.onrender.com',
+    },
+  ],
   tags: [
-    { name: 'Server Info' },
-    { name: 'Authentication' },
-    { name: 'User' },
-    { name: 'Products' },
-    { name: 'Cart' },
-    { name: 'Orders' },
-    { name: 'Chat' },
+    {
+      name: 'Authentication',
+      description: 'Group of routes related to authentication',
+    },
+    { name: 'User', description: 'Operations about users' },
+    {
+      name: 'Products',
+      description: 'Access the main component for the other routes (Products)',
+    },
+    {
+      name: 'Cart',
+      description: 'Routes linked to a cart and a user (or not!)',
+    },
+    { name: 'Orders', description: 'Access to The Morfi orders' },
+    {
+      name: 'Chat',
+      description:
+        'The chat system that operates on the server (similar to a chatbot)',
+    },
   ],
   security: [
     {
