@@ -9,17 +9,20 @@ export default class ProductsRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'ProductsRoutes');
   }
-  configureRoutes(): express.Application {
+  public configureRoutes(): express.Application {
     /**
      * GET - Get all products
      * POST - Add a new product
      */
-    this.app.route(`/products`).get(ProductsController.listProducts).post(
-      fileUploadMiddleware,
-      ProductsMiddleware.validateRequiredProductBodyFields,
-      // PermissionMiddleware.isAdmin,
-      ProductsController.createProduct
-    );
+    this.app
+      .route(`/products`)
+      .get(ProductsController.listProducts)
+      .post(
+        fileUploadMiddleware,
+        ProductsMiddleware.validateRequiredProductBodyFields,
+        PermissionMiddleware.onlyAdminCanDoThisAction,
+        ProductsController.createProduct
+      );
 
     /**
      * GET - Get all products with a custom filter
@@ -38,13 +41,18 @@ export default class ProductsRoutes extends CommonRoutesConfig {
       .route(`/products/:productId`)
       .all(ProductsMiddleware.validateProductExists)
       .get(ProductsController.getProductById)
-      // .all(PermissionMiddleware.isAdmin)
-      .delete(ProductsController.removeProduct);
+      .delete(
+        PermissionMiddleware.onlyAdminCanDoThisAction,
+        ProductsController.removeProduct
+      );
 
     /**
      * PATCH/:productId - Update a product
      */
-    this.app.patch(`/products/:productId`, [ProductsController.patch]);
+    this.app.patch(`/products/:productId`, [
+      PermissionMiddleware.onlyAdminCanDoThisAction,
+      ProductsController.patch,
+    ]);
 
     return this.app;
   }

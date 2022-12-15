@@ -12,7 +12,7 @@ export default class CartRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'CartRoutes');
   }
-  configureRoutes(): express.Application {
+  public configureRoutes(): express.Application {
     /**
      * GET - Get all carts
      * POST - Add a new cart
@@ -39,16 +39,18 @@ export default class CartRoutes extends CommonRoutesConfig {
     this.app.param(`cartId`, CartMiddleware.extractCartId);
     this.app
       .route(`/cart/:cartId`)
-      .all(
-        CartMiddleware.validateCartExists,
-        JwtMiddleware.validJWTNeeded,
+      .all(CartMiddleware.validateCartExists, JwtMiddleware.validJWTNeeded)
+      .patch(
         PermissionMiddleware.onlySameUserOrAdminCanDoThisAction(
           'cartId',
           'cart'
-        )
+        ),
+        CartController.patch
       )
-      .patch(CartController.patch)
-      .delete(CartController.removeCart);
+      .delete(
+        PermissionMiddleware.onlyAdminCanDoThisAction,
+        CartController.removeCart
+      );
 
     /**
      * GET/:cartId/products - List all products in a cart
