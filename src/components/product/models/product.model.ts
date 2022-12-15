@@ -86,16 +86,10 @@ export const productSchema = new Schema<ICreateProductDto>(
       required: true,
       description: 'Product region',
       enum: [
-        'Appetizers',
-        'Condiments',
-        'Confectionery',
-        'Convenience foods',
-        'Desserts',
-        'Dips, pastes and spreads',
-        'Dried foods',
-        'Dumplings',
-        'Fast food',
-        'Products',
+        'North America',
+        'United States',
+        'Europe',
+        'Global', // default
       ],
     },
     rating: {
