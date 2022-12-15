@@ -2,6 +2,7 @@ import express from 'express';
 import debug from 'debug';
 import { EPermissionLevel } from '../types/common.permissionlevel.enum';
 import { IJwt } from '../types/jwt.interface';
+import { UnauthorizedError } from '../error/unauthorized.error';
 
 const log: debug.IDebugger = debug('app:common-permission-middleware');
 
@@ -13,15 +14,18 @@ class CommonPermissionMiddleware {
       next: express.NextFunction
     ) => {
       try {
-        const userPermissionLevel: number = res.locals.jwt.permissionLevel;
+        const userPermissionLevel: number = res.locals?.jwt?.permissionLevel;
 
         if (userPermissionLevel & requiredPermissionLevel) {
-          next();
-        } else {
-          res.status(403).send();
+          return next();
         }
-      } catch (e) {
-        log(e);
+
+        throw new UnauthorizedError(
+          'You do not have the necessary permissions to perform this action',
+          'minimumPermissionLevelRequired'
+        );
+      } catch (err) {
+        next(err);
       }
     };
   }
@@ -34,9 +38,9 @@ class CommonPermissionMiddleware {
     ) => {
       // User authentication data
       // The authentication is based on the IJwt interface
-      const jwtAuthObj = res.locals.jwt as IJwt;
+      const jwtAuthObj = res.locals?.jwt as IJwt;
 
-      const userPermissionLevel: number = jwtAuthObj.permissionLevel;
+      const userPermissionLevel: number = jwtAuthObj?.permissionLevel;
 
       // Parameter that comes from the user request
       // e.g cartId, userId, messageId, productId, etc.
@@ -47,7 +51,7 @@ class CommonPermissionMiddleware {
 
       // We add an exception to the cart property because the authentication works differently than the mongoose model, the authentication is based on the IJwt interface
       // The operation can be found in "./auth.controller.ts"
-      if (jwtProp === 'cart' && jwtAuthObj.cart.id) {
+      if (jwtProp === 'cart' && jwtAuthObj?.cart?.id) {
         jwtAuthProp = jwtAuthObj.cart.id;
       }
 
@@ -57,7 +61,12 @@ class CommonPermissionMiddleware {
         if (userPermissionLevel & EPermissionLevel.ADMIN_PERMISSION) {
           return next();
         } else {
-          return res.status(403).send();
+          return next(
+            new UnauthorizedError(
+              'You do not have the necessary permissions to perform this action',
+              'onlySameUserOrAdminCanDoThisAction'
+            )
+          );
         }
       }
     };
@@ -68,12 +77,17 @@ class CommonPermissionMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    const userPermissionLevel: number = res.locals.jwt.permissionLevel;
+    const userPermissionLevel: number = res.locals?.jwt?.permissionLevel;
 
     if (userPermissionLevel & EPermissionLevel.ADMIN_PERMISSION) {
       return next();
     } else {
-      return res.status(403).send();
+      return next(
+        new UnauthorizedError(
+          'You do not have the necessary permissions to perform this action',
+          'onlyAdminCanDoThisAction'
+        )
+      );
     }
   }
 }
