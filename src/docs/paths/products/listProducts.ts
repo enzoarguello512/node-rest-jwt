@@ -2,21 +2,11 @@ const listProducts = {
   get: {
     tags: ['Products'],
     description: 'Get all products.',
-    //operationId: 'listProducts',
-    parameters: [
-      {
-        name: 'nombre',
-        in: 'query',
-        schema: {
-          type: 'string',
-        },
-        description: 'A product name.',
-        example: 'Shiratamako - Rice Flour',
-      },
-    ],
+    operationId: 'listProducts',
+    parameters: [],
     responses: {
       200: {
-        description: 'Products were obtained',
+        description: 'List of obtained products',
         content: {
           'application/json': {
             schema: {
@@ -25,6 +15,26 @@ const listProducts = {
               items: {
                 $ref: '#/components/schemas/Product',
               },
+            },
+          },
+        },
+      },
+      401: {
+        description: 'Unauthorized route, login first and try again',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/BaseError',
+            },
+          },
+        },
+      },
+      500: {
+        description: 'Server error',
+        content: {
+          'application/json': {
+            schema: {
+              $ref: '#/components/schemas/BaseError',
             },
           },
         },
