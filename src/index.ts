@@ -10,8 +10,10 @@ const debugLog: debug.IDebugger = debug('server');
 const port = config.get<number>('server.port');
 const domain = config.get<string>('server.domain');
 const startMessage = `Server running at http://${domain}:${port}`;
+const docsMessage = `Docs available at http://${domain}:${port}/docs`;
 
 app.listen(port, () => {
   debugLog(startMessage);
   console.log(startMessage);
+  console.log(docsMessage);
 });
