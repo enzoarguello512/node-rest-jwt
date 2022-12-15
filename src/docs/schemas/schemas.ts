@@ -11,7 +11,12 @@ const schemas = {
   Order: orderSchema,
   Product: productSchema,
   User: userSchema,
-  BaseError: baseErrorSchema,
+  Error: baseErrorSchema,
+  ProductId: {
+    type: 'string',
+    description: 'An id of a product',
+    example: '61717f366466441a1936e9fa',
+  },
 };
 
 export default schemas;
