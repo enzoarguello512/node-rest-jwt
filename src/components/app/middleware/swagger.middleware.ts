@@ -9,6 +9,8 @@ import CommonRoutesConfig from '../../../common/common.routes.config';
 import express from 'express';
 import schemas from '../../../docs/schemas/schemas';
 import config from 'config';
+import authPaths from '../../../docs/paths/authentication/paths';
+import cartPaths from '../../../docs/paths/cart/paths';
 
 const port = config.get<number>('server.port');
 const domain = config.get<string>('server.domain');
@@ -16,14 +18,14 @@ const domain = config.get<string>('server.domain');
 const options: swaggerUi.JsonObject = {
   openapi: '3.0.3',
   components: {
-    //securitySchemas: {
-    //bearerAuth: {
-    //type: 'apiKey',
-    //scheme: 'bearer',
-    //bearerFormat: 'JWT',
-    //},
-    //},
     schemas,
+    securitySchemes: {
+      jwtCookieAuth: {
+        type: 'apiKey',
+        in: 'cookie',
+        name: 'jwt',
+      },
+    },
   },
   info: {
     title: 'The Morfi REST API Docs - OpenAPI 3.0',
@@ -75,12 +77,10 @@ const options: swaggerUi.JsonObject = {
         'The chat system that operates on the server (similar to a chatbot)',
     },
   ],
-  security: [
-    {
-      bearerAuth: [],
-    },
-  ],
+  security: [{ jwtCookieAuth: [] }],
   paths: {
+    ...authPaths,
+    ...cartPaths,
     ...productsPaths,
   },
 };
