@@ -11,6 +11,7 @@ import schemas from '../../../docs/schemas/schemas';
 import config from 'config';
 import authPaths from '../../../docs/paths/authentication/paths';
 import cartPaths from '../../../docs/paths/cart/paths';
+import usersPaths from '../../../docs/paths/user/paths';
 
 const port = config.get<number>('server.port');
 const domain = config.get<string>('server.domain');
@@ -61,7 +62,7 @@ const options: swaggerUi.JsonObject = {
       name: 'Authentication',
       description: 'Group of routes related to authentication',
     },
-    { name: 'User', description: 'Operations about users' },
+    { name: 'Users', description: 'Operations about users' },
     {
       name: 'Products',
       description: 'Access the main component for the other routes (Products)',
@@ -82,6 +83,7 @@ const options: swaggerUi.JsonObject = {
     ...authPaths,
     ...cartPaths,
     ...productsPaths,
+    ...usersPaths,
   },
 };
 
