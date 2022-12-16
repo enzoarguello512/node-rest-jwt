@@ -12,6 +12,7 @@ import config from 'config';
 import authPaths from '../../../docs/paths/authentication/paths';
 import cartPaths from '../../../docs/paths/cart/paths';
 import usersPaths from '../../../docs/paths/user/paths';
+import ordersPaths from '../../../docs/paths/orders/paths';
 
 const port = config.get<number>('server.port');
 const domain = config.get<string>('server.domain');
@@ -82,6 +83,7 @@ const options: swaggerUi.JsonObject = {
   paths: {
     ...authPaths,
     ...cartPaths,
+    ...ordersPaths,
     ...productsPaths,
     ...usersPaths,
   },
