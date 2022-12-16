@@ -3,6 +3,7 @@ import baseErrorSchema from './error/baseError';
 import messageSchema from './message/schema';
 import orderSchema from './order/schema';
 import productSchema from './products/schema';
+import loggedUserSchema from './user/loggedUserSchema';
 import userSchema from './user/schema';
 
 const schemas = {
@@ -12,10 +13,16 @@ const schemas = {
   Product: productSchema,
   User: userSchema,
   Error: baseErrorSchema,
-  ProductId: {
-    type: 'string',
-    description: 'An id of a product',
-    example: '61717f366466441a1936e9fa',
+  //LoggedUser: loggedUserSchema,
+  AccessToken: {
+    type: 'object',
+    title: 'Access token',
+    description: 'User access token at login',
+    properties: {
+      accessToken: {
+        type: 'string',
+      },
+    },
   },
 };
 
