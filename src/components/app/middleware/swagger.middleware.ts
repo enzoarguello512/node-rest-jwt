@@ -13,6 +13,7 @@ import authPaths from '../../../docs/paths/authentication/paths';
 import cartPaths from '../../../docs/paths/cart/paths';
 import usersPaths from '../../../docs/paths/user/paths';
 import ordersPaths from '../../../docs/paths/orders/paths';
+import messagesPaths from '../../../docs/paths/messages/paths';
 
 const port = config.get<number>('server.port');
 const domain = config.get<string>('server.domain');
@@ -74,7 +75,7 @@ const options: swaggerUi.JsonObject = {
     },
     { name: 'Orders', description: 'Access to The Morfi orders' },
     {
-      name: 'Chat',
+      name: 'Messages',
       description:
         'The chat system that operates on the server (similar to a chatbot)',
     },
@@ -83,6 +84,7 @@ const options: swaggerUi.JsonObject = {
   paths: {
     ...authPaths,
     ...cartPaths,
+    ...messagesPaths,
     ...ordersPaths,
     ...productsPaths,
     ...usersPaths,
