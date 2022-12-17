@@ -8,8 +8,6 @@ import removeMessage from './removeMessage';
 const messagesPaths = {
   '/messages': {
     ...listMessages,
-  },
-  '/messages/{userId}/cart/{cartId}': {
     ...createMessage,
   },
   '/messages/{id}': {
