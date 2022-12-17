@@ -13,10 +13,11 @@ const numCpu = os.cpus().length;
 const debugLog: debug.IDebugger = debug('server');
 const port = config.get<number>('server.port');
 const domain = config.get<string>('server.domain');
+const mode = config.get<string>('server.mode');
 const startMessage = `🚀 Server running at http://${domain}:${port}`;
 const docsMessage = `📄 Docs available at http://${domain}:${port}/docs`;
 
-if (cluster.isPrimary) {
+if (cluster.isPrimary && mode === 'cluster') {
   for (let i = 0; i < numCpu; i++) {
     cluster.fork();
   }
