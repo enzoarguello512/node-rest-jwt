@@ -1,21 +1,54 @@
-# node-rest-jwt
+<h1 align="center">Welcome to node-rest-jwt 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/enzoarguello512/api-rest-ecommerce#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/enzoarguello512/api-rest-ecommerce/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://github.com/enzoarguello512/api-rest-ecommerce/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/enzoarguello512/node-rest-jwt" />
+  </a>
+  <a href="https://twitter.com/enzoarguello512" target="_blank">
+    <img alt="Twitter: enzoarguello512" src="https://img.shields.io/twitter/follow/enzoarguello512.svg?style=social" />
+  </a>
+</p>
 
-RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens
+> RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens
 
-## Para iniciar el proyecto hay que ejecutar los siguientes comandos:
+### 🏠 [Homepage](https://github.com/enzoarguello512/api-rest-ecommerce#readme)
 
-Para instalar dependencias
+### ✨ [Demo](morfi-react.vercel.app)
 
-    npm install
+## Install
 
-Para ejecutar el servidor es necesario crear un archivo ".env" en la ruta del
-proyecto, no importa si esta vacío y luego ejecutar
+```sh
+npm install
+```
 
-    npm start
+## Usage
 
-Para iniciarlo en modo debug se puede usar
+```sh
+npm run start
+```
 
-    npm run debug
+## Run tests
 
-Tambien esta disponible la api en Postman, este link se puede importar en Postman para ya tener las peticiones listas
-[https://www.getpostman.com/collections/727c2a6023a423caf726](https://www.getpostman.com/collections/727c2a6023a423caf726)
+```sh
+npm run test
+```
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check
+[issues page](https://github.com/enzoarguello512/api-rest-ecommerce/issues). You
+can also take a look at the [contributing guide](https://github.com/enzoarguello512/api-rest-ecommerce/blob/master/CONTRIBUTING.md).
+
+## 📝 License
+
+Copyright © 2022 [enzoarguello512](https://github.com/enzoarguello512).<br />
+This project is
+[MIT](https://github.com/enzoarguello512/api-rest-ecommerce/blob/master/LICENSE)
+licensed.
+
