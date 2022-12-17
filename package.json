@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "node-rest-jwt",
   "version": "0.1.0",
-  "description": "backend",
+  "description": "RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node ./build/src/index.js",
