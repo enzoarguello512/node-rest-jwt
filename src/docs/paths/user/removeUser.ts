@@ -1,22 +1,26 @@
 const removeUser = {
   delete: {
     tags: ['Users'],
-    description:
-      'Deletes an existing user, only available for logged in admin user.',
+    description: 'Deletes an existing user.',
     operationId: 'removeUser',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/UserId',
+          type: 'string',
         },
         required: true,
         description: 'A single user id',
       },
     ],
     responses: {
-      200: {
+      204: {
         description: 'User deleted successfully.',
       },
       401: {

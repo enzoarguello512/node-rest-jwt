@@ -3,12 +3,17 @@ const getUserById = {
     tags: ['Users'],
     description: 'Get a specific user.',
     operationId: 'getUserById',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/UserId',
+          type: 'string',
         },
         required: true,
         description: 'A single user id',

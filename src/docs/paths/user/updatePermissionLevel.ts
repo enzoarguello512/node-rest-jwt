@@ -1,40 +1,36 @@
 const updatePermissionLevel = {
   patch: {
     tags: ['Users'],
-    description:
-      'Update an existing user, only available for logged in admin user.',
-    operationId: 'patchUser',
+    description: 'Update the permission level of a specific user.',
+    operationId: 'updatePermissionLevel',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/UserId',
+          type: 'string',
         },
         required: true,
         description: 'A single user id',
       },
-    ],
-    requestBody: {
-      required: 'true',
-      content: {
-        'multipart/form-data': {
-          schema: {
-            $ref: '#/components/schemas/User',
-          },
+      {
+        name: 'permissionLevel',
+        in: 'path',
+        schema: {
+          type: 'string',
         },
+        required: true,
+        description: 'A single permission level',
       },
-    },
+    ],
     responses: {
-      200: {
+      204: {
         description: 'User updated successfully.',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/User',
-            },
-          },
-        },
       },
       400: {
         description:

@@ -1,7 +1,7 @@
 const createUser = {
   post: {
     tags: ['Users'],
-    description: 'Create a new user, only available for logged in admin user.',
+    description: 'Create a new user.',
     operationId: 'createUser',
     parameters: [],
     requestBody: {
@@ -20,7 +20,7 @@ const createUser = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/UserId',
+              type: 'string',
             },
           },
         },

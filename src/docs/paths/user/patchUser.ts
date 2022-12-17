@@ -1,15 +1,19 @@
 const patchUser = {
   patch: {
     tags: ['Users'],
-    description:
-      'Update an existing user, only available for logged in admin user.',
+    description: 'Update an existing user.',
     operationId: 'patchUser',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/UserId',
+          type: 'string',
         },
         required: true,
         description: 'A single user id',
@@ -26,15 +30,8 @@ const patchUser = {
       },
     },
     responses: {
-      200: {
+      204: {
         description: 'User updated successfully.',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/User',
-            },
-          },
-        },
       },
       400: {
         description:

@@ -3,6 +3,11 @@ const listUsers = {
     tags: ['Users'],
     description: 'Get all users.',
     operationId: 'listUsers',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [],
     responses: {
       200: {
