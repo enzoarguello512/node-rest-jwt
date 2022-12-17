@@ -3,6 +3,11 @@ const listOrders = {
     tags: ['Orders'],
     description: 'Get all orders.',
     operationId: 'listOrders',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [],
     responses: {
       200: {

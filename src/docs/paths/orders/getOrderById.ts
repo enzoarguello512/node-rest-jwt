@@ -3,12 +3,17 @@ const getOrderById = {
     tags: ['Orders'],
     description: 'Get a specific order.',
     operationId: 'getOrderById',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/OrderId',
+          type: 'string',
         },
         required: true,
         description: 'A single order id',

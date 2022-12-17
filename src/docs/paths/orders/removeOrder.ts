@@ -1,22 +1,26 @@
 const removeOrder = {
   delete: {
     tags: ['Orders'],
-    description:
-      'Deletes an existing order, only available for logged in admin user.',
+    description: 'Deletes an existing order.',
     operationId: 'removeOrder',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/OrderId',
+          type: 'string',
         },
         required: true,
         description: 'A single order id',
       },
     ],
     responses: {
-      200: {
+      204: {
         description: 'Order deleted successfully.',
       },
       401: {

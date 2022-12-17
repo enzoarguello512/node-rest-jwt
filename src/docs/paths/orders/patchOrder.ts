@@ -1,15 +1,19 @@
 const patchOrder = {
   patch: {
     tags: ['Orders'],
-    description:
-      'Update an existing order, only available for logged in admin user.',
+    description: 'Update an existing order.',
     operationId: 'patchOrder',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/OrderId',
+          type: 'string',
         },
         required: true,
         description: 'A single order id',
@@ -18,7 +22,7 @@ const patchOrder = {
     requestBody: {
       required: 'true',
       content: {
-        'multipart/form-data': {
+        'application/json': {
           schema: {
             $ref: '#/components/schemas/Order',
           },

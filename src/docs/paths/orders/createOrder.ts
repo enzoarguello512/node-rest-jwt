@@ -1,13 +1,18 @@
 const createOrder = {
   post: {
     tags: ['Orders'],
-    description: 'Create a new order, only available for logged in admin user.',
+    description: 'Create a new order.',
     operationId: 'createOrder',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [],
     requestBody: {
       required: true,
       content: {
-        'multipart/form-data': {
+        'application/json': {
           schema: {
             $ref: '#/components/schemas/Order',
           },
@@ -20,7 +25,7 @@ const createOrder = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/OrderId',
+              type: 'string',
             },
           },
         },

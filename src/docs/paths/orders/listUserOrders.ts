@@ -1,26 +1,35 @@
 const listUserOrders = {
   get: {
     tags: ['Orders'],
-    description: 'Get a specific order.',
-    operationId: 'getOrderById',
+    description: 'Get all orders from a specific user.',
+    operationId: 'listUserOrders',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/OrderId',
+          type: 'string',
         },
         required: true,
-        description: 'A single order id',
+        description: 'A single user id',
       },
     ],
     responses: {
       200: {
-        description: 'Order was obtained',
+        description: 'List of obtained orders',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/Order',
+              type: 'array',
+              description: 'Array of orders.',
+              items: {
+                $ref: '#/components/schemas/Order',
+              },
             },
           },
         },
