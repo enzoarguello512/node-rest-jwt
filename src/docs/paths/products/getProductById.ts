@@ -8,7 +8,7 @@ const getProductById = {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/ProductId',
+          type: 'string',
         },
         required: true,
         description: 'A single product id',

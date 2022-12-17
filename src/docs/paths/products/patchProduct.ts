@@ -1,15 +1,19 @@
 const patchProduct = {
   patch: {
     tags: ['Products'],
-    description:
-      'Update an existing product, only available for logged in admin user.',
+    description: 'Update an existing product.',
     operationId: 'patchProduct',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/ProductId',
+          type: 'string',
         },
         required: true,
         description: 'A single product id',
@@ -26,15 +30,8 @@ const patchProduct = {
       },
     },
     responses: {
-      200: {
+      204: {
         description: 'Product updated successfully.',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/Product',
-            },
-          },
-        },
       },
       400: {
         description:

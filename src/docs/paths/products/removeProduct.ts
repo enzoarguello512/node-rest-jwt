@@ -1,22 +1,26 @@
 const removeProduct = {
   delete: {
     tags: ['Products'],
-    description:
-      'Deletes an existing product, only available for logged in admin user.',
+    description: 'Deletes an existing product.',
     operationId: 'removeProduct',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/ProductId',
+          type: 'string',
         },
         required: true,
         description: 'A single product id',
       },
     ],
     responses: {
-      200: {
+      204: {
         description: 'Product deleted successfully.',
       },
       401: {

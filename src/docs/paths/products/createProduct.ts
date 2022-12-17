@@ -1,9 +1,13 @@
 const createProduct = {
   post: {
     tags: ['Products'],
-    description:
-      'Create a new product, only available for logged in admin user.',
+    description: 'Create a new product.',
     operationId: 'createProduct',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [],
     requestBody: {
       required: true,
@@ -21,7 +25,7 @@ const createProduct = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/ProductId',
+              type: 'string',
             },
           },
         },
