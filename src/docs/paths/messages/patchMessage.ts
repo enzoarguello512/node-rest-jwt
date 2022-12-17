@@ -1,15 +1,19 @@
 const patchMessage = {
   patch: {
     tags: ['Messages'],
-    description:
-      'Update an existing message, only available for logged in admin user.',
+    description: 'Update an existing message.',
     operationId: 'patchMessage',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/MessageId',
+          type: 'string',
         },
         required: true,
         description: 'A single message id',
@@ -18,7 +22,7 @@ const patchMessage = {
     requestBody: {
       required: 'true',
       content: {
-        'multipart/form-data': {
+        'application/json': {
           schema: {
             $ref: '#/components/schemas/Message',
           },
@@ -28,13 +32,6 @@ const patchMessage = {
     responses: {
       200: {
         description: 'Message updated successfully.',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/Message',
-            },
-          },
-        },
       },
       400: {
         description:

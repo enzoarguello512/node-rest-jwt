@@ -3,12 +3,17 @@ const getMessageById = {
     tags: ['Messages'],
     description: 'Get a specific message.',
     operationId: 'getMessageById',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/MessageId',
+          type: 'string',
         },
         required: true,
         description: 'A single message id',

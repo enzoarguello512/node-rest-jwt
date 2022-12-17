@@ -1,22 +1,26 @@
 const removeMessage = {
   delete: {
     tags: ['Messages'],
-    description:
-      'Deletes an existing message, only available for logged in admin user.',
+    description: 'Deletes an existing message.',
     operationId: 'removeMessage',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/MessageId',
+          type: 'string',
         },
         required: true,
         description: 'A single message id',
       },
     ],
     responses: {
-      200: {
+      204: {
         description: 'Message deleted successfully.',
       },
       401: {

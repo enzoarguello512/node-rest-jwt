@@ -3,6 +3,11 @@ const listMessages = {
     tags: ['Messages'],
     description: 'Get all messages.',
     operationId: 'listMessages',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [],
     responses: {
       200: {

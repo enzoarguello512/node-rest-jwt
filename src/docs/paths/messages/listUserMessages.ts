@@ -1,26 +1,35 @@
 const listUserMessages = {
   get: {
     tags: ['Messages'],
-    description: 'Get a specific message.',
-    operationId: 'getMessageById',
+    description: 'Get all messages from a specific user.',
+    operationId: 'listUserMessages',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
-        name: 'id',
+        name: 'userId',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/MessageId',
+          type: 'string',
         },
         required: true,
-        description: 'A single message id',
+        description: 'A single user id',
       },
     ],
     responses: {
       200: {
-        description: 'Message was obtained',
+        description: 'List of obtained messages',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/Message',
+              type: 'array',
+              description: 'Array of messages.',
+              items: {
+                $ref: '#/components/schemas/Message',
+              },
             },
           },
         },

@@ -1,14 +1,18 @@
 const createMessage = {
   post: {
     tags: ['Messages'],
-    description:
-      'Create a new message, only available for logged in admin user.',
+    description: 'Create a new message.',
     operationId: 'createMessage',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [],
     requestBody: {
       required: true,
       content: {
-        'multipart/form-data': {
+        'application/json': {
           schema: {
             $ref: '#/components/schemas/Message',
           },
@@ -21,7 +25,7 @@ const createMessage = {
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/MessageId',
+              $ref: '#/components/schemas/Message',
             },
           },
         },
