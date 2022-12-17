@@ -1,26 +1,11 @@
 module.exports = {
   apps: [
     {
-      script: 'index.js',
-      watch: '.',
-    },
-    {
-      script: './service-worker/',
-      watch: ['./service-worker'],
+      name: 'TheMorfi',
+      script:
+        'cross-env NODE_ENV=development DEBUG=* ts-node-dev --inspect --respawn --transpile-only --exit-child ./src/index.ts',
+      watch: true,
+      time: true,
     },
   ],
-
-  deploy: {
-    production: {
-      user: 'SSH_USERNAME',
-      host: 'SSH_HOSTMACHINE',
-      ref: 'origin/master',
-      repo: 'GIT_REPOSITORY',
-      path: 'DESTINATION_PATH',
-      'pre-deploy-local': '',
-      'post-deploy':
-        'npm install && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': '',
-    },
-  },
 };
