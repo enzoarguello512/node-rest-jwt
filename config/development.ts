@@ -18,7 +18,7 @@ const defaultConfig = {
      * 'memory' | 'filesystem' | 'mysql' | 'sqlite3' | 'mongolocal' | 'mongoatlas' | 'firebase';
      */
     persistence: process.env.PERSISTENCE || 'mongoatlas',
-    mode: process.env.MODE || 'cluster',
+    mode: process.env.MODE || 'fork',
     session: {
       secret: process.env.SESSION_SECRET || 'secret',
       // Timeout in minutes
