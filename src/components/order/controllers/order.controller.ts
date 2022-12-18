@@ -7,14 +7,8 @@ import { ICreateOrderDto } from '../dto/create.order.dto';
 const log: debug.IDebugger = debug('app:orders-controller');
 
 function transformRequestBody(req: express.Request): ICreateOrderDto {
-  const {
-    user,
-    products,
-    total,
-    status,
-    deliveryAddress,
-    contact: { email, phoneNumber },
-  } = req.body as ICreateOrderDto;
+  const { user, products, total, status, deliveryAddress, contact } =
+    req.body as ICreateOrderDto;
 
   return {
     user,
@@ -23,8 +17,8 @@ function transformRequestBody(req: express.Request): ICreateOrderDto {
     status,
     deliveryAddress,
     contact: {
-      email,
-      phoneNumber,
+      email: contact?.email,
+      phoneNumber: contact?.phoneNumber,
     },
   } as ICreateOrderDto;
 }
