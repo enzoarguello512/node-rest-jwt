@@ -16,7 +16,8 @@
     "rollback:db": "npm run build && node ./build/src/scripts/rollback.mongoose.js",
     "m2s": "npm run build && node ./build/src/scripts/m2s.js",
     "release": "standard-version",
-    "prof": "tsc && node --prof ./build/index.js"
+    "prof": "tsc && node --prof ./build/index.js",
+    "artillery": "artillery run src/test/artillery/test.yml"
   },
   "repository": {
     "type": "git",
@@ -29,11 +30,8 @@
   },
   "homepage": "https://github.com/enzoarguello512/api-rest-ecommerce#readme",
   "dependencies": {
-    "@abmsourav/localdb": "github:enzoarguello512/localdb",
-    "argon2": "^0.28.7",
     "bcryptjs": "^2.4.3",
     "chai": "^4.3.6",
-    "class-validator": "^0.13.2",
     "cloudinary": "^1.32.0",
     "cluster": "^0.7.7",
     "config": "^3.3.8",
@@ -54,7 +52,6 @@
     "mongodb-memory-server": "^8.9.0",
     "mongoose": "^6.4.6",
     "mongoose-to-swagger": "^1.4.0",
-    "nanoid": "~3.*.*",
     "nodemailer": "^6.8.0",
     "pm2": "^5.2.2",
     "socket.io": "^4.5.1",

@@ -1,7 +1,6 @@
 import app from '../../../app';
 import supertest from 'supertest';
 import { expect } from 'chai';
-import { nanoid } from 'nanoid';
 import mongoose from 'mongoose';
 import MongoMemoryServer from 'mongodb-memory-server-core';
 import { Global } from '../../../services/mongoose/types/memory.server.interface';
@@ -10,7 +9,7 @@ declare const global: Global;
 
 let firstUserIdTest = '';
 const firstUserBody = {
-  email: `github.enzoarguello512+${nanoid()}@themorfi.com`,
+  email: `github.enzoarguello512+@themorfi.com`,
   password: '7BDADeX1&9Ou',
 };
 
