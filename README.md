@@ -34,7 +34,7 @@ manera manual.
 Esta es la parte backend del servidor, tiene varios módulos (se pueden ver en el
 package.json), lo mas destacable son los endpoints, esta todo documentado usando
 swagger, se puede usar la UI en la ruta local
-[http://localhost:8080/docs](http://localhost:8080/docs) o sino se puede probar
+[http://localhost:8080/docs](http://localhost:8080/docs), tambien existe la posibilidad de crear tu propia colleccion usando la ruta [http://localhost:8080/docs.json](http://localhost:8080/docs.json), y sino se puede probar
 con postman, la url es la siguiente:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/21804622-0cbf027e-b7d9-43d9-b3fa-8420678ff43e?action=collection%2Ffork&collection-url=entityId%3D21804622-0cbf027e-b7d9-43d9-b3fa-8420678ff43e%26entityType%3Dcollection%26workspaceId%3D24718fbd-be5a-41e1-a995-e91f81e3a8fe)
