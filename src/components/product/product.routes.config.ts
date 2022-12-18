@@ -4,6 +4,7 @@ import ProductsMiddleware from './middleware/product.middleware';
 import express from 'express';
 import PermissionMiddleware from '../../common/middleware/common.permission.middleware';
 import fileUploadMiddleware from '../app/middleware/file.upload.middleware';
+import JwtMiddleware from '../../services/auth/middleware/jwt.middleware';
 
 export default class ProductsRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
@@ -20,6 +21,7 @@ export default class ProductsRoutes extends CommonRoutesConfig {
       .post(
         fileUploadMiddleware,
         ProductsMiddleware.validateRequiredProductBodyFields,
+        JwtMiddleware.validJWTNeeded,
         PermissionMiddleware.onlyAdminCanDoThisAction,
         ProductsController.createProduct
       );
@@ -42,6 +44,7 @@ export default class ProductsRoutes extends CommonRoutesConfig {
       .all(ProductsMiddleware.validateProductExists)
       .get(ProductsController.getProductById)
       .delete(
+        JwtMiddleware.validJWTNeeded,
         PermissionMiddleware.onlyAdminCanDoThisAction,
         ProductsController.removeProduct
       );
@@ -50,6 +53,8 @@ export default class ProductsRoutes extends CommonRoutesConfig {
      * PATCH/:productId - Update a product
      */
     this.app.patch(`/products/:productId`, [
+      fileUploadMiddleware,
+      JwtMiddleware.validJWTNeeded,
       PermissionMiddleware.onlyAdminCanDoThisAction,
       ProductsController.patch,
     ]);

@@ -53,16 +53,17 @@ export default class UsersRoutes extends CommonRoutesConfig {
      * PATCH/:userId - Update a user
      */
     this.app.patch(`/users/:userId`, [
+      fileUploadMiddleware,
       UsersMiddleware.validateUserExists,
       JwtMiddleware.validJWTNeeded,
-      body('email').isEmail(),
-      body('password')
-        .isLength({ min: 8 })
-        .withMessage('Password must be 8+ characters'),
-      body('firstName').isString().optional(),
-      body('lastName').isString().optional(),
-      body('permissionLevel').isInt().optional(),
-      BodyValidationMiddleware.verifyBodyFieldsErrors,
+      //body('email').isEmail(),
+      //body('password')
+      //.isLength({ min: 8 })
+      //.withMessage('Password must be 8+ characters'),
+      //body('firstName').isString().optional(),
+      //body('lastName').isString().optional(),
+      //body('permissionLevel').isInt().optional(),
+      //BodyValidationMiddleware.verifyBodyFieldsErrors,
       UsersMiddleware.validatePatchEmail,
       PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('userId', 'id'),
       PermissionMiddleware.minimumPermissionLevelRequired(
