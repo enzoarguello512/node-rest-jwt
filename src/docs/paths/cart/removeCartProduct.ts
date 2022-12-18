@@ -3,6 +3,11 @@ const removeCartProduct = {
     tags: ['Cart'],
     description: 'Remove a product from a specific cart.',
     operationId: 'removeCartProduct',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',

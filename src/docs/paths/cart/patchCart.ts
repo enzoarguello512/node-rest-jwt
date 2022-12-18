@@ -1,15 +1,19 @@
 const patchCart = {
   patch: {
     tags: ['Cart'],
-    description:
-      'Update an existing cart, only available for logged in admin user.',
+    description: 'Update an existing cart.',
     operationId: 'patchCart',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/CartId',
+          type: 'string',
         },
         required: true,
         description: 'A single cart id',
@@ -18,7 +22,7 @@ const patchCart = {
     requestBody: {
       required: 'true',
       content: {
-        'multipart/form-data': {
+        'application/json': {
           schema: {
             $ref: '#/components/schemas/Cart',
           },
@@ -26,15 +30,8 @@ const patchCart = {
       },
     },
     responses: {
-      200: {
+      204: {
         description: 'Cart updated successfully.',
-        content: {
-          'application/json': {
-            schema: {
-              $ref: '#/components/schemas/Cart',
-            },
-          },
-        },
       },
       400: {
         description:

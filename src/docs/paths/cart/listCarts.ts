@@ -3,6 +3,11 @@ const listCarts = {
     tags: ['Cart'],
     description: 'Get all carts.',
     operationId: 'listCarts',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [],
     responses: {
       200: {

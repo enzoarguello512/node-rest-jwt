@@ -3,6 +3,11 @@ const addProduct = {
     tags: ['Cart'],
     description: 'Add a new product to an existing cart.',
     operationId: 'addProduct',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
@@ -38,7 +43,17 @@ const addProduct = {
         content: {
           'application/json': {
             schema: {
-              type: 'string',
+              type: 'object',
+              description: 'Object containing the products',
+              properties: {
+                products: {
+                  type: 'array',
+                  description: 'Array of carts.',
+                  items: {
+                    $ref: '#/components/schemas/Product',
+                  },
+                },
+              },
             },
           },
         },

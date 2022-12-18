@@ -1,14 +1,19 @@
 const getCartProductsById = {
   get: {
     tags: ['Cart'],
-    description: 'Get a specific cart.',
-    operationId: 'getCartById',
+    description: 'Get the products inside a cart.',
+    operationId: 'getCartProductsById',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/CartId',
+          type: 'string',
         },
         required: true,
         description: 'A single cart id',
@@ -16,11 +21,21 @@ const getCartProductsById = {
     ],
     responses: {
       200: {
-        description: 'Cart was obtained',
+        description: 'Cart products were obtained',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/Cart',
+              type: 'object',
+              description: 'Object containing the products',
+              properties: {
+                products: {
+                  type: 'array',
+                  description: 'Array of carts.',
+                  items: {
+                    $ref: '#/components/schemas/Product',
+                  },
+                },
+              },
             },
           },
         },

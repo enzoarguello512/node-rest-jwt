@@ -1,13 +1,18 @@
 const createCart = {
   post: {
     tags: ['Cart'],
-    description: 'Create a new cart, only available for logged in admin user.',
+    description: 'Create a new cart',
     operationId: 'createCart',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [],
     requestBody: {
       required: true,
       content: {
-        'multipart/form-data': {
+        'application/json': {
           schema: {
             $ref: '#/components/schemas/Cart',
           },
@@ -20,7 +25,7 @@ const createCart = {
         content: {
           'application/json': {
             schema: {
-              type: 'string',
+              $ref: '#/components/schemas/Cart',
             },
           },
         },

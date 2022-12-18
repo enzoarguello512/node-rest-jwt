@@ -3,6 +3,11 @@ const createOrRead = {
     tags: ['Cart'],
     description: 'Create or read an existing cart for a specific user.',
     operationId: 'createOrRead',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'userId',
@@ -38,7 +43,7 @@ const createOrRead = {
         content: {
           'application/json': {
             schema: {
-              type: 'string',
+              $ref: '#/components/schemas/Cart',
             },
           },
         },

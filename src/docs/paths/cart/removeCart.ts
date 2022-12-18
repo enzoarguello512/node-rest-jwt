@@ -1,22 +1,26 @@
 const removeCart = {
   delete: {
     tags: ['Cart'],
-    description:
-      'Deletes an existing cart, only available for logged in admin user.',
+    description: 'Deletes an existing cart.',
     operationId: 'removeCart',
+    security: [
+      {
+        jwtBearerAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'id',
         in: 'path',
         schema: {
-          $ref: '#/components/schemas/CartId',
+          type: 'string',
         },
         required: true,
         description: 'A single cart id',
       },
     ],
     responses: {
-      200: {
+      204: {
         description: 'Cart deleted successfully.',
       },
       401: {
