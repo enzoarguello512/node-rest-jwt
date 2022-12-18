@@ -37,7 +37,7 @@ swagger, se puede usar la UI en la ruta local
 [http://localhost:8080/docs](http://localhost:8080/docs) o sino se puede probar
 con postman, la url es la siguiente:
 
-asdasdasda
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/21804622-0cbf027e-b7d9-43d9-b3fa-8420678ff43e?action=collection%2Ffork&collection-url=entityId%3D21804622-0cbf027e-b7d9-43d9-b3fa-8420678ff43e%26entityType%3Dcollection%26workspaceId%3D24718fbd-be5a-41e1-a995-e91f81e3a8fe)
 
 La única ruta que te puede llegar a dar problemas puede ser la de autenticación,
 que es usada en toda la aplicación y se maneja usando tokens de jwt guardados en
