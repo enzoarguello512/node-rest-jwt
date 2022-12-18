@@ -94,11 +94,13 @@ class OrdersDao implements ICrudDerivedToUser {
   // Method in charge of listing all the orders of a specific user
   public async listUserItemsCollection(userId: string, limit = 200, page = 0) {
     try {
-      return Order.find({ user: userId })
-        .limit(limit)
-        .skip(limit * page)
-        .populate('user')
-        .exec();
+      return (
+        Order.find({ user: userId })
+          .limit(limit)
+          .skip(limit * page)
+          //.populate('user')
+          .exec()
+      );
     } catch (err) {
       throw new BaseError('Failed to find orders', err, 'listUserOrders');
     }
