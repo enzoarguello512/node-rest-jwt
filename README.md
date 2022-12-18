@@ -1,5 +1,10 @@
-<h1 align="center">Welcome to node-rest-jwt 👋</h1>
-<p>
+<p align="center">
+  <a href="https://morfi-react.vercel.app">
+    <img src="https://i.imgur.com/cDNjn1M.png" alt="The Morfi logo" height="100">
+  </a>
+  <h1 align="center">node-rest-jwt</h1>
+  <p align="center">RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens<p>
+  <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/enzoarguello512/api-rest-ecommerce#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
@@ -14,14 +19,16 @@
     <img alt="Twitter: enzoarguello512" src="https://img.shields.io/twitter/follow/enzoarguello512.svg?style=social" />
   </a>
 </p>
+</p>
 
-> RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens
+
+
+
+## ✨ Active deployments
+
+- [Deploy](https://morfi-react.vercel.app/)
 
 ### Commit temporal (explicación del proyecto, después hago uno mas prolijo):
-
-#### Deploy del proyecto
-
-✨ [Deploy](morfi-react.vercel.app)
 
 Este proyecto esta basado en un repositorio previo,
 [morfi](https://github.com/enzoarguello512/morfi), que lo actualice y lo adapte
