@@ -39,6 +39,8 @@ con postman, la url es la siguiente:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/21804622-0cbf027e-b7d9-43d9-b3fa-8420678ff43e?action=collection%2Ffork&collection-url=entityId%3D21804622-0cbf027e-b7d9-43d9-b3fa-8420678ff43e%26entityType%3Dcollection%26workspaceId%3D24718fbd-be5a-41e1-a995-e91f81e3a8fe)
 
+<img src="https://user-images.githubusercontent.com/75096734/208274577-0ad2dc20-f114-4679-9158-a4ea25e5b867.png" alt="docs" height="200">
+
 La única ruta que te puede llegar a dar problemas puede ser la de autenticación,
 que es usada en toda la aplicación y se maneja usando tokens de jwt guardados en
 las cookies del cliente y en las peticiones, pero la manera fácil si te querés
@@ -79,7 +81,8 @@ lo siguiente:**
 
 Ejemplo utilizando postman:
 
-img
+<img src="https://user-images.githubusercontent.com/75096734/208273023-801073a1-bf18-433c-adb9-59f7411b1384.png" alt="refresh token postman" height="200">
+<img src="https://user-images.githubusercontent.com/75096734/208273305-629efb38-1e90-41af-b8db-564a44efa241.png" alt="access token postman" height="200">
 
 Otra cosa a destacar si es que vas a filtrar los productos es que solo funcionan
 ciertas categorías y no el 100% de los filtros, los que funcionan por ahora son
