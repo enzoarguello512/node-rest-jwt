@@ -26,7 +26,12 @@ const options: swaggerUi.JsonObject = {
       jwtCookieAuth: {
         type: 'apiKey',
         in: 'cookie',
-        name: 'jwt',
+        name: 'Cookie',
+      },
+      jwtBearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
       },
     },
   },
@@ -80,7 +85,7 @@ const options: swaggerUi.JsonObject = {
         'The chat system that operates on the server (similar to a chatbot)',
     },
   ],
-  security: [{ jwtCookieAuth: [] }],
+  //security: [{ jwtCookieAuth: [] }],
   paths: {
     ...authPaths,
     ...cartPaths,
