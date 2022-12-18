@@ -21,32 +21,40 @@
 </p>
 </p>
 
-
-
+Greetings 👋 and welcome to the [morfi](https://github.com/enzoarguello512/morfi) backend server repository, which contains the code that manages the store page, user registration and client communication. In addition, the [front-end section of the application](https://github.com/enzoarguello512/morfi-react) has been updated to React, which is responsible for communicating with the server.
 
 ## ✨ Active deployments
 
-- [Deploy](https://morfi-react.vercel.app/)
+> (Please bear in mind that the site will take a while to load since it's deployed on a free tier, but it will load, just give it some time 😉)
 
-### Commit temporal (explicación del proyecto, después hago uno mas prolijo):
+- [https://morfi-react.vercel.app](https://morfi-react.vercel.app) - Front-end deployment in vercel
+- [https://node-rest-jwt.onrender.com](https://node-rest-jwt.onrender.com) - Back-end deployment in render (cold start ❄️, so it will be the slower of the two)
 
-Este proyecto esta basado en un repositorio previo,
-[morfi](https://github.com/enzoarguello512/morfi), que lo actualice y lo adapte
-a React (el frontend de esta aplicación), lo podes encontrar en
-[morfi-react](https://github.com/enzoarguello512/morfi-react), la mayoría de
-las funciones están integradas al frontend así que se pueden probar directamente
-desde ahí, pero si gustas, podes leer la documentacion y hacer las peticiones de
-manera manual.
+## 📦 Main features
 
-Esta es la parte backend del servidor, tiene varios módulos (se pueden ver en el
-package.json), lo mas destacable son los endpoints, esta todo documentado usando
-swagger, se puede usar la UI en la ruta local
-[http://localhost:8080/docs](http://localhost:8080/docs), tambien existe la posibilidad de crear tu propia colleccion usando la ruta [http://localhost:8080/docs.json](http://localhost:8080/docs.json), y sino se puede probar
-con postman, la url es la siguiente:
+- Session management with JSON Web Tokens (aka "jwt") (authentication, session inactivity, auto-login, token rotation, etc)
+- Artillery performance testing
+- Nodemailer and Twilio for sending emails, SMS and whatsapp messages
+- A socket.io-based chat implementation
+- Swagger-made documentation
+- You can upload images to the cloud with cloudinary and express-fileupload
+- Application logging with Winston
+- Mocha, chai, supertests for unit testing
+- Multi-threading and clustering are optional methods to improve performance.
+
+### Future features
+
+- Validation with express-validator
+
+## 📄 Documentation
+
+You can find API documentation by running the server locally in [http://localhost:8080/docs](http://localhost:8080/docs) or in json format in [http://localhost:8080/docs.json](http://localhost:8080/docs.json). In case of postman, you can find it at this URL:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/21804622-0cbf027e-b7d9-43d9-b3fa-8420678ff43e?action=collection%2Ffork&collection-url=entityId%3D21804622-0cbf027e-b7d9-43d9-b3fa-8420678ff43e%26entityType%3Dcollection%26workspaceId%3D24718fbd-be5a-41e1-a995-e91f81e3a8fe)
 
-<img src="https://user-images.githubusercontent.com/75096734/208274577-0ad2dc20-f114-4679-9158-a4ea25e5b867.png" alt="docs" height="200">
+  <img src="https://user-images.githubusercontent.com/75096734/208274577-0ad2dc20-f114-4679-9158-a4ea25e5b867.png" alt="swagger documentation" height="300">
+
+### Authentication
 
 La única ruta que te puede llegar a dar problemas puede ser la de autenticación,
 que es usada en toda la aplicación y se maneja usando tokens de jwt guardados en
@@ -88,8 +96,8 @@ lo siguiente:**
 
 Ejemplo utilizando postman:
 
-<img src="https://user-images.githubusercontent.com/75096734/208273023-801073a1-bf18-433c-adb9-59f7411b1384.png" alt="refresh token postman" height="200">
-<img src="https://user-images.githubusercontent.com/75096734/208273305-629efb38-1e90-41af-b8db-564a44efa241.png" alt="access token postman" height="200">
+<img src="https://user-images.githubusercontent.com/75096734/208273023-801073a1-bf18-433c-adb9-59f7411b1384.png" alt="Example of refresh token in the postman interface" height="200">
+<img src="https://user-images.githubusercontent.com/75096734/208273305-629efb38-1e90-41af-b8db-564a44efa241.png" alt="Example of access token in the postman interface" height="200">
 
 Otra cosa a destacar si es que vas a filtrar los productos es que solo funcionan
 ciertas categorías y no el 100% de los filtros, los que funcionan por ahora son
