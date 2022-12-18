@@ -52,8 +52,8 @@ class CartsController {
   ) {
     try {
       const newFields: ICreateCartDto = transformRequestBody(req);
-      const cartId = await cartsService.create(newFields);
-      res.status(httpStatus.CREATED).send({ id: cartId });
+      const cart = await cartsService.create(newFields);
+      res.status(httpStatus.CREATED).send(cart);
     } catch (err) {
       next(err);
     }

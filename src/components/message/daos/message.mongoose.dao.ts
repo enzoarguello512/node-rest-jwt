@@ -128,7 +128,11 @@ class MessagesDao implements ICrudMessage {
         message += '---\n';
         message += lastOrder.products
           .map(({ data: product, quantity }) => {
-            return `📦 Product: ${product.name} - Quantity: ${quantity} - Price: $${product.discountedPrice}`;
+            return `📦 Product: "${
+              product.name
+            }" - Price: [u. $${product.discountedPrice.toFixed(
+              2
+            )} x ${quantity}]`;
           })
           .join('\n');
         message += '\n---';
@@ -150,7 +154,11 @@ class MessagesDao implements ICrudMessage {
             const product = data as ICreateProductDto;
             // we use the same map method to avoid having to iterate over the same array again when we are going to calculate the total
             totalValue += product.discountedPrice * quantity;
-            return `🛍️ Product: ${product.name} - Quantity: ${quantity} - Price: $${product.discountedPrice}`;
+            return `🛍️ Product: "${
+              product.name
+            }" - Price: [u. $${product.discountedPrice.toFixed(
+              2
+            )} x ${quantity}]`;
           })
           .join('\n');
         message += '\n---';

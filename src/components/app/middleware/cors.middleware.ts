@@ -1,5 +1,5 @@
 import { CorsOptions } from 'cors';
-import { allowedOrigins } from '../app.config';
+import allowedOrigins from '../app.config';
 
 // Main configuration for CORS
 export const corsOptions: CorsOptions = {

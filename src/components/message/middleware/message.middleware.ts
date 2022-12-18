@@ -1,6 +1,5 @@
 import express from 'express';
 import messageService from '../services/message.service';
-import httpStatus from 'http-status';
 import { Error as MongoError } from 'mongoose';
 import { NotFoundError } from '../../../common/error/not.found.error';
 import { BadRequestError } from '../../../common/error/bad.request.error';
@@ -14,9 +13,7 @@ class MessagesMiddleware {
     if (req.body && req.body.user && req.body.text && req.body.type) {
       next();
     } else {
-      res.status(httpStatus.BAD_REQUEST).send({
-        error: `Missing required fields: user, text, type`,
-      });
+      next(new BadRequestError(`Missing required fields: user, text, type`));
     }
   }
 

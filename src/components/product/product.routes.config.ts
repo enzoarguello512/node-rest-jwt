@@ -4,22 +4,27 @@ import ProductsMiddleware from './middleware/product.middleware';
 import express from 'express';
 import PermissionMiddleware from '../../common/middleware/common.permission.middleware';
 import fileUploadMiddleware from '../app/middleware/file.upload.middleware';
+import JwtMiddleware from '../../services/auth/middleware/jwt.middleware';
 
 export default class ProductsRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
     super(app, 'ProductsRoutes');
   }
-  configureRoutes(): express.Application {
+  public configureRoutes(): express.Application {
     /**
      * GET - Get all products
      * POST - Add a new product
      */
-    this.app.route(`/products`).get(ProductsController.listProducts).post(
-      fileUploadMiddleware,
-      ProductsMiddleware.validateRequiredProductBodyFields,
-      // PermissionMiddleware.isAdmin,
-      ProductsController.createProduct
-    );
+    this.app
+      .route(`/products`)
+      .get(ProductsController.listProducts)
+      .post(
+        fileUploadMiddleware,
+        ProductsMiddleware.validateRequiredProductBodyFields,
+        JwtMiddleware.validJWTNeeded,
+        PermissionMiddleware.onlyAdminCanDoThisAction,
+        ProductsController.createProduct
+      );
 
     /**
      * GET - Get all products with a custom filter
@@ -38,13 +43,21 @@ export default class ProductsRoutes extends CommonRoutesConfig {
       .route(`/products/:productId`)
       .all(ProductsMiddleware.validateProductExists)
       .get(ProductsController.getProductById)
-      // .all(PermissionMiddleware.isAdmin)
-      .delete(ProductsController.removeProduct);
+      .delete(
+        JwtMiddleware.validJWTNeeded,
+        PermissionMiddleware.onlyAdminCanDoThisAction,
+        ProductsController.removeProduct
+      );
 
     /**
      * PATCH/:productId - Update a product
      */
-    this.app.patch(`/products/:productId`, [ProductsController.patch]);
+    this.app.patch(`/products/:productId`, [
+      fileUploadMiddleware,
+      JwtMiddleware.validJWTNeeded,
+      PermissionMiddleware.onlyAdminCanDoThisAction,
+      ProductsController.patch,
+    ]);
 
     return this.app;
   }

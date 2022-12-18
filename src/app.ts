@@ -19,6 +19,7 @@ import CartRoutes from './components/cart/cart.routes.config';
 import UsersRoutes from './components/user/user.routes.config';
 import MessagesRoutes from './components/message/message.routes.config';
 import AuthRoutes from './services/auth/auth.routes.config';
+import DocsRoutes from './components/app/middleware/swagger.middleware';
 
 // Jwt
 import cookieParser from 'cookie-parser';
@@ -67,6 +68,7 @@ routes.push(new UsersRoutes(app));
 routes.push(new MessagesRoutes(app));
 routes.push(new AuthRoutes(app));
 routes.push(new OrdersRoutes(app));
+routes.push(new DocsRoutes(app));
 routes.forEach((route: CommonRoutesConfig): void => {
   debugLog(`Routes configured for ${route.getName()}`);
 });

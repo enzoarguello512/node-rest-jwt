@@ -15,7 +15,7 @@ export default class UsersRoutes extends CommonRoutesConfig {
     super(app, 'UsersRoutes');
   }
 
-  configureRoutes(): express.Application {
+  public configureRoutes(): express.Application {
     /**
      * GET - Get all users
      * POST - Add a new user
@@ -37,7 +37,6 @@ export default class UsersRoutes extends CommonRoutesConfig {
     /**
      * GET/:userId - Find an individual user
      * DELETE/:userId - Delete a user
-     * PATCH/:userId - Update a user
      */
     this.app.param(`userId`, UsersMiddleware.extractUserId);
     this.app
@@ -50,39 +49,21 @@ export default class UsersRoutes extends CommonRoutesConfig {
       .get(UsersController.getUserById)
       .delete(UsersController.removeUser);
 
-    // this.app.patch(`/users/:userId`, [
-    //   JwtMiddleware.validJWTNeeded,
-    //   body('email').isEmail(),
-    //   body('password')
-    //     .isLength({ min: 5 })
-    //     .withMessage('Must include password (5+ characters)'),
-    //   body('firstName').isString(),
-    //   body('lastName').isString(),
-    //   body('permissionLevel').isInt(),
-    //   BodyValidationMiddleware.verifyBodyFieldsErrors,
-    //   UsersMiddleware.validateSameEmailBelongToSameUser,
-    //   UsersMiddleware.userCantChangePermission,
-    //   PermissionMiddleware.onlySameUserOrAdminCanDoThisAction("userId", "id"),
-    //   PermissionMiddleware.minimumPermissionLevelRequired(
-    //     EPermissionLevel.PAID_PERMISSION
-    //   ),
-    //   UsersController.patch,
-    // ]);
-
     /**
      * PATCH/:userId - Update a user
      */
     this.app.patch(`/users/:userId`, [
+      fileUploadMiddleware,
+      UsersMiddleware.validateUserExists,
       JwtMiddleware.validJWTNeeded,
-      body('email').isEmail().optional(),
-      body('password')
-        .isLength({ min: 5 })
-        .withMessage('Password must be 5+ characters')
-        .optional(),
-      body('firstName').isString().optional(),
-      body('lastName').isString().optional(),
-      body('permissionLevel').isInt().optional(),
-      BodyValidationMiddleware.verifyBodyFieldsErrors,
+      //body('email').isEmail(),
+      //body('password')
+      //.isLength({ min: 8 })
+      //.withMessage('Password must be 8+ characters'),
+      //body('firstName').isString().optional(),
+      //body('lastName').isString().optional(),
+      //body('permissionLevel').isInt().optional(),
+      //BodyValidationMiddleware.verifyBodyFieldsErrors,
       UsersMiddleware.validatePatchEmail,
       PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('userId', 'id'),
       PermissionMiddleware.minimumPermissionLevelRequired(
@@ -95,11 +76,9 @@ export default class UsersRoutes extends CommonRoutesConfig {
      * PATCH/:userId/permissionLevel/:permissionLevel - Update a user's permission level
      */
     this.app.patch(`/users/:userId/permissionLevel/:permissionLevel`, [
+      UsersMiddleware.validateUserExists,
       JwtMiddleware.validJWTNeeded,
-      PermissionMiddleware.onlySameUserOrAdminCanDoThisAction('userId', 'id'),
-      PermissionMiddleware.minimumPermissionLevelRequired(
-        EPermissionLevel.ADMIN_PERMISSION
-      ),
+      PermissionMiddleware.onlyAdminCanDoThisAction,
       UsersController.updatePermissionLevel,
     ]);
 

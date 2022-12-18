@@ -60,7 +60,7 @@ class OrdersMiddleware {
           };
         }),
         total,
-        status: 'Completed',
+        status: 'Complete',
         deliveryAddress: user.address,
         contact: {
           email: user.email,
