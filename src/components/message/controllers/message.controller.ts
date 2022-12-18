@@ -61,8 +61,8 @@ class MessagesController {
   ) {
     try {
       const newFields: ICreateMessageDto = transformRequestBody(req);
-      const messageId = await messagesService.create(newFields);
-      res.status(httpStatus.CREATED).send({ id: messageId });
+      const message = await messagesService.create(newFields);
+      res.status(httpStatus.CREATED).send(message);
     } catch (err) {
       next(err);
     }
