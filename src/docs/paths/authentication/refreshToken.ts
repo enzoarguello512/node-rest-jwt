@@ -4,6 +4,11 @@ const refreshToken = {
     description:
       'It allows you to obtain a new access and refresh token, you must include your refresh token as a request cookie',
     operationId: 'refreshToken',
+    security: [
+      {
+        jwtCookieAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'JWT Cookie',

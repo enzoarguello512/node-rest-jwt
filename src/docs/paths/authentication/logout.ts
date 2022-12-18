@@ -3,6 +3,11 @@ const logout = {
     tags: ['Authentication'],
     description: 'Log out of the server.',
     operationId: 'logout',
+    security: [
+      {
+        jwtCookieAuth: [],
+      },
+    ],
     parameters: [
       {
         name: 'JWT Cookie',

@@ -3,6 +3,11 @@ const auth = {
     tags: ['Authentication'],
     description: 'Log in to the system.',
     operationId: 'auth',
+    security: [
+      {
+        jwtCookieAuth: [],
+      },
+    ],
     parameters: [],
     requestBody: {
       required: true,
@@ -19,7 +24,7 @@ const auth = {
               password: {
                 type: 'string',
                 description: 'User password.',
-                example: 'secret1',
+                example: 'secret',
               },
             },
           },
