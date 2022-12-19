@@ -66,7 +66,7 @@ JWT tokens are validated using middleware called [`JwtMiddleware`](https://githu
 
 In contrast, [`PermissionMiddleware`](https://github.com/enzoarguello512/node-rest-jwt/blob/main/src/common/middleware/common.permission.middleware.ts) checks a user's permissions. 😅
 
-As soon as a user is authenticated, they are given an _access token_ (in the response body) and a _refresh token_ (in the client's cookie). The _access token_ validates that they are authenticated and that they have sufficient permissions, while the _refresh token_ is used to see whether or not the session is still active and to create new _access tokens_ (which expire every 10 minutes).
+As soon as a user is authenticated, they are given an _access token_ (in the response body) and a _refresh token_ (in the response headers). The _access token_ validates that they are authenticated and that they have sufficient permissions, while the _refresh token_ is used to see whether or not the session is still active and to create new _access tokens_ (which expire every 10 minutes).
 
 A total of two endpoints require cookies (to function correctly), while the rest use _access tokens_.
 
