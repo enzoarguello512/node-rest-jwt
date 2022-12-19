@@ -5,7 +5,7 @@
   <h1 align="center">node-rest-jwt</h1>
   <p align="center">RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens<p>
   <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/enzoarguello512/api-rest-ecommerce#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
