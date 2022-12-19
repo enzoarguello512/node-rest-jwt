@@ -1,6 +1,6 @@
 {
   "name": "node-rest-jwt",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens",
   "main": "index.js",
   "scripts": {

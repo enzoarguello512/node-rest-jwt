@@ -2,6 +2,71 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.2.0...v0.2.1) (2022-12-19)
+
+
+### Features
+
+* add common properties to models. ([9893b13](https://github.com/enzoarguello512/api-rest-ecommerce/commit/9893b13be6595e808928ebd44a1c978e66b8285c))
+* add configuration for cluster. ([8d506e3](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8d506e3bbc6ae1a12e5f0b8c7421c5e8585c1d8e))
+* add logged in user schema. ([331c420](https://github.com/enzoarguello512/api-rest-ecommerce/commit/331c420b8d549c1468f14c71bf4ab75014d693ee))
+* add module "mongoose-to-swagger" and script to run it. ([71ead61](https://github.com/enzoarguello512/api-rest-ecommerce/commit/71ead61204e0b90f845b2cf710f2092fa18f8ca8))
+* add modules "swagger-ui-express" and "@types/swagger-ui-express". ([3f15854](https://github.com/enzoarguello512/api-rest-ecommerce/commit/3f1585489f83f33a358ecd2f464bcdcf3e21f754))
+* add new schemas. ([9893d7e](https://github.com/enzoarguello512/api-rest-ecommerce/commit/9893d7e0be2b46f8516394d78599ac5bd2b67f0c))
+* add paths to authentication. ([fdc6335](https://github.com/enzoarguello512/api-rest-ecommerce/commit/fdc633555ecb375382f90bd45ff3ce5ebb75bf25))
+* add paths to cart. ([c82fd94](https://github.com/enzoarguello512/api-rest-ecommerce/commit/c82fd941f10944cca1576b9d7b069beec27dfa48))
+* add paths to messages. ([25b3775](https://github.com/enzoarguello512/api-rest-ecommerce/commit/25b3775d30b26444a0dfdcf7e6f789f973f4b9f0))
+* add paths to orders. ([42941c3](https://github.com/enzoarguello512/api-rest-ecommerce/commit/42941c3ced77ae5f2771b10ca8a8d49b898a2638))
+* add paths to users. ([fbdac57](https://github.com/enzoarguello512/api-rest-ecommerce/commit/fbdac577f035331b22c13b2b553fc5bb20890b96))
+* add routes and configuration for swagger. ([a1ad29b](https://github.com/enzoarguello512/api-rest-ecommerce/commit/a1ad29b75092be6491534d89e31d74f80dcabe6a))
+* add schema for ProductId. ([bf3c53c](https://github.com/enzoarguello512/api-rest-ecommerce/commit/bf3c53cb3dba3fb7e25d139c036e778c04f238c7))
+* add test for artillery. ([ee3350d](https://github.com/enzoarguello512/api-rest-ecommerce/commit/ee3350d8be432f73a97526cefe54ba8347a175df))
+* add token scheme. ([84e3865](https://github.com/enzoarguello512/api-rest-ecommerce/commit/84e38650805844bd013006ddb6f47d7d1e65d9b4))
+* add value examples. ([1167b31](https://github.com/enzoarguello512/api-rest-ecommerce/commit/1167b31bcbf8b428fc8f75fa384ec670555a65f9))
+
+
+### Bug Fixes
+
+* add and fix methods to product path. ([8b64997](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8b649972d7f40e497915405a81365170d40c6b28))
+* add config for development. ([c736e76](https://github.com/enzoarguello512/api-rest-ecommerce/commit/c736e76f85eb92a4be4aceebf182eafadd42eec0))
+* add default mode. ([640a09d](https://github.com/enzoarguello512/api-rest-ecommerce/commit/640a09da5b7b15e5409cc98782fe108d6547f0c8))
+* add missing paths. ([adba720](https://github.com/enzoarguello512/api-rest-ecommerce/commit/adba720480170f60a59c3f957d0116b59da416e6))
+* add paths to swagger main config. ([8e9b008](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8e9b008cd9c48336812a902a2580573ba372a9fc))
+* add paths to swagger main config. ([45d7701](https://github.com/enzoarguello512/api-rest-ecommerce/commit/45d77013b9f265d7e20f66b3e7ac8e648c3d24e6))
+* add paths to swagger main config. ([75a112a](https://github.com/enzoarguello512/api-rest-ecommerce/commit/75a112a5578b3cc5d6bcd3c05893e5c3ac71ab8b))
+* add paths to swagger main config. ([2419b1e](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2419b1e88717498d0f86a4610e4ac4dce50103c8))
+* add postman collection link. ([3bff15c](https://github.com/enzoarguello512/api-rest-ecommerce/commit/3bff15c66a00b1ea61601f72492ebde0f4d5e7cf))
+* add standard error and fix reading undefined properties. ([0d365fb](https://github.com/enzoarguello512/api-rest-ecommerce/commit/0d365fbc73b6f94e2fac41649b57ace79dbcf844))
+* change config to resolve json modules. ([e5ed5a5](https://github.com/enzoarguello512/api-rest-ecommerce/commit/e5ed5a531c9e9c57ad85b8abee53b15bf2a9ceca))
+* change tag name and rename message file. ([0418a10](https://github.com/enzoarguello512/api-rest-ecommerce/commit/0418a10dc0881e33b222b1565b206d2cbdfa9453))
+* correct middlewares and routes. ([9919e2d](https://github.com/enzoarguello512/api-rest-ecommerce/commit/9919e2d3900ba5ef34bbcccf0568c28343154bfd))
+* duplicate enum in model. ([cbea321](https://github.com/enzoarguello512/api-rest-ecommerce/commit/cbea3210783fc7006d14af2d6ce6adab6659fbaa))
+* error messages (now they are standard). ([892dd7c](https://github.com/enzoarguello512/api-rest-ecommerce/commit/892dd7c60abfa5720d92c64a9d0a2bedd3420439))
+* generate initial README. ([b51367a](https://github.com/enzoarguello512/api-rest-ecommerce/commit/b51367a022b243ab6454ba123cdf52a113ae8d23))
+* improve allowed origins. ([bd52ab2](https://github.com/enzoarguello512/api-rest-ecommerce/commit/bd52ab21e7738d9153a0db958e786f6c3505a781))
+* permission errors and route data validation. ([bf22530](https://github.com/enzoarguello512/api-rest-ecommerce/commit/bf22530f9770ced9d5e4c6dad79ac702f905df79))
+* prevent extra user data from being displayed in the order. ([89774b3](https://github.com/enzoarguello512/api-rest-ecommerce/commit/89774b3ff28a237c36abcdbc247ac08d3055965c))
+* prevent undefined fields error. ([ed72eaa](https://github.com/enzoarguello512/api-rest-ecommerce/commit/ed72eaaffbc24e38e3dc9ee2ed93a5ff721e659e))
+* refresh system response messages. ([a4f5979](https://github.com/enzoarguello512/api-rest-ecommerce/commit/a4f5979fd323c55bd028b3b4d2877279dfd78d17))
+* remove "yargs" module, add "cluster" and configuration for pm2. ([b0d1c7b](https://github.com/enzoarguello512/api-rest-ecommerce/commit/b0d1c7bb7a04a330fb1ba07d8fee793ad1d6c321))
+* remove unused dependencies. ([07705cd](https://github.com/enzoarguello512/api-rest-ecommerce/commit/07705cd945afeb56b2bebc4b4311d1301ddcf481))
+* rename patch file. ([e44695f](https://github.com/enzoarguello512/api-rest-ecommerce/commit/e44695f8ded29fdf10488805a024c72c4fcfe904))
+* set status to model enum. ([2ea71f5](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2ea71f56e4845aec651e6e2e979f91bfd80d4baf))
+* swagger issues and update api info. ([515e336](https://github.com/enzoarguello512/api-rest-ecommerce/commit/515e3367b92b76964123ce64714b3199e82a5dd6))
+* update default mode. ([5b9578b](https://github.com/enzoarguello512/api-rest-ecommerce/commit/5b9578b232a123311186cde8cff56db364e882f3))
+* update error codes and add path to create product. ([4e49d05](https://github.com/enzoarguello512/api-rest-ecommerce/commit/4e49d05bde2f062438415f052844549e8a02ad18))
+* update import broken. ([2f9c01b](https://github.com/enzoarguello512/api-rest-ecommerce/commit/2f9c01be9fe619ddb4606e71beccd734f48c864a))
+* update name and description. ([f151f2d](https://github.com/enzoarguello512/api-rest-ecommerce/commit/f151f2d69b42b5824074aa66c8a94b8d92ff0962))
+* update nonexistent path. ([87a8cd2](https://github.com/enzoarguello512/api-rest-ecommerce/commit/87a8cd2152c56d1755a01ee6162536908391b43d))
+* update response sent by the DAO. ([d3e6daf](https://github.com/enzoarguello512/api-rest-ecommerce/commit/d3e6daf77bd4807642ebcee090e351518595f299))
+* update responses and security of authentication paths. ([67909d8](https://github.com/enzoarguello512/api-rest-ecommerce/commit/67909d83cf3573d16c8c0e097fa90ce2397a2be4))
+* update responses and security of cart paths. ([12dfdbe](https://github.com/enzoarguello512/api-rest-ecommerce/commit/12dfdbee37cb594c3dbf9bdc5498747378a246e7))
+* update responses and security of messages paths. ([e6b6562](https://github.com/enzoarguello512/api-rest-ecommerce/commit/e6b6562334906d70a42d1faec87c8d8a9ab03e7c))
+* update responses and security of orders paths. ([9655adf](https://github.com/enzoarguello512/api-rest-ecommerce/commit/9655adf3f495a180d9b7cb3f05c10a93470e7fb0))
+* update responses and security of products paths. ([8006b4f](https://github.com/enzoarguello512/api-rest-ecommerce/commit/8006b4f01557111ec504b8fe80fea970fe777ee2))
+* update responses and security of user paths. ([1971061](https://github.com/enzoarguello512/api-rest-ecommerce/commit/1971061a19f1df07e70913777468953b20414821))
+* update swagger security. ([5cc8cc1](https://github.com/enzoarguello512/api-rest-ecommerce/commit/5cc8cc1dafe3dd4a8e9762834eefa89f48e7ea50))
+
 ## [0.2.0](https://github.com/enzoarguello512/api-rest-ecommerce/compare/v0.1.0...v0.2.0) (2022-12-11)
 
 
