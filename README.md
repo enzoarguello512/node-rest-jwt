@@ -27,22 +27,24 @@ Greetings 👋 and welcome to the [morfi](https://github.com/enzoarguello512/mor
 
 > (Please bear in mind that the site will take a while to load since it's deployed on a free tier, but it will load, just give it some time 😉)
 
-- [https://morfi-react.vercel.app](https://morfi-react.vercel.app) - Front-end deployment in vercel
-- [https://node-rest-jwt.onrender.com](https://node-rest-jwt.onrender.com) - Back-end deployment in render (cold start ❄️, so it will be the slower of the two)
+- [https://morfi-react.vercel.app](https://morfi-react.vercel.app) - Front-end deployment in vercel.
+- [https://node-rest-jwt.onrender.com](https://node-rest-jwt.onrender.com) - Back-end deployment in render (cold start ❄️, so it will be the slower of the two).
 
 ## 📦 Main features
 
 - Session management with JSON Web Tokens (aka "jwt") (authentication, session inactivity, auto-login, token rotation, etc)
 - Artillery performance testing
 - Nodemailer and Twilio for sending emails, SMS and whatsapp messages
+- Query-based filtering of products
 - A socket.io-based chat implementation
 - Swagger-made documentation
 - You can upload images to the cloud with cloudinary and express-fileupload
-- Application logging with Winston
+- Application logging with winston
+- Utilizing CORS for whitelisting origins
 - Mocha, chai, supertests for unit testing
 - Multi-threading and clustering are optional methods to improve performance.
 
-### Future features
+### ⚡ Future features
 
 - Validation with express-validator
 
@@ -54,86 +56,65 @@ You can find API documentation by running the server locally in [http://localhos
 
   <img src="https://user-images.githubusercontent.com/75096734/208274577-0ad2dc20-f114-4679-9158-a4ea25e5b867.png" alt="swagger documentation" height="300">
 
-### Authentication
+### 🔓 Authentication
 
-La única ruta que te puede llegar a dar problemas puede ser la de autenticación,
-que es usada en toda la aplicación y se maneja usando tokens de jwt guardados en
-las cookies del cliente y en las peticiones, pero la manera fácil si te querés
-evitar esto y querés probar la api igual es directamente comentar los middleware
-de `JwtMiddleware` o `PermissionMiddleware`.
+In order to avoid misunderstandings, I will proceed to explain authentication in the following paragraph. 👇
 
-- La ruta **/auth** le enviás tu email y contraseña por medio de POST y te devuelve
-  2 tokens, uno en las cookies de la respuesta (que es el refresh token) y otro
-  en el cuerpo de la respuesta (que es el access token), el access token le
-  permite saber al servidor que estas autenticado y que tenes los permisos
-  suficientes para realizar la operación y el refresh token permite conocer si
-  todavía tenes la sesión activa (y también se usa para crear nuevos tokens de
-  acceso, que expiran cada 10 minutos), todo esto para hacer una rotacion de
-  tokens y tener un poquito mas de seguridad.
-- La ruta **/auth/refresh-token** te permite renovar el refresh token y el access token
-  y extender así el tiempo de vida de tu sesión, que por default dura 24 horas
-  (lo que dure el tiempo de vida del refresh token).
-- La ruta **/auth/logout** que se encarga de borrar la cookie del cliente y el token de
-  refresco si así existiera.
+JWT tokens are validated using middleware called [`JwtMiddleware`](https://github.com/enzoarguello512/node-rest-jwt/blob/main/src/services/auth/middleware/jwt.middleware.ts) and [`PermissionMiddleware`](https://github.com/enzoarguello512/node-rest-jwt/blob/main/src/common/middleware/common.permission.middleware.ts). These middleware can be commented out or removed to accelerate the testing process.
 
-**Entonces para hacer un peticion cualquiera tendrias que incluir en los headers
-lo siguiente:**
+[`JwtMiddleware`](https://github.com/enzoarguello512/node-rest-jwt/blob/main/src/services/auth/middleware/jwt.middleware.ts) is in charge of reading and decrypting the tokens stored in the authorization request and attaching them in the response that is passed to the next middleware using `res.locals.jwt`, the tokens should be sent in `Bearer ${token}` format to work correctly.
 
-- La autorizacion (en este caso un Bearer seguido del token) para el uso de JWT.
+In contrast, [`PermissionMiddleware`](https://github.com/enzoarguello512/node-rest-jwt/blob/main/src/common/middleware/common.permission.middleware.ts) checks a user's permissions. 😅
+
+As soon as a user is authenticated, they are given an _access token_ (in the response body) and a _refresh token_ (in the client's cookie). The _access token_ validates that they are authenticated and that they have sufficient permissions, while the _refresh token_ is used to see whether or not the session is still active and to create new _access tokens_ (which expire every 10 minutes).
+
+A total of two endpoints require cookies (to function correctly), while the rest use _access tokens_.
+
+- **/auth** is used to authenticate **an already registered user**, using email and password, and if successful it returns 2 tokens, the _refresh token_ and the _access token_, this endpoint does not require cookies.
+- **/auth/refresh-token** allows you to renew the _refresh token_ and the _access token_ and extend the lifetime of your session, which by default lasts 24 hours (the lifetime of the _refresh token_), this endpoint requires the _refresh token_ to be stored in the cookies.
+- **/auth/logout** is responsible for deleting the client's _refresh token_, this endpoint requires that the _refresh token_ is stored in the cookies.
+
+✍ **The [front-end of the application](https://github.com/enzoarguello512/morfi-react) already handles all this, however, if you wish to make a request by hand, include the following headings:**
+
+- Using the JWT requires authorization (in this case a Bearer followed by a token).
 
   ```javascript
   headers.set('authorization', `Bearer ${token}`);
   ```
 
-- Dependiendo del método que uses seguramente tengas una opcion para incluir las
-  credenciales (las cookies) en tu petición, que si bien no son 100% necesarias
-  (ya con el access token te debería dejar) te puede llegar a servir con las
-  rutas de autenticación por si las queres probar.
+- You may be able to include the credentials (cookies) in your request, but that is not necessary if you access any other endpoint than **/auth/\*\***
 
   ```javascript
   credentials: 'include';
   ```
 
-Ejemplo utilizando postman:
+  An [example of the frontend code](https://github.com/enzoarguello512/morfi-react/blob/f32a1d0e0ecaccd72266cbb8f553390b60ca3f2e/src/app/api/apiSlice.tsx#L20) responsible for performing this task.
+
+#### 🚀 Example using postman
 
 <img src="https://user-images.githubusercontent.com/75096734/208273023-801073a1-bf18-433c-adb9-59f7411b1384.png" alt="Example of refresh token in the postman interface" height="200">
 <img src="https://user-images.githubusercontent.com/75096734/208273305-629efb38-1e90-41af-b8db-564a44efa241.png" alt="Example of access token in the postman interface" height="200">
 
-Otra cosa a destacar si es que vas a filtrar los productos es que solo funcionan
-ciertas categorías y no el 100% de los filtros, los que funcionan por ahora son
-“Categories”, “Promotions”, “Region”, “Payment” y la barra de búsqueda para
-introducir un nombre personalizado de producto. En un futuro pienso expandirlo
-para que funcione todo al 100%.
+## ❌ Problems encountered
 
-No se probo todo al 100% por un tema de tiempo, voy a seguir arreglando cosas
-igual antes de hacer un push a main, pero tendría que andar, me faltarían
-validaciones mejores pero eso lo puedo agregar después
+- In cluster mode, socket.io generates errors
 
-## Como correr el server
-
-Para arrancar el servidor en modo local haces lo clasico, `npm install` y `npm start` o si lo
-queres probar en modo desarrollo `npm run development` o mi preferido `npm run devpm2`
-
-**Cabe resaltar que hay que contar con el fichero ".env" ya pre-configurado para
-que no te tire ningun error, podes encontrar el ejemplo en [.env.example](https://github.com/enzoarguello512/node-rest-jwt/blob/develop/.env.example)**
-
-Otra cosa a recalcar es que todavia no puse una opcion para actualizar dependencias, osea, me refiero a que si por ejemplo borras el carrito de compras de un usuario, el usuario va a seguir teniendo ese id del carrito de compras (que ya no existe) y esto posiblemente haga un error en el frontend
-
-### 🏠 [Homepage](https://github.com/enzoarguello512/api-rest-ecommerce#readme)
-
-## Install
+## 👨‍💻 Install
 
 ```sh
 npm install
 ```
 
-## Usage
+## 🔥 Usage
+
+**This requires that you have already pre-configured the ".env" file. You can find the example in [.env.example](https://github.com/enzoarguello512/node-rest-jwt/blob/develop/.env.example).**
+We use `npm run development` because `npm start` is reserved for production environments. If you start with `npm start`, you'll have to include your origin in the [app.config.ts](https://github.com/enzoarguello512/node-rest-jwt/blob/3bff15c66a00b1ea61601f72492ebde0f4d5e7cf/src/components/app/app.config.ts#L6) file to avoid CORS errors.
 
 ```sh
-npm run start
+npm run development
 ```
 
-## Run tests
+## 🧪 Run tests
 
 ```sh
 npm run test
