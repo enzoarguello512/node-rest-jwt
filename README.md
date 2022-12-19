@@ -5,20 +5,20 @@
   <h1 align="center">node-rest-jwt</h1>
   <p align="center">RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens<p>
   <p align="center">
-  <img alt="Version" src="https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/enzoarguello512/api-rest-ecommerce#readme" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a>
-  <a href="https://github.com/enzoarguello512/api-rest-ecommerce/graphs/commit-activity" target="_blank">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
-  </a>
-  <a href="https://github.com/enzoarguello512/api-rest-ecommerce/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/enzoarguello512/node-rest-jwt" />
-  </a>
-  <a href="https://twitter.com/enzoarguello512" target="_blank">
-    <img alt="Twitter: enzoarguello512" src="https://img.shields.io/twitter/follow/enzoarguello512.svg?style=social" />
-  </a>
-</p>
+    <img alt="Version" src="https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=2592000" />
+    <a href="https://github.com/enzoarguello512/api-rest-ecommerce#readme" target="_blank">
+      <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+    </a>
+    <a href="https://github.com/enzoarguello512/api-rest-ecommerce/graphs/commit-activity" target="_blank">
+      <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+    </a>
+    <a href="https://github.com/enzoarguello512/api-rest-ecommerce/blob/master/LICENSE" target="_blank">
+      <img alt="License: MIT" src="https://img.shields.io/github/license/enzoarguello512/node-rest-jwt" />
+    </a>
+    <a href="https://twitter.com/enzoarguello512" target="_blank">
+      <img alt="Twitter: enzoarguello512" src="https://img.shields.io/twitter/follow/enzoarguello512.svg?style=social" />
+    </a>
+  </p>
 </p>
 
 Greetings 👋 and welcome to the [morfi](https://github.com/enzoarguello512/morfi) backend server repository, which contains the code that manages the store page, user registration and client communication. In addition, the [front-end section of the application](https://github.com/enzoarguello512/morfi-react) has been updated to React, which is responsible for communicating with the server.
