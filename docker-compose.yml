@@ -3,13 +3,13 @@ services:
   app:
     build: .
     ports:
-      - 8080:8080
+      - "8080:8080"
     links:
       - mongo
   mongo:
     image: mongo
     ports:
-      - 27017:27017
+      - "27017:27017"
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
