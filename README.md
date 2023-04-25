@@ -2,23 +2,23 @@
   <a href="https://morfi-react.vercel.app">
     <img src="https://i.imgur.com/cDNjn1M.png" alt="The Morfi logo" height="100">
   </a>
-  <h1 align="center">node-rest-jwt</h1>
-  <p align="center">RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens<p>
-  <p align="center">
-    <img alt="Version" src="https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=2592000" />
-    <a href="https://github.com/enzoarguello512/api-rest-ecommerce#readme" target="_blank">
-      <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-    </a>
-    <a href="https://github.com/enzoarguello512/api-rest-ecommerce/graphs/commit-activity" target="_blank">
-      <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
-    </a>
-    <a href="https://github.com/enzoarguello512/api-rest-ecommerce/blob/master/LICENSE" target="_blank">
-      <img alt="License: MIT" src="https://img.shields.io/github/license/enzoarguello512/node-rest-jwt" />
-    </a>
-    <a href="https://twitter.com/enzoarguello512" target="_blank">
-      <img alt="Twitter: enzoarguello512" src="https://img.shields.io/twitter/follow/enzoarguello512.svg?style=social" />
-    </a>
-  </p>
+</p>
+<h1 align="center">node-rest-jwt</h1>
+<p align="center">RESTful API using NodeJs, Express, Mongoose, Typescript and JSON Web Tokens</p>
+<p align="center">
+  <img alt="Version" src="https://img.shields.io/badge/version-0.2.1-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/enzoarguello512/api-rest-ecommerce#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/enzoarguello512/api-rest-ecommerce/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://github.com/enzoarguello512/api-rest-ecommerce/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/enzoarguello512/node-rest-jwt" />
+  </a>
+  <a href="https://twitter.com/enzoarguello512" target="_blank">
+    <img alt="Twitter: enzoarguello512" src="https://img.shields.io/twitter/follow/enzoarguello512.svg?style=social" />
+  </a>
 </p>
 
 Greetings 👋 and welcome to the [morfi](https://github.com/enzoarguello512/morfi) backend server repository, which contains the code that manages the store page, user registration and client communication. In addition, the [front-end section of the application](https://github.com/enzoarguello512/morfi-react) has been updated to React, which is responsible for communicating with the server.
@@ -66,7 +66,7 @@ JWT tokens are validated using middleware called [`JwtMiddleware`](https://githu
 
 In contrast, [`PermissionMiddleware`](https://github.com/enzoarguello512/node-rest-jwt/blob/main/src/common/middleware/common.permission.middleware.ts) checks a user's permissions. 😅
 
-As soon as a user is authenticated, they are given an _access token_ (in the response body) and a _refresh token_ (in the response headers). The _access token_ validates that they are authenticated and that they have sufficient permissions, while the _refresh token_ is used to see whether or not the session is still active and to create new _access tokens_ (which expire every 10 minutes).
+As soon as a user is authenticated, they are given an _access token_ (in the response body) and a _refresh token_ (in the response headers). The _access token_ validates that they are authenticated and that they have sufficient permissions, while the _refresh token_ is used to see whether the session is still active and to create new _access tokens_ (which expire every 10 minutes).
 
 A total of two endpoints require cookies (to function correctly), while the rest use _access tokens_.
 
