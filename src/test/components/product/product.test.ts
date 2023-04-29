@@ -1,8 +1,8 @@
 import app from '../../../app';
 import supertest from 'supertest';
 import { expect } from 'chai';
-import mongoose from 'mongoose';
-import MongoMemoryServer from 'mongodb-memory-server-core';
+//import mongoose from 'mongoose';
+//import MongoMemoryServer from 'mongodb-memory-server-core';
 import { Global } from '../../../services/mongoose/types/memory.server.interface';
 import { populateMongoDb } from '../../../scripts/functions.mongoose';
 import path from 'path';
@@ -17,15 +17,15 @@ describe('products endpoints', function () {
     request = supertest.agent(app);
     await populateMongoDb();
   });
-  after(function (done) {
-    // stop mongo test server
-    const instance: MongoMemoryServer = global.__MONGOINSTANCE__;
-    instance.stop();
-    // shut down the Express.js server, close our MongoDB connection, then tell Mocha we're done:
-    app.close(() => {
-      mongoose.connection.close(done);
-    });
-  });
+  //after(function (done) {
+  //stop mongo test server
+  //const instance: MongoMemoryServer = global.__MONGOINSTANCE__;
+  //instance.stop();
+  //shut down the Express.js server, close our MongoDB connection, then tell Mocha we're done:
+  //app.close(() => {
+  //mongoose.connection.close(done);
+  //});
+  //});
 
   it('should allow a GET (Get all products) from /products', async function () {
     const res = await request.get(`/products`).send();
@@ -35,7 +35,7 @@ describe('products endpoints', function () {
     firstProductIdTest = res.body[0].id;
   });
 
-  it('should allow a POST (Add a new product) from /products', async function () {
+  it('should allow a POST (Add a new product) from /products - Fails if the account does not have the necessary permissions', async function () {
     const res = await request
       .post(`/products`)
       .field({
@@ -62,14 +62,14 @@ describe('products endpoints', function () {
     expect(res.body.id).to.equal(firstProductIdTest);
   });
 
-  it('should allow a PATCH (Update a product) from /products/:productId', async function () {
+  it('should allow a PATCH (Update a product) from /products/:productId - Fails if the account does not have the necessary permissions', async function () {
     const res = await request.patch(`/products/${firstProductIdTest}`).send({
       name: 'updated name!',
     });
     expect(res.status).to.equal(204); // NO_CONTENT
   });
 
-  it('should allow a DELETE (Delete a product) from /products/:productId', async function () {
+  it('should allow a DELETE (Delete a product) from /products/:productId - Fails if the account does not have the necessary permissions', async function () {
     const res = await request.delete(`/products/${firstProductIdTest}`).send();
     expect(res.status).to.equal(204); // NO_CONTENT
   });
