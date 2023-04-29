@@ -77,65 +77,97 @@ describe('users and auth endpoints', function () {
       const res = await request.post('/auth').send(firstUserBody);
       expectValidTokens(res);
     } catch (err) {
-      throw new BaseError('Fail to authenticate', err, 'POST to /users');
+      throw new BaseError('Fail to authenticate', err, 'POST to /auth');
     }
   });
 
   it('should allow a GET from /users/:userId with an access token', async function () {
-    const res = await request
-      .get(`/users/${firstUserIdTest}`)
-      .set({ Authorization: `Bearer ${accessToken}` })
-      .send();
-    expectValidObject(res);
-    expect(res.body.id).to.be.a('string');
-    expect(res.body.id).to.equal(firstUserIdTest);
-    expect(res.body.email).to.equal(firstUserBody.email);
+    try {
+      const res = await request
+        .get(`/users/${firstUserIdTest}`)
+        .set({ Authorization: `Bearer ${accessToken}` })
+        .send();
+      expectValidObject(res);
+      expect(res.body.id).to.be.a('string');
+      expect(res.body.id).to.equal(firstUserIdTest);
+      expect(res.body.email).to.equal(firstUserBody.email);
+    } catch (err) {
+      throw new BaseError('Failed to get user', err, 'GET to /users');
+    }
   });
 
   describe('with a valid access token', function () {
     it('should disallow a GET to /users', async function () {
-      const res = await request
-        .get(`/users`)
-        .set({ Authorization: `Bearer ${accessToken}` })
-        .send();
-      expect(res.status).to.equal(401);
+      try {
+        const res = await request
+          .get(`/users`)
+          .set({ Authorization: `Bearer ${accessToken}` })
+          .send();
+        expect(res.status).to.equal(401);
+      } catch (err) {
+        throw new BaseError('Failed to send the request', err, 'GET to /users');
+      }
     });
 
     it('should disallow a PATCH to /users/:userId', async function () {
-      const res = await request
-        .patch(`/users/${firstUserIdTest}`)
-        .set({ Authorization: `Bearer ${accessToken}` })
-        .send({
-          firstName: newFirstName,
-        });
-      expect(res.status).to.equal(401);
+      try {
+        const res = await request
+          .patch(`/users/${firstUserIdTest}`)
+          .set({ Authorization: `Bearer ${accessToken}` })
+          .send({
+            firstName: newFirstName,
+          });
+        expect(res.status).to.equal(401);
+      } catch (err) {
+        throw new BaseError(
+          'Failed to send the request',
+          err,
+          'PATCH to /users'
+        );
+      }
     });
 
     it('should disallow a PATCH to /users/:userId with an nonexistant ID', async function () {
-      const res = await request
-        .patch(`/users/i-do-not-exist`)
-        .set({ Authorization: `Bearer ${accessToken}` })
-        .send({
-          email: firstUserBody.email,
-          password: firstUserBody.password,
-          firstName: 'Test1',
-          lastName: 'Test1',
-          permissionLevel: 256,
-        });
-      expect(res.status).to.equal(400);
+      try {
+        const res = await request
+          .patch(`/users/i-do-not-exist`)
+          .set({ Authorization: `Bearer ${accessToken}` })
+          .send({
+            email: firstUserBody.email,
+            password: firstUserBody.password,
+            firstName: 'Test1',
+            lastName: 'Test1',
+            permissionLevel: 256,
+          });
+        expect(res.status).to.equal(400);
+      } catch (err) {
+        throw new BaseError(
+          'Failed to send the request',
+          err,
+          'PATCH to /users'
+        );
+      }
     });
 
     it('should disallow a PATCH to /users/:userId trying to change the permission level', async function () {
-      const res = await request
-        .patch(`/users/${firstUserIdTest}/permissionLevel/${256}`)
-        .set({ Authorization: `Bearer ${accessToken}` })
-        .send({
-          email: firstUserBody.email,
-          password: firstUserBody.password,
-          firstName: 'Test1',
-          lastName: 'Test1',
-        });
-      expect(res.status).to.equal(401);
+      try {
+        const res = await request
+          .patch(`/users/${firstUserIdTest}/permissionLevel/${256}`)
+          .set({ Authorization: `Bearer ${accessToken}` })
+          .send({
+            email: firstUserBody.email,
+            password: firstUserBody.password,
+            firstName: 'Test1',
+            lastName: 'Test1',
+          });
+        expect(res.status).to.equal(401);
+      } catch (err) {
+        throw new BaseError(
+          'Failed to send the request',
+          err,
+          'PATCH to /users'
+        );
+      }
     });
 
     //it('should allow a PUT to /users/:userId/permissionLevel/2 for testing', async function () {
@@ -148,14 +180,18 @@ describe('users and auth endpoints', function () {
 
     describe('with a new permission level', function () {
       it('should allow a GET to /auth/refresh-token', async function () {
-        const res = await request
-          .get('/auth/refresh-token')
-          .set({
-            Authorization: `Bearer ${accessToken}`,
-            Cookie: [refreshToken],
-          })
-          .send();
-        expectValidTokens(res);
+        try {
+          const res = await request
+            .get('/auth/refresh-token')
+            .set({
+              Authorization: `Bearer ${accessToken}`,
+              Cookie: [refreshToken],
+            })
+            .send();
+          expectValidTokens(res);
+        } catch (err) {
+          throw new BaseError('Fail to authenticate', err, 'GET to /auth');
+        }
       });
 
       //it('should allow a PATCH to /users/:userId to change first and last names', async function () {
@@ -172,24 +208,36 @@ describe('users and auth endpoints', function () {
       //});
 
       it('should allow a GET from /users/:userId and should have a new full name', async function () {
-        const res = await request
-          .get(`/users/${firstUserIdTest}`)
-          .set({ Authorization: `Bearer ${accessToken}` })
-          .send();
-        expectValidObject(res);
-        expect(res.body.id).to.be.a('string');
-        //expect(res.body.firstName).to.equal(newFirstName2);
-        //expect(res.body.lastName).to.equal(newLastName2);
-        expect(res.body.email).to.equal(firstUserBody.email);
-        expect(res.body.id).to.equal(firstUserIdTest);
+        try {
+          const res = await request
+            .get(`/users/${firstUserIdTest}`)
+            .set({ Authorization: `Bearer ${accessToken}` })
+            .send();
+          expectValidObject(res);
+          expect(res.body.id).to.be.a('string');
+          //expect(res.body.firstName).to.equal(newFirstName2);
+          //expect(res.body.lastName).to.equal(newLastName2);
+          expect(res.body.email).to.equal(firstUserBody.email);
+          expect(res.body.id).to.equal(firstUserIdTest);
+        } catch (err) {
+          throw new BaseError(
+            'Failed to change user information',
+            err,
+            'GET to /users'
+          );
+        }
       });
 
       it('should allow a DELETE from /users/:userId', async function () {
-        const res = await request
-          .delete(`/users/${firstUserIdTest}`)
-          .set({ Authorization: `Bearer ${accessToken}` })
-          .send();
-        expect(res.status).to.equal(204);
+        try {
+          const res = await request
+            .delete(`/users/${firstUserIdTest}`)
+            .set({ Authorization: `Bearer ${accessToken}` })
+            .send();
+          expect(res.status).to.equal(204);
+        } catch (err) {
+          throw new BaseError('Failed to delete user', err, 'DELETE to /users');
+        }
       });
     });
   });
